@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Climber</string>
+    <string name="timesettedbutton_name">开始专注</string>
+    <string name="settingofmenu">设置</string>
+    <string name = "time">%1$s : %2$s : %3$s</string>
+    <string name = "message_timeOut">00:00:00</string>
+    <string name = "message_outPrompt">距山顶：</string>
+</resources>
