@@ -54,6 +54,8 @@ public class Climbing extends AppCompatActivity {
                 tv.setText("到达");
                 TextView tv2 = findViewById(R.id.outPrompt);
                 tv2.setText("");
+                Intent intent2=new Intent(Climbing.this,Ending.class);
+                startActivity(intent2);
             }
         }.start();
         final Chronometer usedChronometer = findViewById(R.id.lastTime);
