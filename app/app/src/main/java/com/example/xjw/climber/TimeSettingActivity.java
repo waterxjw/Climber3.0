@@ -16,7 +16,7 @@ import com.wx.wheelview.widget.WheelView;
 
 import java.util.ArrayList;
 
-public class TimeSetting extends AppCompatActivity {
+public class TimeSettingActivity extends AppCompatActivity {
     //背景图片
     private ImageView imageView;
     private WheelView wheelView;
@@ -55,7 +55,7 @@ public class TimeSetting extends AppCompatActivity {
                 //data即当前选中的滚轮数据
                 String data=(String) wheelView.getSelectionItem();
                 //下面冬冬可自行切换至下一activity并传入data数据
-                Intent intent=new Intent(TimeSetting.this,Climbing.class);
+                Intent intent=new Intent(TimeSettingActivity.this,ClimbingActivity.class);
                 intent.putExtra("time",data);
                 startActivity(intent);
 

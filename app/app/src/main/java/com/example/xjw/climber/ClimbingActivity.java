@@ -1,5 +1,6 @@
 package com.example.xjw.climber;
 
+import android.app.Application;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
@@ -11,13 +12,19 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Chronometer;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Climbing extends AppCompatActivity {
+import com.wenming.library.BackgroundUtil;
+import com.wenming.library.MyApplication;
+
+import java.util.Date;
+
+public class ClimbingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,14 +61,29 @@ public class Climbing extends AppCompatActivity {
                 tv.setText("到达");
                 TextView tv2 = findViewById(R.id.outPrompt);
                 tv2.setText("");
-                Intent intent2=new Intent(Climbing.this,Ending.class);
+                Intent intent2=new Intent(ClimbingActivity.this,EndingActivity.class);
                 startActivity(intent2);
             }
         }.start();
         final Chronometer usedChronometer = findViewById(R.id.lastTime);
         usedChronometer.setBase(SystemClock.elapsedRealtime() - 1000);
         usedChronometer.start();
-        Toast.makeText(Climbing.this, "坚持！", Toast.LENGTH_LONG).show();
+        Toast.makeText(ClimbingActivity.this, "坚持！", Toast.LENGTH_LONG).show();
+
+        //判断是否在后台
+        /**以下仅作为测试
+        Date begin = new Date();
+        do {
+            Date now = new Date();
+            if (now.getTime()-begin.getTime()>20000)
+                break;
+        }while (Boolean.TRUE);
+        */
+        Boolean isForeground = BackgroundUtil.queryUsageStats(ClimbingActivity.this, "com.example.xjw.climber");
+        if (isForeground == Boolean.FALSE)
+            Toast.makeText(ClimbingActivity.this, "已离开", Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(ClimbingActivity.this, "还在", Toast.LENGTH_LONG).show();
 
 
         //处理倒计时结束后Chronometer暂停。
@@ -74,7 +96,7 @@ public class Climbing extends AppCompatActivity {
                     case 1:
                         usedChronometer.stop();
                         Looper.prepare();
-                        Toast.makeText(Climbing.this, "成功！", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ClimbingActivity.this, "成功！", Toast.LENGTH_LONG).show();
                         Log.e("a", "true");
 
                         //处理震动

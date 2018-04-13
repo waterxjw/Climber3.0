@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.xjw.climber.Ending">
+    tools:context="com.example.xjw.climber.EndingActivity">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
