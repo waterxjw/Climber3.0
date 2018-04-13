@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wenming.library.BackgroundUtil;
+
 public class Climbing extends AppCompatActivity {
 
     private AnimationDrawable animationDrawable;
@@ -59,7 +61,9 @@ public class Climbing extends AppCompatActivity {
                 tv.setText("到达");
                 TextView tv2 = findViewById(R.id.outPrompt);
                 tv2.setText("");
-                Intent intent2 = new Intent(Climbing.this, Ending.class);
+
+                Intent intent2=new Intent(Climbing.this,EndingActivity.class);
+                
                 startActivity(intent2);
             }
         }.start();
@@ -67,6 +71,21 @@ public class Climbing extends AppCompatActivity {
         usedChronometer.setBase(SystemClock.elapsedRealtime() - 1000);
         usedChronometer.start();
         Toast.makeText(Climbing.this, "坚持！", Toast.LENGTH_LONG).show();
+
+        //判断是否在后台
+        /**以下仅作为测试
+        Date begin = new Date();
+        do {
+            Date now = new Date();
+            if (now.getTime()-begin.getTime()>20000)
+                break;
+        }while (Boolean.TRUE);
+        */
+        Boolean isForeground = BackgroundUtil.queryUsageStats(Climbing.this, "com.example.xjw.climber");
+        if (isForeground == Boolean.FALSE)
+            Toast.makeText(Climbing.this, "已离开", Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(Climbing.this, "还在", Toast.LENGTH_LONG).show();
 
 
         //处理倒计时结束后Chronometer暂停。
