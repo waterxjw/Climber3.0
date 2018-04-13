@@ -72,6 +72,7 @@ public class ClimbingActivity extends AppCompatActivity {
         usedChronometer.start();
         Toast.makeText(ClimbingActivity.this, "坚持！", Toast.LENGTH_LONG).show();
 
+
         //判断是否在后台
         /**以下仅作为测试
         Date begin = new Date();
@@ -81,12 +82,16 @@ public class ClimbingActivity extends AppCompatActivity {
                 break;
         }while (Boolean.TRUE);
         */
-        Boolean isForeground = BackgroundUtil.queryUsageStats(ClimbingActivity.this, "com.example.xjw.climber");
-        if (isForeground == Boolean.FALSE)
-            Toast.makeText(ClimbingActivity.this, "已离开", Toast.LENGTH_LONG).show();
-        else
-            Toast.makeText(ClimbingActivity.this, "还在", Toast.LENGTH_LONG).show();
 
+     /*   Boolean isForeground = BackgroundUtil.queryUsageStats(ClimbingActivity.this, "com.example.xjw.climber");
+        if (isForeground == Boolean.FALSE) {
+            Log.d("state", "off");
+            Toast.makeText(ClimbingActivity.this, "已离开", Toast.LENGTH_LONG).show();
+        }
+            else {
+            Toast.makeText(ClimbingActivity.this, "还在", Toast.LENGTH_LONG).show();
+            Log.d("state","on");
+        }*/
 
         //处理倒计时结束后Chronometer暂停。
         final Handler handler = new Handler() {
@@ -99,7 +104,6 @@ public class ClimbingActivity extends AppCompatActivity {
                         usedChronometer.stop();
                         Looper.prepare();
                         Toast.makeText(ClimbingActivity.this, "成功！", Toast.LENGTH_LONG).show();
-                        Log.e("a", "true");
 
                         //处理震动
                         Vibrator theVibrator = (Vibrator) getApplication().getSystemService(Service.VIBRATOR_SERVICE);
@@ -113,7 +117,6 @@ public class ClimbingActivity extends AppCompatActivity {
                         Looper.loop();
                         break;
                     case 2:
-                        Log.e("abc", "pass");
                         break;
                 }
             }
@@ -144,12 +147,25 @@ public class ClimbingActivity extends AppCompatActivity {
 
 
 
-    //emmmmmmmmm
+
     @Override
     protected void onResume() {
         super.onResume();
         animationDrawable.start();
-    }
+
+        //处理缓存
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    Thread.sleep(2000);
+                }catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.gc();
+            }
+        }).start();
+}
 
     //释放内存，但是应该在锁屏后执行
     @Override
@@ -157,6 +173,13 @@ public class ClimbingActivity extends AppCompatActivity {
         super.onPause();
         if (animationDrawable != null) {
             animationDrawable.stop();
+        }
+
+        //控制台输出是否后台
+        if(IsForeground.determine(ClimbingActivity.this)){
+            Log.e("State","True");
+        }else {
+            Log.e("State","False");
         }
     }
 
