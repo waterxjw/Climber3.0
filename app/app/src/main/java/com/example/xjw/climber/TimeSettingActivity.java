@@ -55,7 +55,7 @@ public class TimeSettingActivity extends AppCompatActivity {
                 //data即当前选中的滚轮数据
                 String data=(String) wheelView.getSelectionItem();
                 //下面冬冬可自行切换至下一activity并传入data数据
-                Intent intent=new Intent(TimeSettingActivity.this,Climbing.class);
+                Intent intent=new Intent(TimeSettingActivity.this,ClimbingActivity.class);
                 intent.putExtra("time",data);
                 startActivity(intent);
 
