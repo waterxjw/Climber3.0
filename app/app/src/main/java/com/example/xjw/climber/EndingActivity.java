@@ -14,7 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.xjw.climber.Border;
 
 
-public class Ending extends AppCompatActivity {
+public class EndingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
