@@ -1,6 +1,5 @@
 package com.example.xjw.climber;
 
-import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
@@ -26,7 +25,7 @@ public class ClimbingActivity extends AppCompatActivity {
     class Timer {
         WeakReference<ClimbingActivity> theActivityReference;
 
-        Timer(Activity activity) {
+        Timer(ClimbingActivity activity) {
             theActivityReference = new WeakReference((ClimbingActivity) activity);
         }
 
