@@ -10,7 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
+import com.ddz.floatingactionbutton.FloatingActionButton;
+import com.ddz.floatingactionbutton.FloatingActionMenu;
 import com.wx.wheelview.adapter.ArrayWheelAdapter;
 import com.wx.wheelview.widget.WheelView;
 
@@ -20,6 +21,7 @@ public class TimeSettingActivity extends AppCompatActivity {
     //背景图片
     private ImageView imageView;
     private WheelView wheelView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,13 +30,14 @@ public class TimeSettingActivity extends AppCompatActivity {
         createImageView(R.mipmap.mountain1); //设置背景图片
         createWheelView(); //设置时间滚轮
         createButton();//设置开始专注按钮
+        createFAButton();//设置右上角浮动按钮
         //下面是自定义一个任务栏，取代原先自带的任务栏
         android.support.v7.widget.Toolbar toolbar=(android.support.v7.widget.Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
     }
     //任务栏右侧的菜单按钮
-    public boolean onCreateOptionsMenu(Menu menu){
+    /*public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.toolbar,menu);
         return true;
     }
@@ -46,6 +49,29 @@ public class TimeSettingActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }*/
+    private void createFAButton(){
+        FloatingActionButton fabSetting=(FloatingActionButton)findViewById(R.id.fab_setting);
+        FloatingActionButton fabHistory=(FloatingActionButton)findViewById(R.id.fab_history);
+        FloatingActionButton fabAlbum=(FloatingActionButton)findViewById(R.id.fab_album);
+        fabSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(TimeSettingActivity.this,"Setting",Toast.LENGTH_SHORT).show();
+            }
+        });
+        fabHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(TimeSettingActivity.this,"History",Toast.LENGTH_SHORT).show();
+            }
+        });
+        fabAlbum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(TimeSettingActivity.this,"Album",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     private void createButton(){
         Button startbutton=(Button)findViewById(R.id.button);
@@ -121,5 +147,7 @@ public class TimeSettingActivity extends AppCompatActivity {
         }
         return list;
     }
+
+
 }
 

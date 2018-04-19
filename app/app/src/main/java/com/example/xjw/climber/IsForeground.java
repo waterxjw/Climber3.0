@@ -5,6 +5,7 @@ import com.wenming.library.BackgroundUtil;
 
 
 public class IsForeground {
+    private static int times;
     /**
      *
      * @param context 窗口控件
@@ -13,10 +14,16 @@ public class IsForeground {
     public static  boolean determine(Context context){
         boolean isForeground = BackgroundUtil.queryUsageStats(context, "com.example.xjw.climber");
         if (isForeground == false) {
-           return  false;
+            times++;
+            return  false;
         }
         else {
             return  true;
         }
     }
+
+    public static int getTimes() {
+        return times;
+    }
+
 }

@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/FloatingActionButton/FloatingActionButton.iml" filepath="$PROJECT_DIR$/FloatingActionButton/FloatingActionButton.iml" />
       <module fileurl="file://$PROJECT_DIR$/app.iml" filepath="$PROJECT_DIR$/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app-app.iml" filepath="$PROJECT_DIR$/app/app-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+<<<<<<< HEAD
+=======
+      <module fileurl="file://F:\Climber3.0\app\library_fab\library_fab.iml" filepath="F:\Climber3.0\app\library_fab\library_fab.iml" />
+      <module fileurl="file://F:\Climber3.0\app\library_floatingactionbutton\library_floatingactionbutton.iml" filepath="F:\Climber3.0\app\library_floatingactionbutton\library_floatingactionbutton.iml" />
+      <module fileurl="file://F:\Climber3.0\app\library_floatingbutton\library_floatingbutton.iml" filepath="F:\Climber3.0\app\library_floatingbutton\library_floatingbutton.iml" />
+>>>>>>> upstream/master
     </modules>
   </component>
 </project>
