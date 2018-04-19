@@ -135,6 +135,7 @@ public class BackgroundUtil {
         }
         RecentUseComparator mRecentComp = new RecentUseComparator();
         long ts = System.currentTimeMillis();
+        //noinspection ResourceType
         UsageStatsManager mUsageStatsManager = (UsageStatsManager) context.getSystemService("usagestats");
         List<UsageStats> usageStats = mUsageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_BEST, ts - 1000 * 10, ts);
         if (usageStats == null || usageStats.size() == 0) {
