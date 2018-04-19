@@ -1,25 +1,25 @@
 package com.example.xjw.climber;
 
-public class TimeChange {
+class TimeChange {
 
-    public static void changeTime(int[] originalTime) {
+    static void changeTime(int[] originalTime) {
         originalTime = switches(originalTime);
         TimeGet.setTimeSecond(originalTime);
     }
 
-    public static void changeTime(String originalTime) {
-        int[] iOriginalTime = TimeGet.stringToInts(originalTime);
-        iOriginalTime = switches(iOriginalTime);
-        TimeGet.setTimeSecond(iOriginalTime);
+    static void changeTime(String sOriginalTime) {
+        int[] iOriginalTime = TimePut.stringToInts(sOriginalTime);
+        changeTime(iOriginalTime);
+
     }
 
     private static int[] switches(int[] time) {
         switch (IsForeground.getTimes()) {
             case 1:
-                time[1] += 4;
+                time[1] -= 4;
                 break;
             case 2:
-                time[2] += 20;
+                time[2] -= 40;
                 break;
             case 3:
                 time[2] += 100;
