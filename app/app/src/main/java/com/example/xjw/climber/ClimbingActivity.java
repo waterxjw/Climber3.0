@@ -16,44 +16,19 @@ public class ClimbingActivity extends AppCompatActivity {
 
     private AnimationDrawable animationDrawable;
     private long firstPressedTime;
+    private boolean isSwitch = false;
+    private CountDownTimer timer;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_climbing);
-        Intent itent = getIntent();
-        String data = getIntent().getStringExtra("time");
-        TimeGet.setTime(Integer.parseInt(data));//默认+和上一页面交接
-
-        final TextView theRestTime = findViewById(R.id.restTime);//剩余时间栏，右下角
-        final Chronometer lastTimeChronometer = findViewById(R.id.lastTime);//持续时间
-
-        //获取上一阶段时间
-        int[] varTime = TimeGet.getInstance().getTime();
-        final int hours = varTime[0];
-        final int minute = varTime[1];
-
-        //输出持续时间
-        lastTimeChronometer.setBase(SystemClock.elapsedRealtime() - 1000);
-        lastTimeChronometer.start();
-
-        //进行弹窗提示
-        Toast.makeText(ClimbingActivity.this, "文文傻蛋！", Toast.LENGTH_LONG).show();
-
-
-        //已用时间输出
-//        CountDownTimer timer =
-        new CountDownTimer((hours * 60 + minute) * 60 * 1000, 1000) {
+    /**
+     * @return 由TimeGet的时间决定的新的计时器
+     */
+    private CountDownTimer creatNewOne() {
+        final TextView theRestTime = findViewById(R.id.restTime);
+        final Chronometer lastTimeChronometer = findViewById(R.id.lastTime);
+        return new CountDownTimer(TimeGet.getTime(true), 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                long sUntilFinished = millisUntilFinished / 1000;
-                long mUntilFinished = sUntilFinished / 60;
-                sUntilFinished = sUntilFinished % 60;
-                long hUntilFinished = mUntilFinished / 60;
-                mUntilFinished = mUntilFinished % 60;
-
-                String[] timeToOut = TimePut.timeOutPut(hUntilFinished, mUntilFinished, sUntilFinished);
-                theRestTime.setText(String.format(getResources().getString(R.string.time), timeToOut[0], timeToOut[1], timeToOut[2]));
+                theRestTime.setText(TimePut.intsToString(millisUntilFinished));
             }
 
             //倒计时结束后
@@ -76,7 +51,29 @@ public class ClimbingActivity extends AppCompatActivity {
                 Intent intent2 = new Intent(ClimbingActivity.this, EndingActivity.class);
                 startActivity(intent2);
             }
-        }.start();
+        };
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_climbing);
+        String data = getIntent().getStringExtra("time");
+        TimeGet.setTimeMinute(Integer.parseInt(data));//默认+和上一页面交接
+
+        final TextView theRestTime = findViewById(R.id.restTime);//剩余时间栏，右下角
+        final Chronometer lastTimeChronometer = findViewById(R.id.lastTime);//持续时间
+
+        //输出持续时间
+        lastTimeChronometer.setBase(SystemClock.elapsedRealtime() - 1000);
+        lastTimeChronometer.start();
+
+        //进行弹窗提示
+        Toast.makeText(ClimbingActivity.this, "文文傻蛋！", Toast.LENGTH_LONG).show();
+
+        //已用时间输出
+        timer = creatNewOne();
+        timer.start();
 
         //图片
         ImageView img = findViewById(R.id.imageView2);
@@ -107,27 +104,34 @@ public class ClimbingActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
+        final TextView theRestTime = findViewById(R.id.restTime);//剩余时间栏，右下角
         super.onPause();
+
         if (animationDrawable != null) {
             animationDrawable.stop();
         }
+
         //控制台输出是否后台
         if (IsForeground.determine(ClimbingActivity.this)) {
             Log.e("State", "True");
         } else {
-            Log.e("State", "False");
+            Log.e("State", "False" + IsForeground.getTimes() + " " + theRestTime.getText().toString());
+            isSwitch = true;
+
+            TimeChange.changeTime(theRestTime.getText().toString());
+            timer.cancel();
+            timer =creatNewOne();
+            timer.start();
         }
     }
 
     @Override
     public void onBackPressed() {
-
         if (System.currentTimeMillis() - firstPressedTime < 2000) {
             ActivityCompat.finishAffinity(this);//退出整个程序
         } else {
             Toast.makeText(getBaseContext(), "再点一次退出", Toast.LENGTH_SHORT).show();
             firstPressedTime = System.currentTimeMillis();
         }
-
     }
 }
