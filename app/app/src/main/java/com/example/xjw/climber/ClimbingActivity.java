@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 public class ClimbingActivity extends AppCompatActivity {
 
+
     private AnimationDrawable animationDrawable;
     private long firstPressedTime;
     private boolean isSwitch = false;
