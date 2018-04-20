@@ -1,9 +1,5 @@
 package com.example.xjw.climber;
 
-/**
- * Created by xjw on 2018/4/9.
- */
-
 public class TimeGet {
     private static int timeSecond;
 
@@ -44,6 +40,9 @@ public class TimeGet {
         timeSecond = minutes * 60;
     }
 
+    /**
+     * @param times 设定时间，[hour, minute,second]
+     */
     static void setTimeSecond(int[] times) {
         if (times[2] > 60) {
             times[1] = times[2] / 60 + times[1];
@@ -56,16 +55,4 @@ public class TimeGet {
         timeSecond = times[0] * 3600 + times[1] * 60 + times[2];
     }
 
-    public static String intsToString(int[] intsTimes) {
-        return String.format("%1$s : %2$s : %3$s", intsTimes[0], intsTimes[1], intsTimes[2]);
-    }
-
-    public static int[] stringToInts(String sTime) {
-        String[] sTimes = sTime.split(":");
-        int[] iTimes = new int[3];
-        for (int i = 0; i < sTimes.length; i++) {
-            iTimes[i] = Integer.parseInt(sTimes[i].trim());
-        }
-        return iTimes;
-    }
 }
