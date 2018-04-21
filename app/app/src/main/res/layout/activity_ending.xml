@@ -10,13 +10,18 @@
         android:layout_height="match_parent"
         android:background="@mipmap/end_background"
         android:scaleType="centerCrop"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <Button
-        android:layout_width="50dp"
-        android:layout_height="69dp"
-        android:text="stone"
-        tools:layout_editor_absoluteX="250dp"
-        tools:layout_editor_absoluteY="426dp"
-        tools:ignore="MissingConstraints" />
-
+        <Button
+            android:id="@+id/end_to_start"
+            android:layout_width="50dp"
+            android:layout_height="69dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="stone" />
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

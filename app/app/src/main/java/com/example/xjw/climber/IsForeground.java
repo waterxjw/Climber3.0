@@ -4,16 +4,16 @@ import android.content.Context;
 import com.wenming.library.BackgroundUtil;
 
 
-public class IsForeground {
+class IsForeground {
     private static int times;
     /**
      *
      * @param context 窗口控件
      * @return FALSE->后台；TRUE->前台(锁屏)
      */
-    public static  boolean determine(Context context){
+    static  boolean determine(Context context){
         boolean isForeground = BackgroundUtil.queryUsageStats(context, "com.example.xjw.climber");
-        if (isForeground == false) {
+        if (!isForeground) {
             times++;
             return  false;
         }
@@ -22,7 +22,7 @@ public class IsForeground {
         }
     }
 
-    public static int getTimes() {
+    static int getTimes() {
         return times;
     }
 
