@@ -34,5 +34,6 @@ dependencies {
 
 
     implementation project(':FloatingActionButton')
+    implementation project(':smartloginlibrary')
 
 }

@@ -6,12 +6,12 @@
         >
 
         <android.support.v7.preference.SwitchPreferenceCompat
-            android:key="key_1"
+            android:key="remind"
             android:title="登顶后是否提醒"
             android:summary="选中后登顶时将震动提醒"
             android:defaultValue="false" />
         <android.support.v7.preference.SwitchPreferenceCompat
-            android:key="key_2"
+            android:key="alwaysLight"
             android:title="是否保持屏幕常亮"
             android:summary="选中后将保持屏幕常亮"
             android:defaultValue="false" />
