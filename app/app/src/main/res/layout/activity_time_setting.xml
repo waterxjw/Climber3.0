@@ -19,18 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="63dp"
-        android:layout_marginEnd="8dp"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <com.wx.wheelview.widget.WheelView
         android:id="@+id/wheelView"
@@ -102,19 +90,24 @@
         app:layout_constraintTop_toTopOf="@+id/imageview">
 
         <com.ddz.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_album"
+            android:id="@+id/fab_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:fab_icon="@drawable/icon_follow"
             app:fab_size="mini" />
+
         <com.ddz.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:fab_icon="@drawable/icon_like"
             app:fab_size="mini" />
+
         <com.ddz.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:fab_icon="@drawable/icon_share"
             app:fab_size="mini" />
     </com.ddz.floatingactionbutton.FloatingActionMenu>
 
