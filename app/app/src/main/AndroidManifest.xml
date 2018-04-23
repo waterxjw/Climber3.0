@@ -23,7 +23,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".ClimbingActivity" />
-        <activity android:name=".EndingActivity"></activity>
+        <activity android:name=".EndingActivity" />
+        <activity
+            android:name=".SettingActivity"
+            android:label="设置" />
+        <activity android:name=".ContactUsActivity" />
+        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>
