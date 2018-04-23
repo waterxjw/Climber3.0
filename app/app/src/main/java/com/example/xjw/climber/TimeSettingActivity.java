@@ -32,8 +32,7 @@ public class TimeSettingActivity extends AppCompatActivity {
         createButton();//设置开始专注按钮
         createFAButton();//设置右上角浮动按钮
         //下面是自定义一个任务栏，取代原先自带的任务栏
-        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
 
     }
 
@@ -54,11 +53,13 @@ public class TimeSettingActivity extends AppCompatActivity {
     private void createFAButton() {
         FloatingActionButton fabSetting = findViewById(R.id.fab_setting);
         FloatingActionButton fabHistory = findViewById(R.id.fab_history);
-        FloatingActionButton fabAlbum = findViewById(R.id.fab_album);
+        FloatingActionButton fabLogin = findViewById(R.id.fab_login);
         fabSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(TimeSettingActivity.this, "Setting", Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(TimeSettingActivity.this,SettingActivity.class);
+                startActivity(intent);
             }
         });
         fabHistory.setOnClickListener(new View.OnClickListener() {
@@ -67,10 +68,13 @@ public class TimeSettingActivity extends AppCompatActivity {
                 Toast.makeText(TimeSettingActivity.this, "History", Toast.LENGTH_SHORT).show();
             }
         });
-        fabAlbum.setOnClickListener(new View.OnClickListener() {
+        fabLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(TimeSettingActivity.this, "Album", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TimeSettingActivity.this, "Login", Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(TimeSettingActivity.this,LoginActivity.class
+                );
+                startActivity(intent);
             }
         });
     }
