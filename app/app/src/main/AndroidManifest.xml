@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ClimbingActivity" />
+        <activity android:name=".MovePlayActivity" />
         <activity android:name=".EndingActivity" />
         <activity
             android:name=".SettingActivity"

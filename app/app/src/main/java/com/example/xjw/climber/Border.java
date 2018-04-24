@@ -1,20 +1,9 @@
 package com.example.xjw.climber;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PaintFlagsDrawFilter;
-import android.graphics.Path;
-import android.graphics.Rect;
-import android.graphics.Region;
-import android.util.AttributeSet;
+import android.graphics.*;
 import android.support.v7.widget.AppCompatImageView;
-import android.widget.ImageView;
-
-/**
- * Created by xjw on 2018/4/10.
- */
+import android.util.AttributeSet;
 
 public class Border extends AppCompatImageView {
     private Bitmap mBitmap;

@@ -3,15 +3,13 @@ package com.example.xjw.climber;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.ddz.floatingactionbutton.FloatingActionButton;
-import com.ddz.floatingactionbutton.FloatingActionMenu;
 import com.wx.wheelview.adapter.ArrayWheelAdapter;
 import com.wx.wheelview.widget.WheelView;
 
@@ -21,6 +19,7 @@ public class TimeSettingActivity extends AppCompatActivity {
     //背景图片
     private ImageView imageView;
     private WheelView wheelView;
+    private long firstPressedTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +89,7 @@ public class TimeSettingActivity extends AppCompatActivity {
                 Intent intent = new Intent(TimeSettingActivity.this, ClimbingActivity.class);
                 intent.putExtra("time", data);
                 startActivity(intent);
+                finish();
 
             }
         });
@@ -157,6 +157,15 @@ public class TimeSettingActivity extends AppCompatActivity {
         return list;
     }
 
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() - firstPressedTime < 2000) {
+            ActivityCompat.finishAffinity(this);//退出整个程序
+        } else {
+            Toast.makeText(getBaseContext(), "再点一次退出", Toast.LENGTH_SHORT).show();
+            firstPressedTime = System.currentTimeMillis();
+        }
+    }
 
 }
 

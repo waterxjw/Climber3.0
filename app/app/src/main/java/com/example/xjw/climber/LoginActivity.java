@@ -8,13 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import studios.codelight.smartloginlibrary.LoginType;
-import studios.codelight.smartloginlibrary.SmartLogin;
-import studios.codelight.smartloginlibrary.SmartLoginCallbacks;
-import studios.codelight.smartloginlibrary.SmartLoginConfig;
-import studios.codelight.smartloginlibrary.SmartLoginFactory;
-import studios.codelight.smartloginlibrary.UserSessionManager;
+import studios.codelight.smartloginlibrary.*;
 import studios.codelight.smartloginlibrary.users.SmartFacebookUser;
 import studios.codelight.smartloginlibrary.users.SmartGoogleUser;
 import studios.codelight.smartloginlibrary.users.SmartUser;
