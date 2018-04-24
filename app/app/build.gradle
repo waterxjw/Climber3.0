@@ -1,6 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
+
+        lintOptions {
+            checkReleaseBuilds false
+            abortOnError false
+        }
+
+
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.example.xjw.climber"

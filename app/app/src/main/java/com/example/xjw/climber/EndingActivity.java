@@ -28,6 +28,8 @@ public class EndingActivity extends AppCompatActivity {
                 Intent intent = new Intent(EndingActivity.this, TimeSettingActivity.class);
                 //启动
                 startActivity(intent);
+                finish();
+
             }
         });
     }
