@@ -1,6 +1,7 @@
 package com.example.xjw.climber;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.*;
@@ -11,6 +12,7 @@ import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.example.xjw.climber.service.MyDetectService;
 
 public class ClimbingActivity extends AppCompatActivity {
 
@@ -19,6 +21,7 @@ public class ClimbingActivity extends AppCompatActivity {
     private long firstPressedTime;
     private boolean isSwitch = false;
     private CountDownTimer timer;
+    private Context mContext;
 
     /**
      * @return 由TimeGet的时间决定的新的计时器
@@ -55,6 +58,13 @@ public class ClimbingActivity extends AppCompatActivity {
         };
     }
 
+    //启动Service函数
+    private void startService() {
+        Features.showForeground = true;
+        Intent intent = new Intent(mContext, MyDetectService.class);
+        mContext.startService(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +74,10 @@ public class ClimbingActivity extends AppCompatActivity {
 
         final TextView theRestTime = findViewById(R.id.restTime);//剩余时间栏，右下角
         final Chronometer lastTimeChronometer = findViewById(R.id.lastTime);//持续时间
+
+        //开始轮询监听
+        startService();
+        Features.BGK_METHOD =3;
 
         //输出持续时间
         lastTimeChronometer.setBase(SystemClock.elapsedRealtime() - 1000);

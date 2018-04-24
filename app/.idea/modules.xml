@@ -6,10 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/app.iml" filepath="$PROJECT_DIR$/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app-app.iml" filepath="$PROJECT_DIR$/app/app-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
-<<<<<<< HEAD
-=======
       <module fileurl="file://$PROJECT_DIR$/smartloginlibrary/smartloginlibrary.iml" filepath="$PROJECT_DIR$/smartloginlibrary/smartloginlibrary.iml" />
->>>>>>> upstream/master
     </modules>
   </component>
 </project>
