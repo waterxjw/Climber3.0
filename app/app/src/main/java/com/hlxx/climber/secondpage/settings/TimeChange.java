@@ -1,13 +1,13 @@
-package com.example.xjw.climber;
+package com.hlxx.climber.secondpage.settings;
 
-class TimeChange {
+public class TimeChange {
 
-    static void changeTime(int[] originalTime) {
+    public static void changeTime(int[] originalTime) {
         originalTime = switches(originalTime);
         TimeGet.setTimeSecond(originalTime);
     }
 
-    static void changeTime(String sOriginalTime) {
+    public  static void changeTime(String sOriginalTime) {
         int[] iOriginalTime = TimePut.stringToInts(sOriginalTime);
         changeTime(iOriginalTime);
 

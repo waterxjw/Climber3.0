@@ -1,12 +1,12 @@
-package com.example.xjw.climber;
+package com.hlxx.climber.secondpage.settings;
 
-class TimePut {
+public class TimePut {
     /**
      * @param millis:毫秒时间
      * @return 时：分：秒
      * @function 毫秒时间时间格式化为字符串
      */
-    static String intsToString(long millis) {
+    public   static String intsToString(long millis) {
 
         int[] intsTimes = new int[3];
         intsTimes[2] = (int) (millis / 1000);
@@ -41,7 +41,7 @@ class TimePut {
      * @return int数组形式
      * @function 对于字符串时：分：秒形式的时间格式化为数组
      */
-    static int[] stringToInts(String sTime) {
+    public  static int[] stringToInts(String sTime) {
         String[] sTimes = sTime.split(":");
         int[] iTimes = new int[3];
         for (int i = 0; i < sTimes.length; i++) {

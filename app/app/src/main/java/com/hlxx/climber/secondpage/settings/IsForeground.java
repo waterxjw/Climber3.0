@@ -1,10 +1,11 @@
-package com.example.xjw.climber;
+package com.hlxx.climber.secondpage.settings;
 
 import android.content.Context;
+import com.hlxx.climber.R;
 import com.wenming.library.BackgroundUtil;
 
 
-class IsForeground {
+public class IsForeground {
 
     private static int times;
 
@@ -12,7 +13,7 @@ class IsForeground {
      * @param context 窗口控件
      * @return FALSE->后台；TRUE->前台(锁屏)
      */
-    static boolean determine(Context context) {
+    public  static boolean determine(Context context) {
         boolean isForeground = BackgroundUtil.queryUsageStats(context, "com.example.xjw.climber");
         if (!isForeground) {
             times++;
@@ -22,15 +23,15 @@ class IsForeground {
         }
     }
 
-    static int getTimes() {
+    public static int getTimes() {
         return times;
     }
 
-    static void setTimes(int times) {
+    public  static void setTimes(int times) {
         IsForeground.times = times;
     }
 
-    static int setClimbBack() {
+    public static int setClimbBack() {
         switch (times) {
             case 0: {
                 return R.drawable.climb_back1;

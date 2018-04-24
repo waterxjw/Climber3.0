@@ -1,4 +1,4 @@
-package com.example.xjw.climber;
+package com.hlxx.climber.secondpage;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
+import com.hlxx.climber.firstpage.TimeSettingActivity;
+import com.hlxx.climber.R;
+import com.hlxx.climber.secondpage.settings.*;
+import com.hlxx.climber.thirdpage.EndingActivity;
 
 
 public class ClimbingActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.xjw.climber;
+package com.hlxx.climber.thirdpage;
 
 import android.content.Context;
 import android.graphics.*;

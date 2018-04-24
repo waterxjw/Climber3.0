@@ -1,4 +1,4 @@
-package com.example.xjw.climber;
+package com.hlxx.climber.secondpage.settings;
 
 public class TimeGet {
     private static int timeSecond;
@@ -9,7 +9,7 @@ public class TimeGet {
     /**
      * @function 实例化方法
      */
-    static TimeGet getInstance() {
+    public static TimeGet getInstance() {
         return new TimeGet();
     }
 
@@ -28,7 +28,7 @@ public class TimeGet {
     /**
      * @return millisTime
      */
-    static long getTime(boolean b) {
+    public static long getTime(boolean b) {
         int[] varTime = getTime();
         return (varTime[0] * 3600 + varTime[1] * 60 + varTime[2]) * 1000;
     }
@@ -36,7 +36,7 @@ public class TimeGet {
     /**
      * @param minutes 设定时间，分钟单位
      */
-    static void setTimeMinute(int minutes) {
+    public static void setTimeMinute(int minutes) {
         timeSecond = minutes * 60;
     }
 

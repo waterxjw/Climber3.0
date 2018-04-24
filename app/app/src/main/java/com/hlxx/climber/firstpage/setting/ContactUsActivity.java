@@ -1,8 +1,9 @@
-package com.example.xjw.climber;
+package com.hlxx.climber.firstpage.setting;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+import com.hlxx.climber.R;
 
 public class ContactUsActivity extends AppCompatActivity {
 
