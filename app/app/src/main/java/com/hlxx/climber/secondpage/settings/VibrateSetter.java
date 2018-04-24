@@ -1,10 +1,11 @@
-package com.example.xjw.climber;
+package com.hlxx.climber.secondpage.settings;
 
 import android.app.Service;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
+import com.hlxx.climber.secondpage.ClimbingActivity;
 
 import java.lang.ref.WeakReference;
 
@@ -17,11 +18,11 @@ public class VibrateSetter {
         isVibrate = vibrate;
     }
 
-    VibrateSetter(ClimbingActivity theActivity) {
+    public VibrateSetter(ClimbingActivity theActivity) {
         this.theActivity = new WeakReference<ClimbingActivity>(theActivity);
     }
 
-    void setVibrate() {
+    public void setVibrate() {
         //处理震动
         ClimbingActivity activity = theActivity.get();
 

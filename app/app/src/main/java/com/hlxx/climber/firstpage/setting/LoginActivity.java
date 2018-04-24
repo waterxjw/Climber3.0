@@ -1,4 +1,4 @@
-package com.example.xjw.climber;
+package com.hlxx.climber.firstpage.setting;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.hlxx.climber.R;
 import studios.codelight.smartloginlibrary.*;
 import studios.codelight.smartloginlibrary.users.SmartFacebookUser;
 import studios.codelight.smartloginlibrary.users.SmartGoogleUser;

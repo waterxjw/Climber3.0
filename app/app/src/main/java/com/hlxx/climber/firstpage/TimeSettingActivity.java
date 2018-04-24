@@ -1,4 +1,4 @@
-package com.example.xjw.climber;
+package com.hlxx.climber.firstpage;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,6 +10,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.ddz.floatingactionbutton.FloatingActionButton;
+import com.hlxx.climber.secondpage.ClimbingActivity;
+import com.hlxx.climber.firstpage.setting.LoginActivity;
+import com.hlxx.climber.R;
+import com.hlxx.climber.firstpage.setting.SettingActivity;
 import com.wx.wheelview.adapter.ArrayWheelAdapter;
 import com.wx.wheelview.widget.WheelView;
 

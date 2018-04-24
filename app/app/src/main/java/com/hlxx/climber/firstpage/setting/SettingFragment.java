@@ -1,4 +1,4 @@
-package com.example.xjw.climber;
+package com.hlxx.climber.firstpage.setting;
 
 
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.SwitchPreferenceCompat;
 import android.widget.Toast;
+import com.hlxx.climber.R;
+import com.hlxx.climber.secondpage.settings.VibrateSetter;
 
 public class SettingFragment extends PreferenceFragmentCompat {
     @Override

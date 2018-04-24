@@ -1,4 +1,4 @@
-package com.example.xjw.climber;
+package com.hlxx.climber.secondpage.settings;
 
 
 import android.app.Activity;
@@ -13,6 +13,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.MediaController;
 import android.widget.VideoView;
+import com.hlxx.climber.R;
+import com.hlxx.climber.thirdpage.EndingActivity;
 
 public class MovePlayActivity extends Activity {
 
