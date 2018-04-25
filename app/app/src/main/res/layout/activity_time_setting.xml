@@ -5,19 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.xjw.climber.TimeSettingActivity">
+    tools:context="com.hlxx.climber.firstpage.TimeSettingActivity">
 
     <ImageView
-        android:id="@+id/imageview"
-        android:layout_width="399dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:fitsSystemWindows="true"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/imageview"
+            android:layout_width="399dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:fitsSystemWindows="true"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginLeft = "8dp" />
 
 
     <com.wx.wheelview.widget.WheelView
@@ -41,14 +41,14 @@
         app:layout_constraintGuide_begin="255dp" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="7dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toStartOf="@+id/scaleimage"
-        app:layout_constraintGuide_begin="404dp"
-        app:layout_constraintStart_toStartOf="parent" />
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="7dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toStartOf="@+id/scaleimage"
+            app:layout_constraintGuide_begin="404dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginRight = "7dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline3"
@@ -80,14 +80,14 @@
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <com.ddz.floatingactionbutton.FloatingActionMenu
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="1dp"
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="1dp"
 
-        app:fab_expandDirection="left"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageview">
+            app:fab_expandDirection="left"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageview" android:layout_marginRight = "1dp">
 
         <com.ddz.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_login"

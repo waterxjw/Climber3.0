@@ -27,7 +27,7 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="Climbing.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xjw/climber/Climbing.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hlxx/climber/Climbing.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-76">
               <caret line="64" column="17" selection-start-line="64" selection-start-column="17" selection-end-line="64" selection-end-column="17" />
@@ -1320,7 +1320,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/xjw/climber/Climbing.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/hlxx/climber/Climbing.java" />
       </list>
     </option>
   </component>
@@ -1433,17 +1433,17 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="com.example.xjw.climber in app-app (1)" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="com.hlxx.climber in app-app (1)" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
       <module name="app-app" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.xjw.climber.*" />
+          <option name="PATTERN" value="com.hlxx.climber.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.example.xjw.climber" />
+      <option name="PACKAGE_NAME" value="com.hlxx.climber" />
       <option name="MAIN_CLASS_NAME" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="package" />
@@ -1460,17 +1460,17 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration name="com.example.xjw.climber in app-app (2)" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="com.hlxx.climber in app-app (2)" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
       <module name="app-app" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.xjw.climber.*" />
+          <option name="PATTERN" value="com.hlxx.climber.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.example.xjw.climber" />
+      <option name="PACKAGE_NAME" value="com.hlxx.climber" />
       <option name="MAIN_CLASS_NAME" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="package" />
@@ -1487,17 +1487,17 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration name="com.example.xjw.climber in app-app" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="com.hlxx.climber in app-app" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
       <module name="app-app" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.xjw.climber.*" />
+          <option name="PATTERN" value="com.hlxx.climber.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.example.xjw.climber" />
+      <option name="PACKAGE_NAME" value="com.hlxx.climber" />
       <option name="MAIN_CLASS_NAME" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="package" />
@@ -1561,13 +1561,13 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
     </configuration>
-    <configuration name="Tests in 'com.example.xjw.climber'" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests" temporary="true" nameIsGenerated="true">
+    <configuration name="Tests in 'com.hlxx.climber'" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests" temporary="true" nameIsGenerated="true">
       <module name="app-app" />
       <option name="TESTING_TYPE" value="1" />
       <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
       <option name="METHOD_NAME" value="" />
       <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="com.example.xjw.climber" />
+      <option name="PACKAGE_NAME" value="com.hlxx.climber" />
       <option name="EXTRA_OPTIONS" value="" />
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
@@ -1693,18 +1693,18 @@
     <list>
       <item itemvalue="Android App.app-app" />
       <item itemvalue="Android JUnit.All in app-app" />
-      <item itemvalue="Android JUnit.com.example.xjw.climber in app-app" />
-      <item itemvalue="Android Instrumented Tests.Tests in 'com.example.xjw.climber'" />
-      <item itemvalue="Android JUnit.com.example.xjw.climber in app-app (1)" />
-      <item itemvalue="Android JUnit.com.example.xjw.climber in app-app (2)" />
+      <item itemvalue="Android JUnit.com.hlxx.climber in app-app" />
+      <item itemvalue="Android Instrumented Tests.Tests in 'com.hlxx.climber'" />
+      <item itemvalue="Android JUnit.com.hlxx.xjw.climber in app-app (1)" />
+      <item itemvalue="Android JUnit.com.hlxx.climber in app-app (2)" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Android JUnit.All in app-app" />
-        <item itemvalue="Android JUnit.com.example.xjw.climber in app-app (1)" />
-        <item itemvalue="Android Instrumented Tests.Tests in 'com.example.xjw.climber'" />
-        <item itemvalue="Android JUnit.com.example.xjw.climber in app-app (2)" />
-        <item itemvalue="Android JUnit.com.example.xjw.climber in app-app" />
+        <item itemvalue="Android JUnit.com.hlxx.climber in app-app (1)" />
+        <item itemvalue="Android Instrumented Tests.Tests in 'com.hlxx.climber'" />
+        <item itemvalue="Android JUnit.com.hlxx.climber in app-app (2)" />
+        <item itemvalue="Android JUnit.com.hlxx.climber in app-app" />
       </list>
     </recent_temporary>
   </component>
@@ -1747,23 +1747,23 @@
     <history-entry file="All_in_app-app - 2018.04.09 at 23h 12m 26s.xml">
       <configuration name="All in app-app" configurationId="AndroidJUnit" />
     </history-entry>
-    <history-entry file="Tests_in_'com_example_xjw_climber' - 2018.04.09 at 23h 11m 00s.xml">
-      <configuration name="Tests in 'com.example.xjw.climber'" configurationId="AndroidTestRunConfigurationType" />
+    <history-entry file="Tests_in_'com_hlxx_climber' - 2018.04.09 at 23h 11m 00s.xml">
+      <configuration name="Tests in 'com.hlxx.climber'" configurationId="AndroidTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="com_example_xjw_climber_in_app-app - 2018.04.09 at 22h 49m 37s.xml">
-      <configuration name="com.example.xjw.climber in app-app" configurationId="AndroidJUnit" />
+    <history-entry file="com_hlxx_climber_in_app-app - 2018.04.09 at 22h 49m 37s.xml">
+      <configuration name="com.hlxx.climber in app-app" configurationId="AndroidJUnit" />
     </history-entry>
-    <history-entry file="com_example_xjw_climber_in_app-app - 2018.04.09 at 22h 49m 58s.xml">
-      <configuration name="com.example.xjw.climber in app-app" configurationId="AndroidJUnit" />
+    <history-entry file="com_hlxx_climber_in_app-app - 2018.04.09 at 22h 49m 58s.xml">
+      <configuration name="com.hlxx.climber in app-app" configurationId="AndroidJUnit" />
     </history-entry>
-    <history-entry file="com_example_xjw_climber_in_app-app_(1) - 2018.04.09 at 23h 07m 34s.xml">
-      <configuration name="com.example.xjw.climber in app-app (1)" configurationId="AndroidJUnit" />
+    <history-entry file="com_hlxx_climber_in_app-app_(1) - 2018.04.09 at 23h 07m 34s.xml">
+      <configuration name="com.hlxx.climber in app-app (1)" configurationId="AndroidJUnit" />
     </history-entry>
-    <history-entry file="com_example_xjw_climber_in_app-app_(1) - 2018.04.09 at 23h 12m 19s.xml">
-      <configuration name="com.example.xjw.climber in app-app (1)" configurationId="AndroidJUnit" />
+    <history-entry file="com_hlxx_climber_in_app-app_(1) - 2018.04.09 at 23h 12m 19s.xml">
+      <configuration name="com.hlxx.climber in app-app (1)" configurationId="AndroidJUnit" />
     </history-entry>
-    <history-entry file="com_example_xjw_climber_in_app-app_(2) - 2018.04.09 at 23h 10m 16s.xml">
-      <configuration name="com.example.xjw.climber in app-app (2)" configurationId="AndroidJUnit" />
+    <history-entry file="com_hlxx_climber_in_app-app_(2) - 2018.04.09 at 23h 10m 16s.xml">
+      <configuration name="com.hlxx.climber in app-app (2)" configurationId="AndroidJUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
@@ -1826,63 +1826,63 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xjw/climber/Climbing.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hlxx/climber/Climbing.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1764">
           <caret line="64" column="17" selection-start-line="64" selection-start-column="17" selection-end-line="64" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xjw/climber/Climbing.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hlxx/climber/Climbing.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2304">
           <caret line="64" column="17" selection-start-line="64" selection-start-column="17" selection-end-line="64" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xjw/climber/Climbing.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hlxx/climber/Climbing.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2304">
           <caret line="64" column="17" selection-start-line="64" selection-start-column="17" selection-end-line="64" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xjw/climber/Climbing.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hlxx/climber/Climbing.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="972">
           <caret line="27" selection-start-line="27" selection-end-line="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xjw/climber/Climbing.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hlxx/climber/Climbing.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
           <caret line="27" selection-start-line="27" selection-end-line="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xjw/climber/Climbing.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hlxx/climber/Climbing.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
           <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xjw/climber/Climbing.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hlxx/climber/Climbing.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1440">
           <caret line="40" column="15" selection-start-line="40" selection-start-column="15" selection-end-line="40" selection-end-column="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xjw/climber/Climbing.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hlxx/climber/Climbing.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="900">
           <caret line="40" column="15" lean-forward="true" selection-start-line="40" selection-start-column="15" selection-end-line="40" selection-end-column="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xjw/climber/TimeSetting.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hlxx/climber/TimeSetting.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
@@ -1896,21 +1896,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xjw/climber/Climbing.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hlxx/climber/Climbing.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="720">
           <caret line="20" column="13" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xjw/climber/TimeSetting.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hlxx/climber/TimeSetting.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xjw/climber/TimeSetting.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hlxx/climber/TimeSetting.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
@@ -1950,7 +1950,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xjw/climber/Climbing.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/hlxx/climber/Climbing.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-76">
           <caret line="64" column="17" selection-start-line="64" selection-start-column="17" selection-end-line="64" selection-end-column="17" />
