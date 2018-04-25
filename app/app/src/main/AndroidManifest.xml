@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.xjw.climber">
+          package="com.hlxx.climber">
+   <!-- package="com.example.xjw.climber"><!-->
+
 
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -15,15 +17,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label">
-        <activity android:name=".TimeSettingActivity">
+        <activity android:name="com.hlxx.climber.firstpage.TimeSettingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ClimbingActivity" />
-        <activity android:name=".EndingActivity"></activity>
+        <activity android:name="com.hlxx.climber.secondpage.ClimbingActivity" />
+        <activity android:name="com.hlxx.climber.secondpage.settings.MovePlayActivity" />
+        <activity android:name="com.hlxx.climber.thirdpage.EndingActivity" />
+        <activity
+            android:name="com.hlxx.climber.firstpage.setting.SettingActivity"
+            android:label="设置" />
+        <activity android:name="com.hlxx.climber.firstpage.setting.ContactUsActivity" />
+        <activity android:name="com.hlxx.climber.firstpage.setting.LoginActivity"></activity>
     </application>
 
 </manifest>
