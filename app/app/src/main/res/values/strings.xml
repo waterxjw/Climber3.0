@@ -5,4 +5,5 @@
     <string name="time">%1$s : %2$s : %3$s</string>
     <string name="message_timeOut">00:00:00</string>
     <string name="message_outPrompt">距山顶：</string>
+    <string name="title_activity_stone">stoneActivity</string>
 </resources>

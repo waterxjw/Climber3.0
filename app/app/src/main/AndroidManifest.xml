@@ -4,6 +4,7 @@
     package="com.example.xjw.climber">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -23,7 +24,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".ClimbingActivity" />
-        <activity android:name=".EndingActivity"></activity>
+        <activity
+            android:name=".EndingActivity"
+            android:theme="@android:style/Theme.NoTitleBar"/>
+        <activity
+            android:name=".stoneActivity"
+            android:label="@string/title_activity_stone"
+            android:theme="@android:style/Theme.Dialog"
+            ></activity>
     </application>
 
 </manifest>
