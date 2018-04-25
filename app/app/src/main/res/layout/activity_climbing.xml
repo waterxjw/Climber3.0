@@ -4,18 +4,23 @@
                                              xmlns:tools = "http://schemas.android.com/tools"
                                              android:layout_width = "match_parent"
                                              android:layout_height = "match_parent"
-                                             tools:context = "com.example.xjw.climber.ClimbingActivity"
-                                             android:background = "@drawable/background">
+                                             tools:context = "com.hlxx.climber.secondpage.ClimbingActivity">
+                                          <!--   android:background = "@drawable/climb_back1"><!-->
+   <ImageView
+           android:layout_width = "match_parent"
+           android:layout_height = "match_parent"
+           android:id = "@+id/climb_background"/>
+
+
     <ImageView
-            android:src = "@mipmap/sun"
+            android:src = "@mipmap/sun1"
             android:layout_width = "117dp"
             android:layout_height = "79dp"
-            android:id = "@+id/imageView" android:layout_marginTop = "16dp"
+            android:id = "@+id/imageView" android:layout_marginTop = "320dp"
             android:contentDescription = "@string/app_name"
             app:layout_constraintTop_toTopOf = "parent"
             android:layout_marginEnd = "16dp"
-            android:layout_marginRight = "32dp"
-            app:layout_constraintEnd_toEndOf = "parent" />
+            app:layout_constraintEnd_toEndOf = "parent" android:layout_marginRight = "16dp" />
     <Chronometer
             android:layout_width = "189dp"
             android:layout_height = "57dp"
@@ -38,7 +43,7 @@
             android:textColor = "@color/colorFonts"
             android:id = "@+id/restTime"
             app:layout_constraintBottom_toBottomOf = "parent"
-            android:layout_marginBottom = "32dp" app:layout_constraintEnd_toEndOf = "parent"
+            android:layout_marginBottom = "24dp" app:layout_constraintEnd_toEndOf = "parent"
             android:layout_marginEnd = "32dp"
             android:layout_marginRight = "32dp" />
     <TextView
@@ -58,5 +63,15 @@
             app:layout_constraintTop_toBottomOf = "@+id/lastTime" app:layout_constraintStart_toStartOf = "parent"
             android:layout_marginStart = "32dp"
             android:layout_marginLeft = "32dp" />
+    <Button
+            android:text = "@string/button_giveUp"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:id = "@+id/button_giveUp"
+            app:layout_constraintStart_toStartOf = "parent"
+            android:layout_marginStart = "132dp"
+            android:layout_marginBottom = "8dp"
+            app:layout_constraintBottom_toTopOf = "@+id/theRestTimePrompt"
+            android:layout_marginLeft = "132dp" />
 
 </android.support.constraint.ConstraintLayout>

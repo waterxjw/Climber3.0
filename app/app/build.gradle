@@ -1,9 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.example.xjw.climber"
+        applicationId "com.hlxx.climber"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
@@ -17,6 +21,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildToolsVersion '27.0.3'
 }
 
 dependencies {
@@ -31,9 +36,6 @@ dependencies {
     implementation files('libs/wheelview_1.3.3.jar')
     implementation project(':library')
     implementation 'com.android.support:preference-v7:26.1.0'
-
-
     implementation project(':FloatingActionButton')
     implementation project(':smartloginlibrary')
-
 }
