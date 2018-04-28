@@ -19,6 +19,7 @@ public class EndingActivity extends AppCompatActivity {
 
         //view层的控件和业务层的控件，靠id关联和映射  给btn1赋值，即设置布局文件中的Button按钮id进行关联
         Button btn1 = (Button) findViewById(R.id.end_to_start);
+        Button btn2=(Button) findViewById(R.id.stone);
 
         //给btn1绑定监听事件
         btn1.setOnClickListener(new OnClickListener() {
@@ -32,6 +33,13 @@ public class EndingActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
 
+            }
+        });
+        btn2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EndingActivity.this, stoneActivity.class);
+                startActivity(intent);
             }
         });
     }

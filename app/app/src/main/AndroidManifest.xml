@@ -6,6 +6,7 @@
 
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -24,6 +25,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
+        <activity android:name=".ClimbingActivity" />
+        <activity
+            android:name=".EndingActivity"
+            android:theme="@android:style/Theme.NoTitleBar"/>
+        <activity
+            android:name=".stoneActivity"
+            android:label="@string/title_activity_stone"
+            android:theme="@android:style/Theme.Dialog"
+            ></activity>
+=======
         <activity android:name="com.hlxx.climber.secondpage.ClimbingActivity" />
         <activity android:name="com.hlxx.climber.secondpage.settings.MovePlayActivity" />
         <activity android:name="com.hlxx.climber.thirdpage.EndingActivity" />
@@ -32,6 +44,7 @@
             android:label="设置" />
         <activity android:name="com.hlxx.climber.firstpage.setting.ContactUsActivity" />
         <activity android:name="com.hlxx.climber.firstpage.setting.LoginActivity"></activity>
+>>>>>>> 6ddafbc0da420883b384d7a851aef8fe49fcf0f7
     </application>
 
 </manifest>
