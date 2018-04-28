@@ -4,6 +4,9 @@
     <string name="settingofmenu">设置</string>
     <string name="message_timeOut">00:00:00</string>
     <string name="message_outPrompt">距山顶：</string>
+<<<<<<< HEAD
+    <string name="title_activity_stone">stoneActivity</string>
+=======
     <string name = "button_giveUp">放弃</string>
     <string name="title_activity_settings2">Settings</string>
 
@@ -79,4 +82,5 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
 
+>>>>>>> 6ddafbc0da420883b384d7a851aef8fe49fcf0f7
 </resources>
