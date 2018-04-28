@@ -39,7 +39,7 @@ public class MovePlayActivity extends Activity {
         mc.setVisibility(View.INVISIBLE);
         video.setMediaController(mc);//隐藏状态栏
 
-        video.setVideoURI(Uri.parse("android.resource://com.example.xjw.climber/"
+        video.setVideoURI(Uri.parse("android.resource://com.hlxx.climber/"
                 + R.raw.ends));
         video.requestFocus();       // 设置VideoView获取焦点
 
