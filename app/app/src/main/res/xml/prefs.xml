@@ -27,7 +27,7 @@
             android:summary="欢迎提供反馈意见" >
             <intent
                 android:action="android.intent.action.MAIN"
-                android:targetPackage="com.hlxx.xjw.climber"
+                android:targetPackage="com.hlxx.climber"
                 android:targetClass="com.hlxx.climber.firstpage.setting.ContactUsActivity" />
 
         </android.support.v7.preference.PreferenceScreen>
