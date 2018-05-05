@@ -1,11 +1,7 @@
 package com.hlxx.climber.secondpage.records;
+
 import java.io.*;
 import java.util.Calendar;
-
-import static com.hlxx.climber.secondpage.settings.IsForeground.getTimes;
-/**
- * Created by xjw on 2018/5/5.
- */
 
 public class RecorderEditor {
     private File fileMonth;
@@ -18,7 +14,7 @@ public class RecorderEditor {
     public RecorderEditor(File applicationDir) {
         this.applicationDir = applicationDir;
         fileMonth = new File(applicationDir, String.valueOf(Calendar.getInstance().get(Calendar.MONTH) + 1));
-        fileDay = new File(fileMonth, "" + (Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + 1));
+        fileDay = new File(fileMonth, "" + (Calendar.getInstance().get(Calendar.DAY_OF_MONTH) ));
         timeOfDay = new File(fileDay, "timeOfDay.hlxx");
     }
 
@@ -37,6 +33,7 @@ public class RecorderEditor {
             e.printStackTrace();
         }
     }
+
     public void oneRecordAdd(Record theRecord) throws IOException {
         timeChange();
         creatFiles();
@@ -47,9 +44,10 @@ public class RecorderEditor {
 
 
     /**
-     +     * @return flase:文件已经存在;true:文件创建成功
-     +     * @throws IOException
-     +     */
+     * +     * @return flase:文件已经存在;true:文件创建成功
+     * +     * @throws IOException
+     * +
+     */
     private boolean creatFiles() throws IOException {
         if (fileDay.mkdirs()) {
             return timeOfDay.createNewFile();

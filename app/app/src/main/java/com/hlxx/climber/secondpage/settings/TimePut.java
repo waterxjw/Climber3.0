@@ -6,7 +6,7 @@ public class TimePut {
      * @return 时：分：秒
      * @function 毫秒时间时间格式化为字符串
      */
-    public   static String intsToString(long millis) {
+    public static String intsToString(long millis) {
 
         int[] intsTimes = new int[3];
         intsTimes[2] = (int) (millis / 1000);
@@ -28,7 +28,7 @@ public class TimePut {
             hour_Minute_Second[1] = String.valueOf(intsTimes[1]);
         }
 
-        if (intsTimes[2]  < 10L) {
+        if (intsTimes[2] < 10L) {
             hour_Minute_Second[2] = "0" + intsTimes[2];
         } else {
             hour_Minute_Second[2] = String.valueOf(intsTimes[2]);
@@ -41,7 +41,7 @@ public class TimePut {
      * @return int数组形式
      * @function 对于字符串时：分：秒形式的时间格式化为数组
      */
-    public  static int[] stringToInts(String sTime) {
+    public static int[] stringToInts(String sTime) {
         String[] sTimes = sTime.split(":");
         int[] iTimes = new int[3];
         for (int i = 0; i < sTimes.length; i++) {

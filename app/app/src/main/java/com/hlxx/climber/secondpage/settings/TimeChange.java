@@ -7,7 +7,7 @@ public class TimeChange {
         TimeGet.setTimeSecond(originalTime);
     }
 
-    public  static void changeTime(String sOriginalTime) {
+    public static void changeTime(String sOriginalTime) {
         int[] iOriginalTime = TimePut.stringToInts(sOriginalTime);
         changeTime(iOriginalTime);
 
@@ -19,7 +19,7 @@ public class TimeChange {
                 time[1] -= 4;
                 break;
             case 2:
-                time[2] -= 40;
+                time[2] -= 50;
                 break;
             case 3:
                 time[2] += 100;

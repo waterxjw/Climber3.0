@@ -2,10 +2,6 @@ package com.hlxx.climber.secondpage.records;
 
 import java.io.Serializable;
 
-/**
- * Created by xjw on 2018/5/5.
- */
-
 public class Record implements Serializable {
     static final long serialVersionUID = 1L;
     private int time;
