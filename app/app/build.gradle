@@ -36,6 +36,7 @@ dependencies {
     implementation files('libs/wheelview_1.3.3.jar')
     implementation project(':library')
     implementation 'com.android.support:preference-v7:26.1.0'
+    implementation 'com.android.support:design:26.1.0'
     implementation project(':FloatingActionButton')
     implementation project(':smartloginlibrary')
 }
