@@ -13,7 +13,7 @@ public class IsForeground {
      * @param context 窗口控件
      * @return FALSE->后台；TRUE->前台(锁屏)
      */
-    public  static boolean determine(Context context) {
+    public static boolean determine(Context context) {
         boolean isForeground = BackgroundUtil.queryUsageStats(context, "com.example.xjw.climber");
         if (!isForeground) {
             times++;
@@ -27,7 +27,7 @@ public class IsForeground {
         return times;
     }
 
-    public  static void setTimes(int times) {
+    public static void setTimes(int times) {
         IsForeground.times = times;
     }
 

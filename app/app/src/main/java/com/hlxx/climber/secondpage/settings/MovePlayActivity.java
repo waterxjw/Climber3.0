@@ -19,6 +19,7 @@ import com.hlxx.climber.thirdpage.EndingActivity;
 public class MovePlayActivity extends Activity {
 
     private VideoView video;
+    boolean b;
 
     /**
      * Called when the activity is firstcreated.
@@ -55,14 +56,27 @@ public class MovePlayActivity extends Activity {
             public void onCompletion(MediaPlayer mp) {
                 Log.d("viod", "onCompletion: END");
                 finish();
-                Intent intent2 = new Intent(MovePlayActivity.this, EndingActivity.class);
-                startActivity(intent2);
+                Intent intent = new Intent(MovePlayActivity.this, EndingActivity.class);
+                startActivity(intent);
             }
         });
 
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        if (b) {
+            video.stopPlayback();
+            Log.d("viod", "onCompletion: END");
+            finish();
+            b = false;
+            Intent intent = new Intent(MovePlayActivity.this, EndingActivity.class);
+            startActivity(intent);
+        }
+        b = true;
+    }
 }
 
