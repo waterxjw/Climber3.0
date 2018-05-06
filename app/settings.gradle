@@ -1,2 +1,2 @@
-include ':app',  ':FloatingActionButton',':smartloginlibrary'
+include ':app',  ':FloatingActionButton',':smartloginlibrary','hellocharts-library'
 include ':library'

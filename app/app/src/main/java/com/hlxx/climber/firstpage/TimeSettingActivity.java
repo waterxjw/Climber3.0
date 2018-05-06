@@ -141,7 +141,7 @@ public class TimeSettingActivity extends AppCompatActivity {
                 //必须先清零，以避免内存过度占用问题，艹，老子为了这一行代码浪费了一中午
                 imageView.setImageResource(0);
                 //切换图片
-                imageView.setImageResource(R.mipmap.mountain1 + i);
+                imageView.setImageResource(R.mipmap.remote_mountain1 + i);
 
 
             }
@@ -151,7 +151,7 @@ public class TimeSettingActivity extends AppCompatActivity {
     //为滚轮设置数据
     private ArrayList<String> createMinutes() {
         ArrayList<String> list = new ArrayList<String>();
-        for (int i = 5; i <= 25; i += 5) {
+        for (int i = 5; i <= 20; i += 5) {
             if (i == 5)
                 list.add("0" + i);
             else {
