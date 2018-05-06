@@ -61,7 +61,7 @@ public class TimeSettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(TimeSettingActivity.this, "Setting", Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(TimeSettingActivity.this,SettingActivity.class);
+                Intent intent = new Intent(TimeSettingActivity.this, SettingActivity.class);
                 startActivity(intent);
             }
         });
@@ -75,7 +75,7 @@ public class TimeSettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(TimeSettingActivity.this, "Login", Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(TimeSettingActivity.this,LoginActivity.class
+                Intent intent = new Intent(TimeSettingActivity.this, LoginActivity.class
                 );
                 startActivity(intent);
             }

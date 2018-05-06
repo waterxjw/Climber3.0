@@ -19,6 +19,7 @@ import com.hlxx.climber.secondpage.records.Record;
 import com.hlxx.climber.secondpage.records.RecorderEditor;
 import com.hlxx.climber.secondpage.settings.*;
 import com.hlxx.climber.thirdpage.EndingActivity;
+
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 
@@ -37,7 +38,6 @@ public class ClimbingActivity extends AppCompatActivity {
     private Thread gcRequest;
     private Record aRecord = new Record();
     private RecorderEditor aRecorderEditor;
-
 
 
     /**
@@ -232,7 +232,7 @@ public class ClimbingActivity extends AppCompatActivity {
             aRecord.setFinish(false);
             try {
                 aRecorderEditor.oneRecordAdd(aRecord);
-                Log.e("Times", "onBackPressed: "+aRecorderEditor.time );
+                Log.e("Times", "onBackPressed: " + aRecorderEditor.time);
             } catch (IOException e) {
                 e.printStackTrace();
             }
