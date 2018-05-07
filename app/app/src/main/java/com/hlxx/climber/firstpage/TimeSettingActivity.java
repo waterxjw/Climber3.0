@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.ddz.floatingactionbutton.FloatingActionButton;
+import com.hlxx.climber.firstpage.setting.HistoryActivity;
 import com.hlxx.climber.secondpage.ClimbingActivity;
 import com.hlxx.climber.firstpage.setting.LoginActivity;
 import com.hlxx.climber.R;
@@ -30,7 +31,7 @@ public class TimeSettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_setting);
         // createScaleImage();
-        createImageView(R.mipmap.mountain1); //设置背景图片
+        createImageView(R.mipmap.remote_mountain1); //设置背景图片
         createWheelView(); //设置时间滚轮
         createButton();//设置开始专注按钮
         createFAButton();//设置右上角浮动按钮
@@ -69,6 +70,9 @@ public class TimeSettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(TimeSettingActivity.this, "History", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(TimeSettingActivity.this,HistoryActivity.class
+                );
+                startActivity(intent);
             }
         });
         fabLogin.setOnClickListener(new View.OnClickListener() {
