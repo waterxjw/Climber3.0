@@ -16,7 +16,7 @@
     <string name="add">Add</string>
     <string name="delete">Delete</string>
     <string name="update">Update</string>
-    <string name="item_timestamp">Timestamp:&#160;&#160;</string>
+    <string name="item_timestamp"> 专注总时间&#160;&#160;</string>
     <string name="item_name"><xliff:g id="name">%1$s</xliff:g>:&#160;&#160;</string>
 
     <!-- Strings related to Settings -->

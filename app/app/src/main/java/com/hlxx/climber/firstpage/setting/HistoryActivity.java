@@ -38,12 +38,15 @@ public class HistoryActivity extends AppCompatActivity {
     private TimelineChartView mGraph;
     private TextView mTimestamp;
     private TextView[] mSeries;
+    private TextView sumOfTime;
     private View[] mSeriesColors;
 
     private Calendar mStart;
 
     private final SimpleDateFormat DATETIME_FORMATTER =
-            new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+    private final SimpleDateFormat HOURTIME_FORMATTER =
+            new SimpleDateFormat("HH:mm", Locale.getDefault());
     private final NumberFormat NUMBER_FORMATTER = new DecimalFormat("#0.00");
     private final String[] COLUMN_NAMES = {"timestamp", "Serie 1", "Serie 2", "Serie 3"};
 
@@ -71,7 +74,7 @@ public class HistoryActivity extends AppCompatActivity {
         }
     };
 
-    private final View.OnClickListener mClickListener = new View.OnClickListener() {
+   /* private final View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
@@ -141,7 +144,7 @@ public class HistoryActivity extends AppCompatActivity {
                     break;
             }
         }
-    };
+    };*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,11 +158,11 @@ public class HistoryActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle(R.string.app_name);
+            getSupportActionBar().setTitle("历史记录");
         }
 
         // Buttons
-        Button button = findViewById(R.id.add);
+        /*Button button = findViewById(R.id.add);
         button.setOnClickListener(mClickListener);
         button = findViewById(R.id.delete);
         button.setOnClickListener(mClickListener);
@@ -189,7 +192,7 @@ public class HistoryActivity extends AppCompatActivity {
                 mGraph.setGraphMode(MODES[mMode]);
                 Toast.makeText(HistoryActivity.this, MODES_TEXT[mMode], Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
 
         // Create random data
@@ -206,6 +209,7 @@ public class HistoryActivity extends AppCompatActivity {
         mTimestamp = findViewById(R.id.item_timestamp);
         ViewGroup series = findViewById(R.id.item_series);
         mSeries = new TextView[COLUMN_NAMES.length - 1];
+        sumOfTime=findViewById(R.id.sum_time);
         mSeriesColors = new View[COLUMN_NAMES.length - 1];
         for (int i = 1; i < COLUMN_NAMES.length; i++) {
             View v = inflater.inflate(R.layout.serie_item_layout, series, false);
@@ -222,10 +226,13 @@ public class HistoryActivity extends AppCompatActivity {
         mGraph.addOnSelectedItemChangedListener(new OnSelectedItemChangedListener() {
             @Override
             public void onSelectedItemChanged(TimelineChartView.Item selectedItem, boolean fromUser) {
+                double sum=0;
                 mTimestamp.setText(DATETIME_FORMATTER.format(selectedItem.mTimestamp));
                 for (int i = 0; i < mSeries.length; i++) {
                     mSeries[i].setText(NUMBER_FORMATTER.format(selectedItem.mSeries[i]));
+                    sum+=selectedItem.mSeries[i];
                 }
+                sumOfTime.setText(NUMBER_FORMATTER.format(sum));
             }
 
             @Override
@@ -297,6 +304,7 @@ public class HistoryActivity extends AppCompatActivity {
         item[0] = timestamp;
         for (int i = 1; i < COLUMN_NAMES.length; i++) {
             item[i] = random(9999);
+
         }
         return item;
     }
@@ -310,17 +318,18 @@ public class HistoryActivity extends AppCompatActivity {
     private void createRandomData(InMemoryCursor cursor) {
         List<Object[]> data = new ArrayList<>();
         Calendar today = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
+
         today.set(Calendar.HOUR_OF_DAY, 0);
         today.set(Calendar.MINUTE, 0);
         today.set(Calendar.SECOND, 0);
         today.set(Calendar.MILLISECOND, 0);
         mStart = (Calendar) today.clone();
-        mStart.add(Calendar.HOUR_OF_DAY, -48);
+        mStart.add(Calendar.DAY_OF_MONTH, -30);
         while (mStart.compareTo(today) <= 0) {
             data.add(createItem(mStart.getTimeInMillis()));
-            mStart.add(Calendar.HOUR_OF_DAY, 1);
+            mStart.add(Calendar.DAY_OF_MONTH, 1);
         }
-        mStart.add(Calendar.HOUR_OF_DAY, -1);
+        mStart.add(Calendar.DAY_OF_MONTH, -1);
         cursor.addAll(data);
     }
 }
