@@ -39,4 +39,7 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
     implementation project(':FloatingActionButton')
     implementation project(':smartloginlibrary')
+    implementation project(':library_timeline_chart')
+    implementation 'com.github.ismaeltoe:flowlayout:1.0'
+
 }

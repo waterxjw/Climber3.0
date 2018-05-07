@@ -1,0 +1,27 @@
+-- Merging decision tree log ---
+manifest
+ADDED from F:\Climber3.0\app\library_timeline_chart\src\main\AndroidManifest.xml:17:1-19:12
+INJECTED from F:\Climber3.0\app\library_timeline_chart\src\main\AndroidManifest.xml:17:1-19:12
+INJECTED from F:\Climber3.0\app\library_timeline_chart\src\main\AndroidManifest.xml:17:1-19:12
+	package
+		ADDED from F:\Climber3.0\app\library_timeline_chart\src\main\AndroidManifest.xml:17:11-45
+		INJECTED from F:\Climber3.0\app\library_timeline_chart\src\main\AndroidManifest.xml
+		INJECTED from F:\Climber3.0\app\library_timeline_chart\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from F:\Climber3.0\app\library_timeline_chart\src\main\AndroidManifest.xml:17:1-19:12
+application
+ADDED from F:\Climber3.0\app\library_timeline_chart\src\main\AndroidManifest.xml:18:5-20
+uses-sdk
+INJECTED from F:\Climber3.0\app\library_timeline_chart\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from F:\Climber3.0\app\library_timeline_chart\src\main\AndroidManifest.xml
+INJECTED from F:\Climber3.0\app\library_timeline_chart\src\main\AndroidManifest.xml
+INJECTED from F:\Climber3.0\app\library_timeline_chart\src\main\AndroidManifest.xml
+INJECTED from F:\Climber3.0\app\library_timeline_chart\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from F:\Climber3.0\app\library_timeline_chart\src\main\AndroidManifest.xml
+		ADDED from F:\Climber3.0\app\library_timeline_chart\src\main\AndroidManifest.xml
+		INJECTED from F:\Climber3.0\app\library_timeline_chart\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from F:\Climber3.0\app\library_timeline_chart\src\main\AndroidManifest.xml
+		ADDED from F:\Climber3.0\app\library_timeline_chart\src\main\AndroidManifest.xml
+		INJECTED from F:\Climber3.0\app\library_timeline_chart\src\main\AndroidManifest.xml

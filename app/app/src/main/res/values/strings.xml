@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Climber</string>
     <string name="timesettedbutton_name">开始专注</string>
     <string name="settingofmenu">设置</string>
@@ -7,6 +7,17 @@
     <string name="title_activity_stone">stoneActivity</string>
     <string name="button_giveUp">放弃</string>
     <string name="title_activity_settings2">Settings</string>
+    <string name="mode">Mode</string>
+    <string name="footer">Footer</string>
+    <string name="color">Color</string>
+    <string name="sound">Sound</string>
+    <string name="reload">Reload</string>
+    <string name="live_update">Live Update</string>
+    <string name="add">Add</string>
+    <string name="delete">Delete</string>
+    <string name="update">Update</string>
+    <string name="item_timestamp"> 专注总时间&#160;&#160;</string>
+    <string name="item_name"><xliff:g id="name">%1$s</xliff:g>:&#160;&#160;</string>
 
     <!-- Strings related to Settings -->
 
