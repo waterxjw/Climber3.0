@@ -5,7 +5,6 @@ public class TimeGet {
 
     private TimeGet() {
     }
-
     /**
      * @function 实例化方法
      */

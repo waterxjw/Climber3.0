@@ -18,7 +18,7 @@ import studios.codelight.smartloginlibrary.util.SmartLoginException;
 
 public class LoginActivity extends AppCompatActivity implements SmartLoginCallbacks {
 
-    private Button  customSigninButton, customSignupButton, logoutButton;
+    private Button customSigninButton, customSignupButton, logoutButton;
     private EditText emailEditText, passwordEditText;
     SmartUser currentUser;
     //GoogleApiClient mGoogleApiClient;
@@ -74,8 +74,6 @@ public class LoginActivity extends AppCompatActivity implements SmartLoginCallba
     private void setListeners() {
 
 
-
-
         customSigninButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,7 +98,7 @@ public class LoginActivity extends AppCompatActivity implements SmartLoginCallba
                 if (currentUser != null) {
                     if (currentUser instanceof SmartFacebookUser) {
                         smartLogin = SmartLoginFactory.build(LoginType.Facebook);
-                    } else if(currentUser instanceof SmartGoogleUser) {
+                    } else if (currentUser instanceof SmartGoogleUser) {
                         smartLogin = SmartLoginFactory.build(LoginType.Google);
                     } else {
                         smartLogin = SmartLoginFactory.build(LoginType.CustomLogin);

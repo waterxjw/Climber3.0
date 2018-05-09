@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-          package="com.hlxx.climber">
-   <!-- package="com.example.xjw.climber"><!-->
-
+    package="com.hlxx.climber">
 
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -18,33 +15,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label">
-        <activity android:name="com.hlxx.climber.firstpage.TimeSettingActivity">
+        <activity android:name=".firstpage.TimeSettingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
-        <activity android:name=".ClimbingActivity" />
+        <activity android:name=".secondpage.ClimbingActivity" />
+        <activity android:name=".secondpage.settings.MovePlayActivity" />
+        <activity android:name=".thirdpage.EndingActivity" />
         <activity
-            android:name=".EndingActivity"
-            android:theme="@android:style/Theme.NoTitleBar"/>
-        <activity
-            android:name=".stoneActivity"
-            android:label="@string/title_activity_stone"
-            android:theme="@android:style/Theme.Dialog"
-            ></activity>
-=======
-        <activity android:name="com.hlxx.climber.secondpage.ClimbingActivity" />
-        <activity android:name="com.hlxx.climber.secondpage.settings.MovePlayActivity" />
-        <activity android:name="com.hlxx.climber.thirdpage.EndingActivity" />
-        <activity
-            android:name="com.hlxx.climber.firstpage.setting.SettingActivity"
+            android:name=".firstpage.setting.SettingActivity"
             android:label="设置" />
-        <activity android:name="com.hlxx.climber.firstpage.setting.ContactUsActivity" />
-        <activity android:name="com.hlxx.climber.firstpage.setting.LoginActivity"></activity>
->>>>>>> 6ddafbc0da420883b384d7a851aef8fe49fcf0f7
+        <activity android:name=".firstpage.setting.ContactUsActivity" />
+        <activity android:name=".firstpage.setting.LoginActivity" />
+        <activity android:name=".thirdpage.StoneActivity" />
+        <activity android:name=".firstpage.setting.HistoryActivity"></activity>
     </application>
 
 </manifest>

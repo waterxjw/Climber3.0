@@ -19,6 +19,7 @@ import com.hlxx.climber.thirdpage.EndingActivity;
 public class MovePlayActivity extends Activity {
 
     private VideoView video;
+    boolean b;
 
     /**
      * Called when the activity is firstcreated.
@@ -39,7 +40,7 @@ public class MovePlayActivity extends Activity {
         mc.setVisibility(View.INVISIBLE);
         video.setMediaController(mc);//隐藏状态栏
 
-        video.setVideoURI(Uri.parse("android.resource://com.example.xjw.climber/"
+        video.setVideoURI(Uri.parse("android.resource://com.hlxx.climber/"
                 + R.raw.ends));
         video.requestFocus();       // 设置VideoView获取焦点
 
@@ -55,14 +56,27 @@ public class MovePlayActivity extends Activity {
             public void onCompletion(MediaPlayer mp) {
                 Log.d("viod", "onCompletion: END");
                 finish();
-                Intent intent2 = new Intent(MovePlayActivity.this, EndingActivity.class);
-                startActivity(intent2);
+                Intent intent = new Intent(MovePlayActivity.this, EndingActivity.class);
+                startActivity(intent);
             }
         });
 
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        if (b) {
+            video.stopPlayback();
+            Log.d("viod", "onCompletion: END");
+            finish();
+            b = false;
+            Intent intent = new Intent(MovePlayActivity.this, EndingActivity.class);
+            startActivity(intent);
+        }
+        b = true;
+    }
 }
 

@@ -6,8 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import com.hlxx.climber.firstpage.TimeSettingActivity;
+
 import com.hlxx.climber.R;
+import com.hlxx.climber.firstpage.TimeSettingActivity;
 
 
 public class EndingActivity extends AppCompatActivity {
@@ -16,10 +17,16 @@ public class EndingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ending);
+        ending_buttons();//按钮跳转：bt1,bt2
 
+
+    }
+
+    //按钮
+    protected void ending_buttons() {
         //view层的控件和业务层的控件，靠id关联和映射  给btn1赋值，即设置布局文件中的Button按钮id进行关联
         Button btn1 = (Button) findViewById(R.id.end_to_start);
-        Button btn2=(Button) findViewById(R.id.stone);
+        Button btn2 = (Button) findViewById(R.id.stone);
 
         //给btn1绑定监听事件
         btn1.setOnClickListener(new OnClickListener() {
@@ -38,9 +45,10 @@ public class EndingActivity extends AppCompatActivity {
         btn2.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EndingActivity.this, stoneActivity.class);
+                Intent intent = new Intent(EndingActivity.this, StoneActivity.class);
                 startActivity(intent);
             }
         });
     }
+
 }
