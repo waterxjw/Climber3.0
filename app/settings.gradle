@@ -1,2 +1,1 @@
-include ':app',  ':FloatingActionButton',':smartloginlibrary'
-include ':library'
+include ':app',':library'

@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.ddz.floatingactionbutton.FloatingActionButton;
+import com.hlxx.climber.firstpage.setting.HistoryActivity;
 import com.hlxx.climber.secondpage.ClimbingActivity;
 import com.hlxx.climber.firstpage.setting.LoginActivity;
 import com.hlxx.climber.R;
@@ -39,7 +40,7 @@ public class TimeSettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_setting);
         // createScaleImage();
-        createImageView(R.mipmap.mountain1); //设置背景图片
+        createImageView(R.mipmap.remote_mountain1); //设置背景图片
         createWheelView(); //设置时间滚轮
         createButton();//设置开始专注按钮
         createFAButton();//设置右上角浮动按钮
@@ -68,7 +69,7 @@ public class TimeSettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(TimeSettingActivity.this, "Setting", Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(TimeSettingActivity.this,SettingActivity.class);
+                Intent intent = new Intent(TimeSettingActivity.this, SettingActivity.class);
                 startActivity(intent);
             }
         });
@@ -76,13 +77,16 @@ public class TimeSettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(TimeSettingActivity.this, "History", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(TimeSettingActivity.this,HistoryActivity.class
+                );
+                startActivity(intent);
             }
         });
         fabLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(TimeSettingActivity.this, "Login", Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(TimeSettingActivity.this,LoginActivity.class
+                Intent intent = new Intent(TimeSettingActivity.this, LoginActivity.class
                 );
                 startActivity(intent);
             }
@@ -148,7 +152,7 @@ public class TimeSettingActivity extends AppCompatActivity {
                 //必须先清零，以避免内存过度占用问题，艹，老子为了这一行代码浪费了一中午
                 imageView.setImageResource(0);
                 //切换图片
-                imageView.setImageResource(R.mipmap.mountain1 + i);
+                imageView.setImageResource(R.mipmap.remote_mountain1 + i);
 
 
             }
@@ -158,7 +162,7 @@ public class TimeSettingActivity extends AppCompatActivity {
     //为滚轮设置数据
     private ArrayList<String> createMinutes() {
         ArrayList<String> list = new ArrayList<String>();
-        for (int i = 5; i <= 25; i += 5) {
+        for (int i = 5; i <= 20; i += 5) {
             if (i == 5)
                 list.add("0" + i);
             else {
