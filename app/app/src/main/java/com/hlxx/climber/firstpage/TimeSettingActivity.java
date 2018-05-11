@@ -129,7 +129,8 @@ public class TimeSettingActivity extends AppCompatActivity {
         wheelView.setSkin(WheelView.Skin.Holo);
         WheelView.WheelViewStyle style = new WheelView.WheelViewStyle();
         //设置选中的文字颜色与大小
-        style.selectedTextColor = Color.parseColor("#0288ce");
+        style.selectedTextColor = Color.BLACK;
+        style.holoBorderColor=Color.BLACK;
         style.selectedTextSize = 25;
         //设置背景颜色为透明
         style.backgroundColor = Color.alpha(0);
@@ -137,7 +138,7 @@ public class TimeSettingActivity extends AppCompatActivity {
 
         wheelView.setStyle(style);
         //设置滚轮右侧的指示文字及其格式
-        wheelView.setExtraText("分钟", Color.parseColor("#0288ce"), 60, 120);
+        wheelView.setExtraText("分钟",Color.BLACK , 60, 120);
         //设置滚轮滑动停止时的事件，即更换图片
         wheelView.setOnWheelItemSelectedListener(new WheelView.OnWheelItemSelectedListener() {
             @Override
