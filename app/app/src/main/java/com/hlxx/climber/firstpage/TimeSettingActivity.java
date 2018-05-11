@@ -18,15 +18,24 @@ import com.wx.wheelview.adapter.ArrayWheelAdapter;
 import com.wx.wheelview.widget.WheelView;
 
 import java.util.ArrayList;
+import com.microsoft.windowsazure.mobileservices.*;
 
 public class TimeSettingActivity extends AppCompatActivity {
     //背景图片
     private ImageView imageView;
     private WheelView wheelView;
     private long firstPressedTime;
-
+    private MobileServiceClient mClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //azure
+        try {
+            mClient = new MobileServiceClient("https://focusonclimb.azurewebsites.net", this);
+        }
+        catch(Exception e) {
+
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_setting);
         // createScaleImage();
@@ -35,8 +44,6 @@ public class TimeSettingActivity extends AppCompatActivity {
         createButton();//设置开始专注按钮
         createFAButton();//设置右上角浮动按钮
         //下面是自定义一个任务栏，取代原先自带的任务栏
-
-
     }
 
     //任务栏右侧的菜单按钮

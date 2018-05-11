@@ -6,6 +6,7 @@
     <!-- package="com.example.xjw.climber"><! -->
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -32,7 +33,7 @@
             android:label="设置" />
         <activity android:name=".firstpage.setting.ContactUsActivity" />
         <activity android:name=".firstpage.setting.LoginActivity" />
-        <activity android:name=".thirdpage.StoneActivity"></activity>
+        <activity android:name=".thirdpage.StoneActivity"/>
     </application>
 
 </manifest>

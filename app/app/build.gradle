@@ -39,4 +39,5 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
     implementation project(':FloatingActionButton')
     implementation project(':smartloginlibrary')
+    implementation 'com.microsoft.azure:azure-mobile-android:3.4.0'
 }
