@@ -37,9 +37,12 @@ dependencies {
     implementation project(':library')
     implementation 'com.android.support:preference-v7:26.1.0'
     implementation 'com.android.support:design:26.1.0'
-    implementation project(':FloatingActionButton')
-    implementation project(':smartloginlibrary')
-    implementation project(':library_timeline_chart')
+
+
+
     implementation 'com.github.ismaeltoe:flowlayout:1.0'
+    implementation 'com.ddz.materialdesign:FloatingActionButton:1.0.4'
+    implementation 'com.ruesga.timeline-chart-view:timeline-chart-view:1.0.2'
+    implementation 'codelight.studios:android-smart-login:1.2'
 
 }
