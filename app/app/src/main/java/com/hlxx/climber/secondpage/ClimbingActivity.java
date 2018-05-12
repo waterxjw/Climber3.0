@@ -12,6 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.*;
 import com.hlxx.climber.firstpage.TimeSettingActivity;
 import com.hlxx.climber.R;
@@ -26,6 +27,12 @@ import java.lang.ref.WeakReference;
 public class ClimbingActivity extends AppCompatActivity {
 
     private static ClimbingActivity instance;
+
+    public static void setWillScreenOn(boolean willScreenOn) {
+        ClimbingActivity.willScreenOn = willScreenOn;
+    }
+
+    private static boolean willScreenOn = false;
 
     private AnimationDrawable animationDrawable;
     private long firstPressedTime;
@@ -91,6 +98,9 @@ public class ClimbingActivity extends AppCompatActivity {
         // 初始化
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_climbing);
+        if (willScreenOn) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
         aRecorderEditor = new RecorderEditor(getFilesDir());
         String data = getIntent().getStringExtra("time");
         aRecord.setTime(Integer.parseInt(data));

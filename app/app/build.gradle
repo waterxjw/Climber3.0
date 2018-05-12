@@ -38,6 +38,8 @@ dependencies {
     implementation 'com.android.support:preference-v7:26.1.0'
     implementation 'com.android.support:design:26.1.0'
 
+    implementation 'com.microsoft.azure:azure-mobile-android:3.4.0'
+
 
 
     implementation 'com.github.ismaeltoe:flowlayout:1.0'
