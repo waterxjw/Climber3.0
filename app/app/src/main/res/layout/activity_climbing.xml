@@ -8,19 +8,19 @@
     <ImageView
             android:layout_width = "match_parent"
             android:layout_height = "match_parent"
+            android:scaleType = "fitXY"
             android:id = "@+id/climb_background"
             tools:ignore = "ContentDescription" />
-    <ImageView
-            android:src = "@drawable/fixed_photo"
-            android:layout_width = "117dp"
-            android:layout_height = "79dp"
-            android:id = "@+id/imageView"
-            android:layout_marginTop = "320dp"
+    <!-- android:alpha = "0.3"  设置透明0-1-->
+    <!--ImageView
+            android:src = "@drawable/climbing"
+            android:layout_width = "0dp"
+            android:layout_height = "wrap_content"
+            android:id = "@+id/climer"
+            android:scaleType = "fitXY"
             android:contentDescription = "@string/app_name"
-            app:layout_constraintTop_toTopOf = "parent"
-            android:layout_marginEnd = "16dp"
-            app:layout_constraintEnd_toEndOf = "parent"
-            android:layout_marginRight = "16dp" />
+            app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintTop_toTopOf = "parent" /-->
     <Chronometer
             android:layout_width = "189dp"
             android:layout_height = "57dp"
@@ -62,9 +62,10 @@
     <ImageView
             android:layout_width = "139dp"
             android:layout_height = "179dp"
-            android:id = "@+id/imageView2"
+            android:id = "@+id/climerActions"
             android:layout_marginTop = "60dp"
-            app:layout_constraintTop_toBottomOf = "@+id/lastTime" app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintTop_toBottomOf = "@+id/lastTime"
+            app:layout_constraintStart_toStartOf = "parent"
             android:layout_marginStart = "32dp"
             android:layout_marginLeft = "32dp"
             tools:ignore = "ContentDescription" />
@@ -78,5 +79,14 @@
             android:layout_marginBottom = "8dp"
             app:layout_constraintBottom_toTopOf = "@+id/theRestTimePrompt"
             android:layout_marginLeft = "132dp" />
+    <ImageView
+            android:layout_width = "148dp"
+            android:layout_height = "262dp"
+            android:id = "@+id/testView"
+            android:layout_marginBottom = "8dp"
+            app:layout_constraintBottom_toTopOf = "@+id/theRestTimePrompt"
+            app:layout_constraintEnd_toEndOf = "parent"
+            android:layout_marginEnd = "8dp"
+            android:layout_marginRight = "8dp" />
 
 </android.support.constraint.ConstraintLayout>

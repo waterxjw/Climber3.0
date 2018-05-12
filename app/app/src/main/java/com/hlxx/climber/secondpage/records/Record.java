@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Record implements Serializable {
     static final long serialVersionUID = 1L;
-    private int time;
+    private int time;//时间
     private boolean finish;
     private int switchTimes;
     private int totalTime;

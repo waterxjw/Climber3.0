@@ -2,6 +2,8 @@ package com.hlxx.climber.secondpage;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -14,8 +16,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.*;
-import com.hlxx.climber.firstpage.TimeSettingActivity;
 import com.hlxx.climber.R;
+import com.hlxx.climber.firstpage.TimeSettingActivity;
 import com.hlxx.climber.secondpage.records.Record;
 import com.hlxx.climber.secondpage.records.RecorderEditor;
 import com.hlxx.climber.secondpage.settings.*;
@@ -100,9 +102,9 @@ public class ClimbingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_climbing);
         if (willScreenOn) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        }
-        aRecorderEditor = new RecorderEditor(getFilesDir());
+        }//设置是否常亮
         String data = getIntent().getStringExtra("time");
+        aRecorderEditor = new RecorderEditor(getFilesDir());
         aRecord.setTime(Integer.parseInt(data));
         TimeGet.setTimeMinute(Integer.parseInt(data));//默认+和上一页面交接
 
@@ -123,11 +125,11 @@ public class ClimbingActivity extends AppCompatActivity {
         //图片
         animationDrawable = /*(AnimationDrawable) img.getDrawable();*/new AnimationDrawable();
         animationDrawable.addFrame(ContextCompat.getDrawable(this, R.drawable.actions4), 500);
-        animationDrawable.addFrame(ContextCompat.getDrawable(this, R.drawable.actions3), 500);
-        animationDrawable.addFrame(ContextCompat.getDrawable(this, R.drawable.actions2), 500);
-        animationDrawable.addFrame(ContextCompat.getDrawable(this, R.drawable.actions1), 500);
-        animationDrawable.setOneShot(false);
-        ImageView img = findViewById(R.id.imageView2);
+       // animationDrawable.addFrame(ContextCompat.getDrawable(this, R.drawable.actions3), 500);
+       // animationDrawable.addFrame(ContextCompat.getDrawable(this, R.drawable.actions2), 500);
+       // animationDrawable.addFrame(ContextCompat.getDrawable(this, R.drawable.actions1), 500);
+        animationDrawable.setOneShot(true);
+        ImageView img = findViewById(R.id.climerActions);
         img.setBackgroundDrawable(animationDrawable);
     }
 
@@ -171,6 +173,13 @@ public class ClimbingActivity extends AppCompatActivity {
                                             }
                                         }
         );
+
+
+        Bitmap sourceBitmap =BitmapFactory.decodeResource(getResources(), R.drawable.climb_sky);
+        Log.e("IMAGINE", ""+sourceBitmap.getHeight()+ "    " +sourceBitmap.getWidth() );
+        ImageView testImageView = findViewById(R.id.testView);
+        Bitmap smallBitmap = Bitmap.createBitmap(sourceBitmap,0,sourceBitmap.getHeight()-30000,2268,2000);
+        testImageView.setImageBitmap(smallBitmap);
 
 
         //处理缓存
@@ -256,4 +265,6 @@ public class ClimbingActivity extends AppCompatActivity {
     public static Context getMyApplication() {
         return instance;
     }
+
+
 }
