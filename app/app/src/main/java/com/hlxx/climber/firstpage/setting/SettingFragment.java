@@ -7,6 +7,7 @@ import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.SwitchPreferenceCompat;
 import android.widget.Toast;
 import com.hlxx.climber.R;
+import com.hlxx.climber.secondpage.ClimbingActivity;
 import com.hlxx.climber.secondpage.settings.VibrateSetter;
 
 public class SettingFragment extends PreferenceFragmentCompat {
@@ -33,6 +34,7 @@ public class SettingFragment extends PreferenceFragmentCompat {
     class AlwaysLightonPreferenceChangerListener implements Preference.OnPreferenceChangeListener {
         public boolean onPreferenceChange(Preference preference, Object newValue) {
             Toast.makeText(getActivity(), "屏幕是否常亮？" + newValue, Toast.LENGTH_SHORT).show();
+            ClimbingActivity.setWillScreenOn(Boolean.parseBoolean(newValue.toString()) );
             return true;
         }
     }
