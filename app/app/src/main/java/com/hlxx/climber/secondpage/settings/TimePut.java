@@ -44,9 +44,19 @@ public class TimePut {
     public static int[] stringToInts(String sTime) {
         String[] sTimes = sTime.split(":");
         int[] iTimes = new int[3];
-        for (int i = 0; i < sTimes.length; i++) {
-            iTimes[i] = Integer.parseInt(sTimes[i].trim());
+        if (sTimes.length == 2) {
+            for (int i = 1; i < 3; i++) {
+                iTimes[i] = Integer.parseInt(sTimes[i-1].trim());
+            }
+        } else if (sTimes.length == 3) {
+            for (int i = 0; i < 3; i++) {
+                iTimes[i] = Integer.parseInt(sTimes[i].trim());
+            }
         }
         return iTimes;
+    }
+
+    public static int intsToSecond(int[] times) {
+        return times[0] * 3600 + times[1] * 60 + times[2];
     }
 }
