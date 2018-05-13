@@ -1,5 +1,6 @@
 package com.hlxx.climber.firstpage.setting;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,6 +25,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -37,18 +39,23 @@ public class HistoryActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private TimelineChartView mGraph;
     private TextView mTimestamp;
-    private TextView[] mSeries;
+    private TextView[][] mSeries;
     private TextView sumOfTime;
     private View[] mSeriesColors;
-
+    private TextView concentrateTimes,failTimes,levelInAverage;
     private Calendar mStart;
+    private HashMap<String,int[]> detailData=new HashMap<String,int[]>();
+    private HashMap<String,String[][]> seriesData=new HashMap<String,String[][]>();
+    private String [][] seriesString;
 
+    private LayoutInflater inflater;
     private final SimpleDateFormat DATETIME_FORMATTER =
             new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     private final SimpleDateFormat HOURTIME_FORMATTER =
             new SimpleDateFormat("HH:mm", Locale.getDefault());
     private final NumberFormat NUMBER_FORMATTER = new DecimalFormat("#0.00");
-    private final String[] COLUMN_NAMES = {"timestamp", "Serie 1", "Serie 2", "Serie 3"};
+    //private final String[] COLUMN_NAMES = {"timestamp", "Serie 1", "Serie 2", "Serie 3"};
+    private final String[] COLUMN_NAMES = {"timestamp","sum"};
 
     private final int[] MODES = {
             TimelineChartView.GRAPH_MODE_BARS,
@@ -205,13 +212,14 @@ public class HistoryActivity extends AppCompatActivity {
         mSound += mGraph.getSelectionSoundEffectSource() != 0 ? 1 : 0;
 
         // Setup info view
-        LayoutInflater inflater = LayoutInflater.from(this);
+
         mTimestamp = findViewById(R.id.item_timestamp);
-        ViewGroup series = findViewById(R.id.item_series);
-        mSeries = new TextView[COLUMN_NAMES.length - 1];
+
+        inflater = LayoutInflater.from(this);
+        //mSeries = new TextView[COLUMN_NAMES.length - 1];
         sumOfTime=findViewById(R.id.sum_time);
-        mSeriesColors = new View[COLUMN_NAMES.length - 1];
-        for (int i = 1; i < COLUMN_NAMES.length; i++) {
+        //mSeriesColors = new View[COLUMN_NAMES.length - 1];
+        /*for (int i = 1; i < COLUMN_NAMES.length; i++) {
             View v = inflater.inflate(R.layout.serie_item_layout, series, false);
             TextView title = v.findViewById(R.id.title);
             title.setText(getString(R.string.item_name, COLUMN_NAMES[i]));
@@ -220,36 +228,64 @@ public class HistoryActivity extends AppCompatActivity {
             mSeriesColors[i - 1] = v.findViewById(R.id.color);
             mSeriesColors[i - 1].setBackgroundColor(Color.TRANSPARENT);
             series.addView(v);
-        }
+        }*/
+        concentrateTimes=findViewById(R.id.concentrationtimes);
+        failTimes=findViewById(R.id.failtimes);
+        levelInAverage=findViewById(R.id.levelinaverage);
+        concentrateTimes.setText("_");
+        failTimes.setText("_");
+        levelInAverage.setText("_");
 
         // Setup graph view data and start listening
         mGraph.addOnSelectedItemChangedListener(new OnSelectedItemChangedListener() {
             @Override
             public void onSelectedItemChanged(TimelineChartView.Item selectedItem, boolean fromUser) {
                 double sum=0;
+                ViewGroup series = findViewById(R.id.item_series);
+                series.removeAllViews();
+                seriesString=seriesData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp));
                 mTimestamp.setText(DATETIME_FORMATTER.format(selectedItem.mTimestamp));
-                for (int i = 0; i < mSeries.length; i++) {
-                    mSeries[i].setText(NUMBER_FORMATTER.format(selectedItem.mSeries[i]));
-                    sum+=selectedItem.mSeries[i];
-                }
+                //for (int i = 0; i < mSeries.length; i++) {
+                    //mSeries[i].setText(NUMBER_FORMATTER.format(selectedItem.mSeries[i]));
+                sum+=selectedItem.mSeries[0];
                 sumOfTime.setText(NUMBER_FORMATTER.format(sum));
+                concentrateTimes.setText(Integer.toString((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[0]));
+                failTimes.setText(Integer.toString((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[1]));
+                levelInAverage.setText(Integer.toString((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[2])+"%");
+                mSeries=new TextView[seriesString.length][5];
+                for (int i=0;i<seriesString.length;i++){
+                    View v = inflater.inflate(R.layout.serie_item_layout, series, false);
+                    mSeries[i][0]=v.findViewById(R.id.singleTime);
+                    mSeries[i][1]=v.findViewById(R.id.actualConcentrateTime);
+                    mSeries[i][2]=v.findViewById(R.id.planConcentrateTime);
+                    mSeries[i][3]=v.findViewById(R.id.level);
+                    mSeries[i][4]=v.findViewById(R.id.isSuccess);
+                    mSeries[i][0].setText(seriesString[i][0]);
+                    mSeries[i][1].setText(seriesString[i][1]);
+                    mSeries[i][2].setText(seriesString[i][2]);
+                    mSeries[i][3].setText(seriesString[i][3]);
+                    mSeries[i][4].setText(seriesString[i][4]);
+                    series.addView(v);
+                }
+               // }
+
             }
 
             @Override
             public void onNothingSelected() {
                 mTimestamp.setText("-");
-                for (TextView v : mSeries) {
+                /*for (TextView v : mSeries) {
                     v.setText("-");
-                }
+                }*/
             }
         });
         mGraph.addOnColorPaletteChangedListener(new OnColorPaletteChangedListener() {
             @Override
             public void onColorPaletteChanged(int[] palette) {
-                int count = mSeriesColors.length;
+                /*int count = mSeriesColors.length;
                 for (int i = 0; i < count; i++) {
                     mSeriesColors[i].setBackgroundColor(palette[i]);
-                }
+                }*/
             }
         });
         mGraph.setOnClickItemListener(new TimelineChartView.OnClickItemListener() {
@@ -317,8 +353,10 @@ public class HistoryActivity extends AppCompatActivity {
 
     private void createRandomData(InMemoryCursor cursor) {
         List<Object[]> data = new ArrayList<>();
-        Calendar today = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
+        String[][] seriesdata;
 
+        Calendar today = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
+        Calendar temporary = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
         today.set(Calendar.HOUR_OF_DAY, 0);
         today.set(Calendar.MINUTE, 0);
         today.set(Calendar.SECOND, 0);
@@ -326,6 +364,18 @@ public class HistoryActivity extends AppCompatActivity {
         mStart = (Calendar) today.clone();
         mStart.add(Calendar.DAY_OF_MONTH, -30);
         while (mStart.compareTo(today) <= 0) {
+            seriesdata=new String[random(5)][5];
+            for (int i=0;i<seriesdata.length;i++){
+
+                temporary.set(Calendar.HOUR_OF_DAY,random(10));
+                seriesdata[i][0]=HOURTIME_FORMATTER.format(temporary.getTimeInMillis());
+                seriesdata[i][1]=Integer.toString(random(10));
+                seriesdata[i][2]=Integer.toString(random(10));
+                seriesdata[i][3]=Integer.toString(random(100))+"%";
+                seriesdata[i][4]=(random(2)==0)?"成功":"失败";
+            }
+            seriesData.put(DATETIME_FORMATTER.format(mStart.getTimeInMillis()),seriesdata);
+            detailData.put(DATETIME_FORMATTER.format(mStart.getTimeInMillis()),new int[]{random(10),random(5),random(100)});
             data.add(createItem(mStart.getTimeInMillis()));
             mStart.add(Calendar.DAY_OF_MONTH, 1);
         }
