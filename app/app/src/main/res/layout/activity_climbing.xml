@@ -11,8 +11,7 @@
             android:scaleType = "fitXY"
             android:id = "@+id/climb_background"
             tools:ignore = "ContentDescription" />
-    <!-- android:alpha = "0.3"  设置透明0-1-->
-    <!--ImageView
+    <ImageView
             android:src = "@drawable/climbing"
             android:layout_width = "0dp"
             android:layout_height = "wrap_content"
@@ -20,7 +19,7 @@
             android:scaleType = "fitXY"
             android:contentDescription = "@string/app_name"
             app:layout_constraintStart_toStartOf = "parent"
-            app:layout_constraintTop_toTopOf = "parent" /-->
+            app:layout_constraintTop_toTopOf = "parent" />
     <Chronometer
             android:layout_width = "189dp"
             android:layout_height = "57dp"
@@ -59,16 +58,6 @@
             app:layout_constraintBottom_toTopOf = "@+id/restTime"
             app:layout_constraintStart_toStartOf = "@+id/restTime"
     />
-    <ImageView
-            android:layout_width = "139dp"
-            android:layout_height = "179dp"
-            android:id = "@+id/climerActions"
-            android:layout_marginTop = "60dp"
-            app:layout_constraintTop_toBottomOf = "@+id/lastTime"
-            app:layout_constraintStart_toStartOf = "parent"
-            android:layout_marginStart = "32dp"
-            android:layout_marginLeft = "32dp"
-            tools:ignore = "ContentDescription" />
     <Button
             android:text = "@string/button_giveUp"
             android:layout_width = "wrap_content"
@@ -79,14 +68,5 @@
             android:layout_marginBottom = "8dp"
             app:layout_constraintBottom_toTopOf = "@+id/theRestTimePrompt"
             android:layout_marginLeft = "132dp" />
-    <ImageView
-            android:layout_width = "148dp"
-            android:layout_height = "262dp"
-            android:id = "@+id/testView"
-            android:layout_marginBottom = "8dp"
-            app:layout_constraintBottom_toTopOf = "@+id/theRestTimePrompt"
-            app:layout_constraintEnd_toEndOf = "parent"
-            android:layout_marginEnd = "8dp"
-            android:layout_marginRight = "8dp" />
 
 </android.support.constraint.ConstraintLayout>

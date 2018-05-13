@@ -31,7 +31,7 @@ public class IsForeground {
         IsForeground.times = times;
     }
 
-    public static int setClimbBack() {
+    /*public static int setClimbBack() {
         switch (times) {
             case 0: {
                 return R.drawable.climb_back1;
@@ -44,5 +44,5 @@ public class IsForeground {
             }
         }
         return R.drawable.climb_back3;
-    }
+    }*/
 }
