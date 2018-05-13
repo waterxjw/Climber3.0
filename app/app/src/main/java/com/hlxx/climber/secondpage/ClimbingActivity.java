@@ -178,7 +178,7 @@ public class ClimbingActivity extends AppCompatActivity {
         Bitmap sourceBitmap =BitmapFactory.decodeResource(getResources(), R.drawable.climb_sky);
         Log.e("IMAGINE", ""+sourceBitmap.getHeight()+ "    " +sourceBitmap.getWidth() );
         ImageView testImageView = findViewById(R.id.testView);
-        Bitmap smallBitmap = Bitmap.createBitmap(sourceBitmap,0,sourceBitmap.getHeight()-30000,2268,2000);
+        Bitmap smallBitmap = Bitmap.createBitmap(sourceBitmap,0,0,100,2000);
         testImageView.setImageBitmap(smallBitmap);
 
 

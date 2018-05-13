@@ -113,9 +113,10 @@
                         android:layout_height="wrap_content"
                         android:text="专注次数"/>
                     <TextView
+                        android:id="@+id/concentrationtimes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/concentrationtimes"
+
                         android:textStyle="bold"/>
                 </LinearLayout>
                 <LinearLayout
@@ -156,21 +157,15 @@
                 android:layout_height="1px"
                 android:background="?android:attr/listDivider"
                 />
-
-
-
             <LinearLayout
-                xmlns:f="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/item_series"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:orientation="vertical"
+                android:id="@+id/item_series"></LinearLayout>
 
-                >
 
-                <!-- Series goes here -->
-            </LinearLayout>
+
+
 
         </LinearLayout>
 
