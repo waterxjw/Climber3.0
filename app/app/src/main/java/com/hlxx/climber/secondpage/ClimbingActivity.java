@@ -103,7 +103,6 @@ public class ClimbingActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                //animationDrawable.stop();
                 ((TextView) findViewById(R.id.theRestTimePrompt)).setText("");
                 lastTimeChronometer.stop();//Chronometer暂停
                 Toast.makeText(ClimbingActivity.this, "成功！", Toast.LENGTH_LONG).show();//进行弹窗提示
@@ -233,8 +232,6 @@ public class ClimbingActivity extends AppCompatActivity {
     protected void onPause() {
         final TextView theRestTime = findViewById(R.id.restTime);//剩余时间栏，右下角
         super.onPause();
-
-        // animationDrawable.stop();
 
         PowerManager pm = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
         isScreenOn = pm.isScreenOn();//如果为true，则表示屏幕“亮”了，否则屏幕“暗”了。
