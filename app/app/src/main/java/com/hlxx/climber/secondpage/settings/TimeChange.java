@@ -16,7 +16,7 @@ public class TimeChange {
     private static int[] switches(int[] time) {
         switch (IsForeground.getTimes()) {
             case 1:
-                time[1] -= 4;
+                time[1] -= 1;
                 break;
             case 2:
                 time[2] -= 50;
