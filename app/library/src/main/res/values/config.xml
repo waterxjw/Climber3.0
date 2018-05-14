@@ -46,7 +46,7 @@
     <!-- Default value for animate cursor transition -->
     <bool name="tlcDefAnimateCursorTransition">true</bool>
 
-    <!-- Default behaviour when follow real time cursor updates -->
+    <!-- Default behaviour when follow real timeSetted cursor updates -->
     <bool name="tlcDefFollowCursorPosition">false</bool>
 
     <!-- Default behaviour to always ensure a valid selection -->

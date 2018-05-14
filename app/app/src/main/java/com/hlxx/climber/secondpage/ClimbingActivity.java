@@ -6,11 +6,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.*;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
+import android.util.DisplayMetrics;
 import android.view.WindowManager;
-import android.widget.*;
+import android.widget.Chronometer;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 import com.hlxx.climber.R;
 import com.hlxx.climber.firstpage.TimeSettingActivity;
 import com.hlxx.climber.secondpage.records.Record;
@@ -27,30 +30,38 @@ import static com.hlxx.climber.secondpage.settings.TimePut.intsToSecond;
 import static com.hlxx.climber.secondpage.settings.TimePut.stringToInts;
 
 public class ClimbingActivity extends AppCompatActivity {
-    public static void setWillScreenOn(boolean willScreenOn) {
-        ClimbingActivity.willScreenOn = willScreenOn;
-    }
-
     private static boolean willScreenOn = false;
     private long firstPressedTime;
     private boolean isSwitch = false;
     private CountDownTimer timer;
     private VibrateSetter vibrateSetter = new VibrateSetter(this);
-    private boolean isScreenOn;
-    private WeakReference<CountDownTimer> wrfCDT;
+    private boolean isScreenOn = true;
     private Thread gcRequest;
     private Record aRecord = new Record();
     private RecorderEditor aRecorderEditor;
-    private static int widthPixels;
+    private static int hightPixels;
     private static double speed;
     private static Bitmap sourceBitmap;
     private static Bitmap toShowBitmap;
+    private Handler mHandler = new MyHandler(this);
 
+    //设置是否常亮
+    public static void setWillScreenOn(boolean willScreenOn) {
+        ClimbingActivity.willScreenOn = willScreenOn;
+    }
+
+    //是否熄屏
+    private void screenState() {
+        PowerManager pm = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
+        isScreenOn = pm.isScreenOn();//如果为true，则表示屏幕“亮”了，否则屏幕“暗”了。
+    }
+
+    //用于处理背景图片
     private static class MyHandler extends Handler {
         private final WeakReference<ClimbingActivity> weakReference;
 
         private MyHandler(ClimbingActivity activty) {
-            this.weakReference = new WeakReference<ClimbingActivity>(activty);
+            this.weakReference = new WeakReference<>(activty);
         }
 
         @Override
@@ -62,11 +73,21 @@ public class ClimbingActivity extends AppCompatActivity {
                     case 1:
                         TextView tv = activity.findViewById(R.id.lastTime);
                         int timeUsed = intsToSecond(stringToInts(tv.getText().toString()));
-                        tv = null;
-                        int yLocation = (int) speed * timeUsed + widthPixels;
+                        int yLocation = (int) speed * timeUsed + hightPixels;
+                        if (yLocation / (double) sourceBitmap.getHeight() < 0.595) {
+                            tv.setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_start));
+                        } else if (yLocation / (double) sourceBitmap.getHeight() > 0.79) {
+                            tv.setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
+                            ((TextView) activity.findViewById(R.id.theRestTimePrompt)).setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
+                            ((TextView) activity.findViewById(R.id.restTime)).setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
+                        } else {
+                            tv.setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_mid));
+                        }
                         ImageView testImageView = activity.findViewById(R.id.climb_background);
+                        tv = null;
+                        yLocation = yLocation > sourceBitmap.getHeight() ? sourceBitmap.getHeight() : yLocation;
                         toShowBitmap = null;
-                        toShowBitmap = Bitmap.createBitmap(sourceBitmap, 0, sourceBitmap.getHeight() - yLocation, sourceBitmap.getWidth(), widthPixels);
+                        toShowBitmap = Bitmap.createBitmap(sourceBitmap, 0, sourceBitmap.getHeight() - yLocation, sourceBitmap.getWidth(), hightPixels);
                         testImageView.setImageBitmap(toShowBitmap);
                         break;
                     default:
@@ -76,15 +97,9 @@ public class ClimbingActivity extends AppCompatActivity {
         }
     }
 
-    private Handler mHandler = new MyHandler(this);
-
-    /**
-     * @return 由TimeGet的时间决定的新的计时器
-     */
+    //返回由TimeGet的时间决定的新的计时器
     private CountDownTimer creatNewOne() {
-
         final TextView theRestTime = findViewById(R.id.restTime);
-        final Chronometer lastTimeChronometer = findViewById(R.id.lastTime);
         return new CountDownTimer(TimeGet.getTime(true), 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -94,35 +109,27 @@ public class ClimbingActivity extends AppCompatActivity {
             //倒计时结束后
             @Override
             public void onFinish() {
-                String[] times = lastTimeChronometer.getText().toString().split(":");
-                aRecord.setTotalTime(Integer.parseInt(times[0]) * 60 + Integer.parseInt(times[1]));
-                aRecord.setSwitchTimes(IsForeground.getTimes());
                 theRestTime.setText("到达");
-                try {
-                    aRecorderEditor.oneRecordAdd(aRecord);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                recordWrite(true);
                 ((TextView) findViewById(R.id.theRestTimePrompt)).setText("");
-                lastTimeChronometer.stop();//Chronometer暂停
+                ((Chronometer) findViewById(R.id.lastTime)).stop();//Chronometer暂停
                 Toast.makeText(ClimbingActivity.this, "成功！", Toast.LENGTH_LONG).show();//进行弹窗提示
-                //处理震动
-                vibrateSetter.setVibrate();
+                vibrateSetter.setVibrate();//处理震动
                 IsForeground.setTimes(0);
-                aRecord.setFinish(true);
                 if (gcRequest != null) {
                     gcRequest.interrupt();
                     gcRequest = null;
                 }
-                mHandler = null;
+                screenState();
                 //切换
-                Intent intent2;
+                Intent nextIntent;
                 if (isScreenOn) {
-                    intent2 = new Intent(ClimbingActivity.this, MovePlayActivity.class);
+                    nextIntent = new Intent(ClimbingActivity.this, MovePlayActivity.class);
                 } else {
-                    intent2 = new Intent(ClimbingActivity.this, EndingActivity.class);
+                    nextIntent = new Intent(ClimbingActivity.this, EndingActivity.class);
                 }
-                startActivity(intent2);
+                startActivity(nextIntent);
+                mHandler = null;
                 finish();
             }
         };
@@ -135,96 +142,77 @@ public class ClimbingActivity extends AppCompatActivity {
         String data = getIntent().getStringExtra("time");
         setTimeSecondSetted(Integer.parseInt(data));
         aRecorderEditor = new RecorderEditor(getFilesDir());
-        aRecord.setTime(getTimeSecondSetted());//默认+和上一页面交接+初始化记录仪
-
-        final TextView theRestTime = findViewById(R.id.restTime);//剩余时间栏，右下角
-        final Chronometer lastTimeChronometer = findViewById(R.id.lastTime);//持续时间
+        aRecord.setTimeSetted(getTimeSecondSetted());//默认+和上一页面交接+初始化记录仪
 
         if (willScreenOn) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }//设置是否常亮
 
         //输出持续时间
+        Chronometer lastTimeChronometer = findViewById(R.id.lastTime);
         lastTimeChronometer.setBase(SystemClock.elapsedRealtime() - 1000);
         lastTimeChronometer.start();
+        lastTimeChronometer = null;
 
         //进行弹窗提示
         Toast.makeText(ClimbingActivity.this, "文文傻蛋！", Toast.LENGTH_SHORT).show();
 
-        //已用时间输出
+        //剩余时间输出
         timer = creatNewOne();
         timer.start();
+
+        //设置背景
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        hightPixels = dm.heightPixels;
+        dm = null;
+        sourceBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.climb_sky);
+        speed = (sourceBitmap.getHeight() - hightPixels) / (double) getTimeSecondSetted();
+        ImageView testImageView = findViewById(R.id.climb_background);
+        toShowBitmap = Bitmap.createBitmap(sourceBitmap, 0, sourceBitmap.getHeight() - hightPixels, sourceBitmap.getWidth(), hightPixels);
+        testImageView.setImageBitmap(toShowBitmap);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Button giveUpButton = findViewById(R.id.button_giveUp);
-        giveUpButton.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                if (System.currentTimeMillis() - firstPressedTime < 2000) {
-                                                    final Chronometer lastTimeChronometer = findViewById(R.id.lastTime);
-                                                    String[] times = lastTimeChronometer.getText().toString().split(":");
-                                                    aRecord.setTotalTime(Integer.parseInt(times[0]) * 60 + Integer.parseInt(times[1]));
-                                                    aRecord.setSwitchTimes(IsForeground.getTimes());
-                                                    aRecord.setFinish(false);
-                                                    try {
-                                                        aRecorderEditor.oneRecordAdd(aRecord);
-                                                    } catch (IOException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                    if (gcRequest != null) {
-                                                        gcRequest.interrupt();
-                                                        gcRequest = null;
-                                                    }
-                                                    mHandler = null;
-                                                    Intent intent = new Intent(ClimbingActivity.this, TimeSettingActivity.class);
-                                                    startActivity(intent);
-                                                    finish();
-                                                } else {
-                                                    Toast.makeText(getBaseContext(), "骚年，何弃疗！", Toast.LENGTH_SHORT).show();
-                                                    firstPressedTime = System.currentTimeMillis();
-                                                }
-                                            }
-                                        }
-        );
 
+        //放弃按钮
+        (findViewById(R.id.button_giveUp)).setOnClickListener((view) -> {
+            if (System.currentTimeMillis() - firstPressedTime < 5000) {
+                recordWrite(false);
+                if (gcRequest != null) {
+                    gcRequest.interrupt();
+                    gcRequest = null;
+                }
+                mHandler = null;
+                startActivity(new Intent(ClimbingActivity.this, TimeSettingActivity.class));
+                finish();
+            } else {
+                Toast.makeText(getBaseContext(), "骚年，何弃疗！", Toast.LENGTH_SHORT).show();
+                firstPressedTime = System.currentTimeMillis();
+            }
+        });
 
-        //处理缓存
+        //处理缓存+更新背景
         if (gcRequest == null || !gcRequest.isAlive()) {
-            gcRequest = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    while (true) {
-                        try {
-                            Message msg = new Message();
-                            msg.what = 1;  //消息(一个整型值)
-                            if (mHandler != null) {
-                                mHandler.sendMessage(msg);// 每隔1秒发送一个msg给mHandler
-                                Thread.sleep(5000);
-                            }
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+            gcRequest = new Thread(() -> {
+                boolean threadState = true;
+                while (threadState) {
+                    try {
+                        Message msg = new Message();
+                        msg.what = 1;  //消息(一个整型值)
+                        if (mHandler != null) {
+                            mHandler.sendMessage(msg);// 每隔1秒发送一个msg给mHandler
+                            Thread.sleep(5000);
                         }
-                        System.gc();
+                    } catch (InterruptedException e) {
+                        threadState = false;
                     }
                 }
+                System.gc();
             });
             gcRequest.start();
-
-
-            widthPixels = getWindowManager().getDefaultDisplay().getHeight();
-            sourceBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.climb_sky);
-            speed = (sourceBitmap.getHeight() - widthPixels) / (double) getTimeSecondSetted();
-            TextView tv = findViewById(R.id.lastTime);
-            int timeUsed = intsToSecond(stringToInts(tv.getText().toString()));
-            tv = null;
-            int yLocation = (int) speed * timeUsed + widthPixels;
-            ImageView testImageView = findViewById(R.id.climb_background);
-            toShowBitmap = Bitmap.createBitmap(sourceBitmap, 0, sourceBitmap.getHeight() - yLocation, sourceBitmap.getWidth(), widthPixels);
-            Log.e("TIMESS", "" + (sourceBitmap.getHeight() - yLocation - widthPixels));
-            testImageView.setImageBitmap(toShowBitmap);
         }
     }
 
@@ -233,18 +221,13 @@ public class ClimbingActivity extends AppCompatActivity {
         final TextView theRestTime = findViewById(R.id.restTime);//剩余时间栏，右下角
         super.onPause();
 
-        PowerManager pm = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
-        isScreenOn = pm.isScreenOn();//如果为true，则表示屏幕“亮”了，否则屏幕“暗”了。
-
+        screenState();
         //控制台输出是否后台
-        if (theRestTime.getText().toString().equals("到达") || !isScreenOn) {
-            Log.e("State", "True");
-        } else {
+        if (!theRestTime.getText().toString().equals("到达") && isScreenOn) {
             isSwitch = true;
             IsForeground.setTimes(IsForeground.getTimes() + 1);
             TimeChange.changeTime(theRestTime.getText().toString());
             timer.cancel();
-            wrfCDT = new WeakReference<>(timer);
             timer = null;
             timer = creatNewOne();
             timer.start();
@@ -254,34 +237,22 @@ public class ClimbingActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     protected void onDestroy() {
-        final Chronometer lastTimeChronometer = findViewById(R.id.lastTime);//持续时间
+        Chronometer lastTimeChronometer = findViewById(R.id.lastTime);//持续时间
         lastTimeChronometer.stop();
+        lastTimeChronometer = null;
         timer.cancel();
-        wrfCDT = new WeakReference<>(timer);
         timer = null;
         super.onDestroy();
         IsForeground.setTimes(0);
     }
 
-
     @Override
     public void onBackPressed() {
         if (System.currentTimeMillis() - firstPressedTime < 2000) {
-            final Chronometer lastTimeChronometer = findViewById(R.id.lastTime);
-            String[] times = lastTimeChronometer.getText().toString().split(":");
             mHandler = null;
-            aRecord.setTotalTime(Integer.parseInt(times[0]) * 60 + Integer.parseInt(times[1]));
-            aRecord.setSwitchTimes(IsForeground.getTimes());
-            aRecord.setFinish(false);
-            try {
-                aRecorderEditor.oneRecordAdd(aRecord);
-                Log.e("Times", "onBackPressed: " + aRecorderEditor.time);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            recordWrite(false);
             ActivityCompat.finishAffinity(this);//退出整个程序
         } else {
             Toast.makeText(getBaseContext(), "再点一次退出", Toast.LENGTH_SHORT).show();
@@ -289,5 +260,15 @@ public class ClimbingActivity extends AppCompatActivity {
         }
     }
 
-
+    private void recordWrite(boolean finish) {
+        String[] times = ((Chronometer) findViewById(R.id.lastTime)).getText().toString().split(":");
+        aRecord.setTotalTime(Integer.parseInt(times[0]) * 60 + Integer.parseInt(times[1]));
+        aRecord.setSwitchTimes(IsForeground.getTimes());
+        aRecord.setFinish(finish);
+        try {
+            aRecorderEditor.oneRecordAdd(aRecord);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
