@@ -94,21 +94,21 @@
             android:id="@+id/fab_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fab_icon="@drawable/icon_follow"
+            app:fab_icon="@drawable/icon_login"
             app:fab_size="mini" />
 
         <com.ddz.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fab_icon="@drawable/icon_like"
+            app:fab_icon="@drawable/icon_history"
             app:fab_size="mini" />
 
         <com.ddz.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fab_icon="@drawable/icon_share"
+            app:fab_icon="@drawable/icon_setting"
             app:fab_size="mini" />
     </com.ddz.floatingactionbutton.FloatingActionMenu>
 
