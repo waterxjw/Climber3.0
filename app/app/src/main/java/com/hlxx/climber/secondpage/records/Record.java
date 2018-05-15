@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 public class Record implements Serializable {
     static final long serialVersionUID = 1L;
-    private int time;
+    private int timeSetted;//时间
     private boolean finish;
     private int switchTimes;
     private int totalTime;
 
-    public void setTime(int time) {
-        this.time = time;
+    public void setTimeSetted(int timeSetted) {
+        this.timeSetted = timeSetted;
     }
 
     public void setFinish(boolean finish) {
@@ -28,7 +28,7 @@ public class Record implements Serializable {
     @Override
     public String toString() {
         return "Record{" +
-                "time=" + time +
+                "timeSetted=" + timeSetted +
                 ", finish=" + finish +
                 ", switchTimes=" + switchTimes +
                 ", totalTime=" + totalTime +

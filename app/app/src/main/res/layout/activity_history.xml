@@ -92,21 +92,82 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/sum_time"
+                    android:textSize="40dp"
+                    android:textStyle="bold"
                     android:textAppearance="@android:style/TextAppearance.Large"/>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_gravity="center">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="专注次数"/>
+                    <TextView
+                        android:id="@+id/concentrationtimes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
 
-
-            <com.ismaeltoe.FlowLayout
-                xmlns:f="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/item_series"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="失败次数"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/failtimes"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="平均专注程度"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/levelinaverage"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="3px"
+                android:background="?android:attr/listDivider"
+                />
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                f:horizontalPadding="8dp"
-                f:verticalPadding="8dp">
+                android:orientation="vertical"
+                android:id="@+id/item_series"
 
-                <!-- Series goes here -->
-            </com.ismaeltoe.FlowLayout>
+                ></LinearLayout>
+
+
+
+
 
         </LinearLayout>
 

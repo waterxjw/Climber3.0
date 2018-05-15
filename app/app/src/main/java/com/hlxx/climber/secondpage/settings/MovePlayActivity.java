@@ -19,7 +19,7 @@ import com.hlxx.climber.thirdpage.EndingActivity;
 public class MovePlayActivity extends Activity {
 
     private VideoView video;
-    boolean b;
+    private boolean b;
 
     /**
      * Called when the activity is firstcreated.
