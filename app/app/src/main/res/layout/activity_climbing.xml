@@ -30,7 +30,9 @@
             android:id = "@+id/lastTime"
             app:layout_constraintTop_toTopOf = "parent"
             android:textColorHint = "@android:color/background_light" app:layout_constraintEnd_toEndOf = "parent"
-            android:layout_marginTop = "320dp" android:layout_marginEnd = "160dp" />
+            android:layout_marginTop = "320dp"
+            android:layout_marginEnd = "120dp"
+            android:layout_marginRight = "120dp" />
     <TextView
             android:text = "@string/message_timeOut"
             android:layout_width = "111dp"
@@ -58,13 +60,19 @@
             android:layout_width = "46dp"
             android:layout_height = "108dp"
             android:textSize = "25sp"
-            android:background="@drawable/give_up_button_shape"
+            android:background = "@drawable/give_up_button_shape"
             android:textColor = "@color/color_button_text"
             android:id = "@+id/button_giveUp"
             app:layout_constraintStart_toStartOf = "parent"
             app:layout_constraintBottom_toBottomOf = "parent"
-    >
-
-    </Button>
+    />
+    <pl.droidsonroids.gif.GifImageView
+            android:layout_width = "57dp"
+            android:layout_height = "132dp"
+            android:background = "@drawable/climber"
+            android:id = "@+id/climber"
+            app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintBottom_toBottomOf = "parent"
+            android:layout_marginBottom = "220dp" />
 
 </android.support.constraint.ConstraintLayout>

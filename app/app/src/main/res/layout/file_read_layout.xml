@@ -12,8 +12,11 @@
             android:layout_width = "384dp"
             android:layout_height = "448dp"
             android:id = "@+id/outPut"
-            android:textSize = "30sp"
-            android:textColor="@color/color_button_side"
+            android:textSize = "25sp"
+            android:scrollbars = "vertical"
+            android:singleLine = "false"
+            android:maxLines = "15"
+            android:textColor = "@color/color_button_side"
             app:layout_constraintTop_toTopOf = "parent"
             app:layout_constraintStart_toStartOf = "parent"
             app:layout_constraintEnd_toEndOf = "parent" app:layout_constraintHorizontal_bias = "0.0" />
