@@ -7,7 +7,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303f9f</color>
     <color name="colorAccent">#FF4081</color>
-    <color name = "color_time_rest_start">#0b0b0b</color>
+    <color name = "color_button">#bbe4d0aa</color>
+    <color name = "color_button_side">#cf6d0cef</color>
+    <color name = "color_button_text">#d8409ea4</color>
+    <color name = "color_time_rest_start">#f27bb1</color>
     <color name = "color_time_rest_mid">#f7f7ab</color>
     <color name = "color_time_rest_end">#e6f5f5</color>
     <color name="primary_light">#f2f2f2</color>

@@ -20,7 +20,7 @@ public class RecordReader {
         timeOfDay = new File(fileDay, "timeOfDay.hlxx");
     }
 
-    public Record oneRecordReaded(File recordPath) throws IOException, ClassNotFoundException {
+    public static Record oneRecordReaded(File recordPath) throws IOException, ClassNotFoundException {
         return objectReader(recordPath);
     }
 

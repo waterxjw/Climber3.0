@@ -24,12 +24,13 @@
             android:layout_width = "113dp"
             android:layout_height = "51dp"
             android:format = "%s"
+            android:textColor = "@color/color_time_rest_start"
             android:textSize = "40sp"
             android:textStyle = "bold"
             android:id = "@+id/lastTime"
             app:layout_constraintTop_toTopOf = "parent"
             android:textColorHint = "@android:color/background_light" app:layout_constraintEnd_toEndOf = "parent"
-    />
+            android:layout_marginTop = "320dp" android:layout_marginEnd = "160dp" />
     <TextView
             android:text = "@string/message_timeOut"
             android:layout_width = "111dp"
@@ -39,10 +40,8 @@
             android:textColor = "@color/color_time_rest_start"
             android:id = "@+id/restTime"
             app:layout_constraintBottom_toBottomOf = "parent"
-            android:layout_marginBottom = "24dp"
             app:layout_constraintEnd_toEndOf = "parent"
-            android:layout_marginEnd = "32dp"
-            android:layout_marginRight = "32dp" />
+    />
     <TextView
             android:text = "@string/message_outPrompt"
             android:layout_width = "wrap_content"
@@ -56,13 +55,16 @@
     />
     <Button
             android:text = "@string/button_giveUp"
-            android:layout_width = "wrap_content"
-            android:layout_height = "wrap_content"
+            android:layout_width = "46dp"
+            android:layout_height = "108dp"
+            android:textSize = "25sp"
+            android:background="@drawable/give_up_button_shape"
+            android:textColor = "@color/color_button_text"
             android:id = "@+id/button_giveUp"
             app:layout_constraintStart_toStartOf = "parent"
-            android:layout_marginStart = "132dp"
-            android:layout_marginBottom = "8dp"
-            app:layout_constraintBottom_toTopOf = "@+id/theRestTimePrompt"
-            android:layout_marginLeft = "132dp" />
+            app:layout_constraintBottom_toBottomOf = "parent"
+    >
+
+    </Button>
 
 </android.support.constraint.ConstraintLayout>
