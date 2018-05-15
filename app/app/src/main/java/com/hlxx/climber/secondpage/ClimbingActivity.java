@@ -123,7 +123,7 @@ public class ClimbingActivity extends AppCompatActivity {
 
     private void createImageView(int num) {
         ImageView imageView = findViewById(R.id.climb_background);
-        imageView.setImageResource(num);
+        //imageView.setImageResource(num);
         wrfIV = new WeakReference<>(imageView);
         imageView = null;
     }
@@ -132,7 +132,7 @@ public class ClimbingActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        createImageView(IsForeground.setClimbBack());
+        //createImageView(IsForeground.setClimbBack());
         animationDrawable.start();
 
         Button giveUpButton = findViewById(R.id.button_giveUp);
