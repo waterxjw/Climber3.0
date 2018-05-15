@@ -33,6 +33,7 @@ public class ClimbingActivity extends AppCompatActivity {
     private static boolean willScreenOn = false;
     private long firstPressedTime;
     private boolean isSwitch = false;
+    private boolean cancle = false;
     private CountDownTimer timer;
     private VibrateSetter vibrateSetter = new VibrateSetter(this);
     private boolean isScreenOn = true;
@@ -180,6 +181,7 @@ public class ClimbingActivity extends AppCompatActivity {
         //放弃按钮
         (findViewById(R.id.button_giveUp)).setOnClickListener((view) -> {
             if (System.currentTimeMillis() - firstPressedTime < 5000) {
+                cancle=true;
                 recordWrite(false);
                 if (gcRequest != null) {
                     gcRequest.interrupt();
@@ -222,8 +224,8 @@ public class ClimbingActivity extends AppCompatActivity {
         super.onPause();
 
         screenState();
-        //控制台输出是否后台
-        if (!theRestTime.getText().toString().equals("到达") && isScreenOn) {
+        //是否后台
+        if (!cancle && !theRestTime.getText().toString().equals("到达") && isScreenOn) {
             isSwitch = true;
             IsForeground.setTimes(IsForeground.getTimes() + 1);
             TimeChange.changeTime(theRestTime.getText().toString());
@@ -271,4 +273,5 @@ public class ClimbingActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
 }

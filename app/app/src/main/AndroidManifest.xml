@@ -2,10 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.hlxx.climber">
-
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
@@ -26,11 +24,11 @@
         <activity android:name=".firstpage.setting.ContactUsActivity" />
         <activity android:name=".firstpage.setting.LoginActivity" />
         <activity android:name=".thirdpage.StoneActivity" />
-        <activity android:name=".firstpage.setting.HistoryActivity" />
+        <activity android:name=".firstpage.setting.HistoryActivity"/>
+        <activity android:name=".firstpage.ToReadFile" />
         <activity android:name=".zerothpage.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
