@@ -1240,7 +1240,7 @@ int id textTitle 0x7f0c00e8
 int id text_empty_message 0x7f0c00e9
 int id text_list_view 0x7f0c00ea
 int id thing_proto 0x7f0c00eb
-int id time 0x7f0c00ec
+int id timeSetted 0x7f0c00ec
 int id title 0x7f0c00ed
 int id titleDividerNoCustom 0x7f0c00ee
 int id title_template 0x7f0c00ef
