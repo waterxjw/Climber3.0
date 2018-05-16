@@ -16,17 +16,20 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
+            android:textColor="#4c4150"
             android:text="我还是觉得用炭条写留言比刻下来更环保(￣ ﹌ ￣)  " />
 
         <Button
             android:id="@+id/upload"
             android:layout_width="45dp"
-            android:layout_height="20dp"
+            android:layout_height="42dp"
             android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
             android:layout_alignParentRight="true"
             android:padding="5dp"
             android:text="写下"
             android:gravity="center"
+            android:textColor="#4c4150"
             android:background="@color/white"
             android:textSize="8dp" />
 
@@ -38,22 +41,23 @@
             android:padding="0dp"
             android:gravity="center"
             android:background="@color/white"
+            android:textColor="#4c4150"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"/>
 
         <EditText
             android:id="@+id/user_to_talk"
-            android:layout_width="match_parent"
+            android:layout_width="218dp"
             android:layout_height="wrap_content"
-            android:textColorHint="#e7f0f1"
-            android:textSize="8dp"
-            android:layout_alignParentLeft="true"
+            android:layout_alignLeft="@+id/upload"
             android:layout_alignParentBottom="true"
-            android:layout_above="@+id/upload"
-            android:maxLines="5"
+            android:layout_alignParentLeft="true"
+            android:hint="在雨季到来前，写下你想说的话吧"
             android:maxLength="150"
-            android:hint="在雨季到来前，写下你想说的话吧"/>
+            android:maxLines="5"
+            android:textColorHint="#4c4150"
+            android:textSize="8dp" />
 
 </RelativeLayout>
 

@@ -56,34 +56,6 @@ public class StoneActivity extends Activity {
     }
 
 
-    //点击dialog区域外则返回
-    //好像没成功
-    public boolean onTouchEvent(MotionEvent event) {
-
-        if (MotionEvent.ACTION_OUTSIDE == event.getAction()) {
-            finish();
-            return true;
-        }
-        return super.onTouchEvent(event);
-    }
-
-/*有bug的点击dialog区域外返回
-   public boolean onTouchEvent(MotionEvent event) {
-        // TODO Auto-generated method stub
-        float x = event.getX();
-        float y = event.getY();
-
-        PointF p = new PointF(x, y);
-        if(p is in StoneActivity)
-            donothing;
-        else
-            this.finish();
-
-        return super.onTouchEvent(event);
-    }
-*/
-
-
     //输入框
     public void init() {
         String text = "";//用户输入的文本
