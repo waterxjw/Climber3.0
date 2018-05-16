@@ -3,6 +3,7 @@ package com.hlxx.climber.firstpage;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -10,11 +11,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.hlxx.climber.R;
 import com.hlxx.climber.secondpage.records.Record;
+import com.hlxx.climber.secondpage.records.Records;
 
 import java.io.File;
 import java.io.IOException;
 
 import static com.hlxx.climber.secondpage.records.RecordReader.oneRecordReaded;
+import static com.hlxx.climber.secondpage.records.RecordReader.recordsReaded;
 import static com.hlxx.climber.secondpage.records.RecordReader.timeOfDayGet;
 
 public class ToReadFile extends AppCompatActivity {
@@ -36,6 +39,8 @@ public class ToReadFile extends AppCompatActivity {
         aButton = findViewById(R.id.search);
         aEditText = findViewById(R.id.inPut);
         aTextView = findViewById(R.id.outPut);
+
+        aTextView.setMovementMethod(ScrollingMovementMethod.getInstance());
 
         filePath = getFilesDir();
         File[] files = filePath.listFiles();
@@ -69,6 +74,7 @@ public class ToReadFile extends AppCompatActivity {
             changeFilePath(toSearch);
             File[] toSearchFile = toSearch.listFiles();
             StringBuilder outPut = new StringBuilder();
+            outPut.append("..").append("\n");
             for (File file : toSearchFile) {
                 outPut.append(file.getName()).append("\n");
             }
@@ -86,8 +92,13 @@ public class ToReadFile extends AppCompatActivity {
                 try {
                     Record aRecord = oneRecordReaded(toSearch);
                     aTextView.setText(aRecord.toString());
-                } catch (IOException | ClassNotFoundException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
+                    try {
+                        Records aRecords = recordsReaded(toSearch);
+                        aTextView.setText(aRecords.toString());
+                    } catch (IOException | ClassNotFoundException e1) {
+                        e1.printStackTrace();
+                    }
                 }
             }
         } else if (command.equals("..")) {

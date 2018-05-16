@@ -192,7 +192,7 @@ public class TimeSettingActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (System.currentTimeMillis() - firstPressedTime < 2000) {
+        if (System.currentTimeMillis() - firstPressedTime < 5000) {
             ActivityCompat.finishAffinity(this);//退出整个程序
         } else {
             Toast.makeText(getBaseContext(), "再点一次退出", Toast.LENGTH_SHORT).show();
