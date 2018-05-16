@@ -20,7 +20,11 @@ public class RecordReader {
         timeOfDay = new File(fileDay, "timeOfDay.hlxx");
     }
 
-    public Record oneRecordReaded(File recordPath) throws IOException, ClassNotFoundException {
+    public static Record oneRecordReaded(File recordPath) throws IOException, ClassNotFoundException {
+        return objectReader(recordPath);
+    }
+
+    public static Records recordsReaded(File recordPath) throws IOException, ClassNotFoundException {
         return objectReader(recordPath);
     }
 
@@ -29,7 +33,7 @@ public class RecordReader {
     }
 
 
-    private static  <T> T objectReader(File objectPath) throws IOException, ClassNotFoundException {
+    public static  <T> T objectReader(File objectPath) throws IOException, ClassNotFoundException {
         FileInputStream objectFIS = new FileInputStream(objectPath);
         ObjectInputStream objectOIS = new ObjectInputStream(objectFIS);
         T object = (T) objectOIS.readObject();

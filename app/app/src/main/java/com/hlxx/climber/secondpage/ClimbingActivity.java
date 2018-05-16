@@ -33,6 +33,7 @@ public class ClimbingActivity extends AppCompatActivity {
     private static boolean willScreenOn = false;
     private long firstPressedTime;
     private boolean isSwitch = false;
+    private boolean cancle = false;
     private CountDownTimer timer;
     private VibrateSetter vibrateSetter = new VibrateSetter(this);
     private boolean isScreenOn = true;
@@ -44,6 +45,7 @@ public class ClimbingActivity extends AppCompatActivity {
     private static Bitmap sourceBitmap;
     private static Bitmap toShowBitmap;
     private Handler mHandler = new MyHandler(this);
+    private PowerManager.WakeLock wakeLock = null;
 
     //设置是否常亮
     public static void setWillScreenOn(boolean willScreenOn) {
@@ -111,6 +113,7 @@ public class ClimbingActivity extends AppCompatActivity {
             public void onFinish() {
                 theRestTime.setText("到达");
                 recordWrite(true);
+                releaseWakeLock();
                 ((TextView) findViewById(R.id.theRestTimePrompt)).setText("");
                 ((Chronometer) findViewById(R.id.lastTime)).stop();//Chronometer暂停
                 Toast.makeText(ClimbingActivity.this, "成功！", Toast.LENGTH_LONG).show();//进行弹窗提示
@@ -137,10 +140,11 @@ public class ClimbingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_climbing);
         String data = getIntent().getStringExtra("time");
-        setTimeSecondSetted(Integer.parseInt(data));
+        setTimeSecondSetted(Integer.parseInt(data) - 4);
         aRecorderEditor = new RecorderEditor(getFilesDir());
         aRecord.setTimeSetted(getTimeSecondSetted());//默认+和上一页面交接+初始化记录仪
 
@@ -152,8 +156,7 @@ public class ClimbingActivity extends AppCompatActivity {
         Chronometer lastTimeChronometer = findViewById(R.id.lastTime);
         lastTimeChronometer.setBase(SystemClock.elapsedRealtime() - 1000);
         lastTimeChronometer.start();
-        lastTimeChronometer = null;
-
+        acquireWakeLock();
         //进行弹窗提示
         Toast.makeText(ClimbingActivity.this, "文文傻蛋！", Toast.LENGTH_SHORT).show();
 
@@ -180,7 +183,9 @@ public class ClimbingActivity extends AppCompatActivity {
         //放弃按钮
         (findViewById(R.id.button_giveUp)).setOnClickListener((view) -> {
             if (System.currentTimeMillis() - firstPressedTime < 5000) {
+                cancle = true;
                 recordWrite(false);
+                releaseWakeLock();
                 if (gcRequest != null) {
                     gcRequest.interrupt();
                     gcRequest = null;
@@ -222,8 +227,8 @@ public class ClimbingActivity extends AppCompatActivity {
         super.onPause();
 
         screenState();
-        //控制台输出是否后台
-        if (!theRestTime.getText().toString().equals("到达") && isScreenOn) {
+        //是否后台
+        if (!cancle && !theRestTime.getText().toString().equals("到达") && isScreenOn) {
             isSwitch = true;
             IsForeground.setTimes(IsForeground.getTimes() + 1);
             TimeChange.changeTime(theRestTime.getText().toString());
@@ -250,9 +255,10 @@ public class ClimbingActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (System.currentTimeMillis() - firstPressedTime < 2000) {
+        if (System.currentTimeMillis() - firstPressedTime < 5000) {
             mHandler = null;
             recordWrite(false);
+            releaseWakeLock();
             ActivityCompat.finishAffinity(this);//退出整个程序
         } else {
             Toast.makeText(getBaseContext(), "再点一次退出", Toast.LENGTH_SHORT).show();
@@ -261,6 +267,7 @@ public class ClimbingActivity extends AppCompatActivity {
     }
 
     private void recordWrite(boolean finish) {
+
         String[] times = ((Chronometer) findViewById(R.id.lastTime)).getText().toString().split(":");
         aRecord.setTotalTime(Integer.parseInt(times[0]) * 60 + Integer.parseInt(times[1]));
         aRecord.setSwitchTimes(IsForeground.getTimes());
@@ -269,6 +276,24 @@ public class ClimbingActivity extends AppCompatActivity {
             aRecorderEditor.oneRecordAdd(aRecord);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+
+    private void acquireWakeLock() {
+        if (null == wakeLock) {
+            PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+            wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getCanonicalName());
+            if (null != wakeLock) {
+                wakeLock.acquire();
+            }
+        }
+    }
+
+    private void releaseWakeLock() {
+        if (null != wakeLock && wakeLock.isHeld()) {
+            wakeLock.release();
+            wakeLock = null;
         }
     }
 }
