@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ import com.wx.wheelview.adapter.ArrayWheelAdapter;
 import com.wx.wheelview.widget.WheelView;
 
 import java.util.ArrayList;
+
 import com.microsoft.windowsazure.mobileservices.*;
 
 public class TimeSettingActivity extends AppCompatActivity {
@@ -27,13 +29,13 @@ public class TimeSettingActivity extends AppCompatActivity {
     private WheelView wheelView;
     private long firstPressedTime;
     private MobileServiceClient mClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //azure
         try {
             mClient = new MobileServiceClient("https://focusonclimb.azurewebsites.net", this);
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
 
         }
 
@@ -45,6 +47,21 @@ public class TimeSettingActivity extends AppCompatActivity {
         createButton();//设置开始专注按钮
         createFAButton();//设置右上角浮动按钮
         //下面是自定义一个任务栏，取代原先自带的任务栏
+
+
+        Button aButton =findViewById(R.id.start_read_file);
+        aButton.setOnClickListener((view) -> startActivity(new Intent(TimeSettingActivity.this, ToReadFile.class)));
+
+
+
+
+
+
+
+
+
+
+
     }
 
     //任务栏右侧的菜单按钮
@@ -77,7 +94,7 @@ public class TimeSettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(TimeSettingActivity.this, "History", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(TimeSettingActivity.this,HistoryActivity.class
+                Intent intent = new Intent(TimeSettingActivity.this, HistoryActivity.class
                 );
                 startActivity(intent);
             }
@@ -137,7 +154,7 @@ public class TimeSettingActivity extends AppCompatActivity {
         WheelView.WheelViewStyle style = new WheelView.WheelViewStyle();
         //设置选中的文字颜色与大小
         style.selectedTextColor = Color.BLACK;
-        style.holoBorderColor=Color.BLACK;
+        style.holoBorderColor = Color.BLACK;
         style.selectedTextSize = 25;
         //设置背景颜色为透明
         style.backgroundColor = Color.alpha(0);
@@ -145,7 +162,7 @@ public class TimeSettingActivity extends AppCompatActivity {
 
         wheelView.setStyle(style);
         //设置滚轮右侧的指示文字及其格式
-        wheelView.setExtraText("分钟",Color.BLACK , 60, 120);
+        wheelView.setExtraText("分钟", Color.BLACK, 60, 120);
         //设置滚轮滑动停止时的事件，即更换图片
         wheelView.setOnWheelItemSelectedListener(new WheelView.OnWheelItemSelectedListener() {
             @Override
@@ -175,7 +192,7 @@ public class TimeSettingActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (System.currentTimeMillis() - firstPressedTime < 2000) {
+        if (System.currentTimeMillis() - firstPressedTime < 5000) {
             ActivityCompat.finishAffinity(this);//退出整个程序
         } else {
             Toast.makeText(getBaseContext(), "再点一次退出", Toast.LENGTH_SHORT).show();

@@ -1,7 +1,11 @@
 package com.hlxx.climber.secondpage.records;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+
+import static com.hlxx.climber.secondpage.records.RecordReader.objectReader;
 
 public class RecorderEditor {
     private File fileMonth;
@@ -36,12 +40,13 @@ public class RecorderEditor {
 
     public void oneRecordAdd(Record theRecord) throws IOException {
         if (creatFiles()) {
+
             time = 1;
             objectWriter(timeOfDay, time);
         } else {
             timeChange();
         }
-
+        recordSort();
         oneRecord = new File(fileDay, time + ".hlxx");
         oneRecord.createNewFile();
         objectWriter(oneRecord, theRecord);
@@ -67,5 +72,40 @@ public class RecorderEditor {
         objectOOS.writeObject(object);
         objectOOS.close();
         objectFOS.close();
+    }
+
+    private void recordSort() {
+        File[] filesDay = fileMonth.listFiles();
+        for (File file : filesDay) {
+            if (file.isDirectory() && !file.equals(fileDay)) {
+                File newRecords = new File(fileMonth, "" + file.getName() + ".hlxx");
+                try {
+                    newRecords.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ArrayList<File> records = new ArrayList<>(Arrays.asList(file.listFiles()));
+                File total = new File(file, "timeOfDay.hlxx");
+                records.remove(total);
+                Records toWrite = new Records();
+                try {
+                    toWrite.setTimes(objectReader(total));
+                } catch (IOException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                for (File record : records) {
+                    try {
+                        toWrite.addRecord(objectReader(record));
+                    } catch (IOException | ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+                try {
+                    objectWriter(newRecords, toWrite);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

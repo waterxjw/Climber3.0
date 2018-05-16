@@ -3,6 +3,7 @@ package com.hlxx.climber.secondpage.settings;
 public class TimeGet {
     private static int timeSecond;
     private static int timeSecondSetted;
+    private static int totalTime = 0;
 
     public static int getTimeSecondSetted() {
         return timeSecondSetted;
@@ -11,17 +12,10 @@ public class TimeGet {
     public static void setTimeSecondSetted(int minutes) {
         TimeGet.timeSecondSetted = minutes * 60;
         TimeGet.timeSecond = minutes * 60;
+        TimeGet.totalTime = minutes * 60;
     }
-
 
     private TimeGet() {
-    }
-
-    /**
-     * @function 实例化方法
-     */
-    public static TimeGet getInstance() {
-        return new TimeGet();
     }
 
     /**
