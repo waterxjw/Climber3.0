@@ -32,7 +32,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="@+id/guideline"></com.wx.wheelview.widget.WheelView>
+        app:layout_constraintTop_toTopOf="@+id/guideline"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -65,21 +65,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="62dp" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/btn_bg_red"
-        android:text="@string/timesettedbutton_name"
-        android:textColor="@color/colorwhite"
-
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
-
     <com.ddz.floatingactionbutton.FloatingActionMenu
             android:id="@+id/fab"
             android:layout_width="wrap_content"
@@ -94,23 +79,43 @@
             android:id="@+id/fab_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fab_icon="@drawable/icon_follow"
+            app:fab_icon="@drawable/icon_login"
             app:fab_size="mini" />
 
         <com.ddz.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fab_icon="@drawable/icon_like"
+            app:fab_icon="@drawable/icon_history"
             app:fab_size="mini" />
 
         <com.ddz.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fab_icon="@drawable/icon_share"
+            app:fab_icon="@drawable/icon_setting"
             app:fab_size="mini" />
     </com.ddz.floatingactionbutton.FloatingActionMenu>
+    <Button
+            android:id = "@+id/button"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_marginEnd = "8dp"
+            android:layout_marginStart = "8dp"
+            android:layout_marginTop = "8dp"
+            android:background = "@drawable/btn_bg_red"
+            android:text = "@string/timesettedbutton_name"
+            android:textColor = "@color/colorwhite"
+            app:layout_constraintEnd_toStartOf = "@+id/guideline4"
+            app:layout_constraintStart_toStartOf = "@+id/guideline3"
+            app:layout_constraintTop_toTopOf = "@+id/guideline2" />
+    <Button
+            android:id = "@+id/start_read_file"
+            android:text = "Button"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintBottom_toBottomOf = "parent" />
 
 
 </android.support.constraint.ConstraintLayout>

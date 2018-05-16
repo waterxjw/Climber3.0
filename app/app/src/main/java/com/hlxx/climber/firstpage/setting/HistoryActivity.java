@@ -260,11 +260,11 @@ public class HistoryActivity extends AppCompatActivity {
                     mSeries[i][2]=v.findViewById(R.id.planConcentrateTime);
                     mSeries[i][3]=v.findViewById(R.id.level);
                     mSeries[i][4]=v.findViewById(R.id.isSuccess);
-                    mSeries[i][0].setText(seriesString[i][0]);
+                    mSeries[i][0].setText(seriesString[i][0]+"     ");
                     mSeries[i][1].setText(seriesString[i][1]);
                     mSeries[i][2].setText(seriesString[i][2]);
                     mSeries[i][3].setText(seriesString[i][3]);
-                    mSeries[i][4].setText(seriesString[i][4]);
+                    mSeries[i][4].setText("         "+seriesString[i][4]);
                     series.addView(v);
                 }
                // }
