@@ -24,12 +24,16 @@ public class RecordReader {
         return objectReader(recordPath);
     }
 
+    public static Records recordsReaded(File recordPath) throws IOException, ClassNotFoundException {
+        return objectReader(recordPath);
+    }
+
     public static int timeOfDayGet(File timeOfDayPath) throws IOException, ClassNotFoundException {
         return (int)objectReader(timeOfDayPath);
     }
 
 
-    private static  <T> T objectReader(File objectPath) throws IOException, ClassNotFoundException {
+    public static  <T> T objectReader(File objectPath) throws IOException, ClassNotFoundException {
         FileInputStream objectFIS = new FileInputStream(objectPath);
         ObjectInputStream objectOIS = new ObjectInputStream(objectFIS);
         T object = (T) objectOIS.readObject();
