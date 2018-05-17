@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.hlxx.climber.R;
 import com.hlxx.climber.firstpage.TimeSettingActivity;
+import com.hlxx.climber.services.AzureServiceAdapter;
 
 
 public class EndingActivity extends AppCompatActivity {
@@ -17,6 +18,7 @@ public class EndingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ending);
+        AzureServiceAdapter.Initialize(this);
         ending_buttons();//按钮跳转：bt1,bt2
 
 

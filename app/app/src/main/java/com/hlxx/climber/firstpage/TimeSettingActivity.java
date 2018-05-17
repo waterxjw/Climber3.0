@@ -28,16 +28,9 @@ public class TimeSettingActivity extends AppCompatActivity {
     private ImageView imageView;
     private WheelView wheelView;
     private long firstPressedTime;
-    private MobileServiceClient mClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //azure
-        try {
-            mClient = new MobileServiceClient("https://focusonclimb.azurewebsites.net", this);
-        } catch (Exception e) {
-
-        }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_setting);
@@ -51,16 +44,6 @@ public class TimeSettingActivity extends AppCompatActivity {
 
         Button aButton =findViewById(R.id.start_read_file);
         aButton.setOnClickListener((view) -> startActivity(new Intent(TimeSettingActivity.this, ToReadFile.class)));
-
-
-
-
-
-
-
-
-
-
 
     }
 
