@@ -17,22 +17,28 @@
 
         <Button
             android:id="@+id/end_to_start"
-            android:layout_width="50dp"
-            android:layout_height="69dp"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignLeft="@+id/stone"
-            android:layout_alignParentRight="true"
-            android:text="restart" />
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="11dp"
+            android:background="@drawable/button_shape"
+            android:text="restart"
+            android:alpha="0.7"
+            android:textColor="#ede8f9"/>
         <Button
             android:id="@+id/stone"
-            android:layout_width="50dp"
-            android:layout_height="69dp"
+            android:layout_width="100dp"
+            android:layout_height="129dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:text="stone"/>
+            android:background="@mipmap/stone"
+            android:layout_marginRight="35dp"
+            android:layout_marginBottom="10dp"/>
 
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
