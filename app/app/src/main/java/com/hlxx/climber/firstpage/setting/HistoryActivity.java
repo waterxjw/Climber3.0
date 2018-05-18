@@ -20,6 +20,7 @@ import com.ruesga.timelinechart.TimelineChartView;
 import com.ruesga.timelinechart.TimelineChartView.OnColorPaletteChangedListener;
 import com.ruesga.timelinechart.TimelineChartView.OnSelectedItemChangedListener;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -381,5 +382,21 @@ public class HistoryActivity extends AppCompatActivity {
         }
         mStart.add(Calendar.DAY_OF_MONTH, -1);
         cursor.addAll(data);
+    }
+    private void createData(InMemoryCursor cursor){
+        List<Object[]> data = new ArrayList<>();
+        String[][] seriesdata;
+        int[] detaildata;
+        Calendar today = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
+        Calendar temporary = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
+        today.set(Calendar.HOUR_OF_DAY, 0);
+        today.set(Calendar.MINUTE, 0);
+        today.set(Calendar.SECOND, 0);
+        today.set(Calendar.MILLISECOND, 0);
+        mStart = (Calendar) today.clone();
+        mStart.add(Calendar.DAY_OF_MONTH, -30);
+        while (mStart.compareTo(today) <= 0){
+            File file=new
+        }
     }
 }
