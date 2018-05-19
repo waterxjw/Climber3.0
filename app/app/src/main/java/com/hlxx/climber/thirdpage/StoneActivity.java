@@ -297,6 +297,7 @@ public class StoneActivity extends Activity {
     private void createAndShowDialog(final String message, final String title) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
+
         builder.setMessage(message);
         builder.setTitle(title);
         builder.create().show();
