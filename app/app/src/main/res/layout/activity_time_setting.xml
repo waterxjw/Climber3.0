@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="1dp"
-
+            app:fab_addButtonColorNormal="@color/empty"
             app:fab_expandDirection="left"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageview" android:layout_marginRight = "1dp">
@@ -79,6 +79,7 @@
             android:id="@+id/fab_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/empty"
             app:fab_icon="@drawable/icon_login"
             app:fab_size="mini" />
 
@@ -86,6 +87,7 @@
             android:id="@+id/fab_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/empty"
             app:fab_icon="@drawable/icon_history"
             app:fab_size="mini" />
 
@@ -93,6 +95,7 @@
             android:id="@+id/fab_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/empty"
             app:fab_icon="@drawable/icon_setting"
             app:fab_size="mini" />
     </com.ddz.floatingactionbutton.FloatingActionMenu>
@@ -106,6 +109,7 @@
             android:background = "@drawable/btn_bg_red"
             android:text = "@string/timesettedbutton_name"
             android:textColor = "@color/colorwhite"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf = "@+id/guideline4"
             app:layout_constraintStart_toStartOf = "@+id/guideline3"
             app:layout_constraintTop_toTopOf = "@+id/guideline2" />
