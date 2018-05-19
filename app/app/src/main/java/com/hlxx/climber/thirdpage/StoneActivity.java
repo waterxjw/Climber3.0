@@ -51,7 +51,7 @@ public class StoneActivity extends Activity {
         //Initialize(this);
         //mServiceAdapter =AzureServiceAdapter.getInstance();
         //mClient = mServiceAdapter.getClient();
-        init();
+        //init();
         //getComment();
         // 非模态化
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL, WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL);
