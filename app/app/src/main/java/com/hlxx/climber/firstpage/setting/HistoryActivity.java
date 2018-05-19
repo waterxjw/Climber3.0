@@ -284,7 +284,7 @@ public class HistoryActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected() {
-                mTimestamp.setText("-");
+
                 /*for (TextView v : mSeries) {
                     v.setText("-");
                 }*/
@@ -408,7 +408,7 @@ public class HistoryActivity extends AppCompatActivity {
         mStart.add(Calendar.DAY_OF_MONTH, -today.get(Calendar.DAY_OF_MONTH)+1);
         while (mStart.compareTo(today) <= 0){
             detaildata=new String[4];
-            File file=new File(getFilesDir(),Integer.toString(5));
+            File file=new File(getFilesDir(),Integer.toString(today.get(Calendar.MONTH)));
             File[] files=file.listFiles();
             File temp=null;
             if (mStart.compareTo(today)==0){
@@ -431,11 +431,16 @@ public class HistoryActivity extends AppCompatActivity {
                 mStart.add(Calendar.DAY_OF_MONTH, 1);
                 break;
             }
-            for (File aFile:files){
-                if (aFile.getName().equals(Integer.toString(mStart.get(Calendar.DAY_OF_MONTH))+".hlxx")){
-                    temp=aFile;
-                    break;
-                }
+            try{
+                for (File aFile:files){
+                    if (aFile.getName().equals(Integer.toString(mStart.get(Calendar.DAY_OF_MONTH))+".hlxx")){
+                        temp=aFile;
+                        break;
+                    }
+            }
+
+            }catch(Exception e){
+
             }
             if (temp==null){
                 detaildata[0]="0";
