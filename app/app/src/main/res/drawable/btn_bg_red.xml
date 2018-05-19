@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/colorbutton"/>
+    <solid android:color="@color/gray"/>
     <stroke android:width="1dip"
-        android:color="@color/colorbuttonstroke"
+        android:color="@color/gray"
         />
     <corners android:topLeftRadius="10dip"
         android:topRightRadius="10dip"
