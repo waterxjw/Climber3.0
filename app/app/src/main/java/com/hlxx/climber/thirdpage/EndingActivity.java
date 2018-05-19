@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.hlxx.climber.R;
 import com.hlxx.climber.firstpage.TimeSettingActivity;
+import com.hlxx.climber.services.AzureServiceAdapter;
 
 import java.io.File;
 import java.io.FileDescriptor;

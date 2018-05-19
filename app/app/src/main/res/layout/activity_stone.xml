@@ -6,20 +6,8 @@
     android:layout_gravity="center"
     android:background="@mipmap/stone_dialog"
     android:orientation="vertical"
-
-
     tools:context="com.hlxx.climber.thirdpage.StoneActivity">
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="42dp"
-            android:layout_marginRight="42dp"
-            android:gravity="center"
-            android:textColor="#4c4150"
-            android:text="我还是觉得用炭条写留言比刻下来更环保(￣ ﹌ ￣)  " />
 
         <Button
             android:id="@+id/upload"
@@ -31,12 +19,11 @@
             android:layout_alignParentRight="true"
             android:padding="5dp"
             android:text="写下"
-
             android:textColor="@color/white"
             android:gravity="center"
-
             android:background="@drawable/button_shape"
-            android:textSize="8dp" />
+            android:textSize="8dp"
+            android:onClick="addItem"/>
 
         <Button
             android:id="@+id/out"
@@ -67,9 +54,19 @@
             android:hint="在雨季到来前，写下你想说的话吧"
             android:maxLength="150"
             android:maxLines="5"
-            android:textColorHint="#4c4150"
+            android:textColorHint="#ffffff"
+            android:textColor="#FFFFFF"
             android:textSize="8dp"
             />
+
+    <ListView
+        android:id="@+id/listViewComment"
+        android:layout_width="219dp"
+        android:layout_height="142dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="73dp"
+        tools:listitem="@layout/row_list_comment" />
 
 </RelativeLayout>
 
