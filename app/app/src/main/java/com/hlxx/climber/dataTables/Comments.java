@@ -19,20 +19,10 @@ public class Comments {
     public String getBy() { return mBy; }
     public final void setBy(String by) { mText = by; }
 
-    @com.google.gson.annotations.SerializedName("createdAt")
-    private DateTimeOffset mCreatedAt;
-    public DateTimeOffset getCreatedAt() { return mCreatedAt; }
-    protected DateTimeOffset setCreatedAt(DateTimeOffset createdAt) { mCreatedAt = createdAt;  return mCreatedAt;}
-
-    @com.google.gson.annotations.SerializedName("updatedAt")
-    private DateTimeOffset mUpdatedAt;
-    public DateTimeOffset getUpdatedAt() { return mUpdatedAt; }
-    protected DateTimeOffset setUpdatedAt(DateTimeOffset updatedAt) { mUpdatedAt = updatedAt; return mUpdatedAt;}
-
-    @com.google.gson.annotations.SerializedName("version")
-    private String mVersion;
-    public String getVersion() { return mVersion; }
-    public final void setVersion(String version) { mVersion = version; }
+    @com.google.gson.annotations.SerializedName("isThumb")
+    private Boolean mIsThumb;
+    public Boolean isThumb() { return mIsThumb; }
+    public final void setThumb(Boolean isThumb) { mIsThumb = isThumb; }
 
     public Comments() { }
 

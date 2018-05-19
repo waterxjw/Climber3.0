@@ -18,7 +18,6 @@ public class EndingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ending);
-        AzureServiceAdapter.Initialize(this);
         ending_buttons();//按钮跳转：bt1,bt2
 
 
