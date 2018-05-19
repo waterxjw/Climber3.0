@@ -57,15 +57,15 @@ public class StoneActivity extends Activity {
 
 
     //输入框
-    public void init() {
-        String text = "";//用户输入的文本
-        user_input = (EditText) findViewById(R.id.user_to_talk);
-        SpannableString ss = new SpannableString("刻下你想说的话吧");
-        AbsoluteSizeSpan ass = new AbsoluteSizeSpan(15, true);
-        ss.setSpan(ass, 0, ss.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        user_input.setHint(new SpannableString(ss));
-        text = user_input.getText().toString();
-    }
+//    public void init() {
+//        String text = "";//用户输入的文本
+//        user_input = (EditText) findViewById(R.id.user_to_talk);
+//        SpannableString ss = new SpannableString("刻下你想说的话吧");
+//        AbsoluteSizeSpan ass = new AbsoluteSizeSpan(15, true);
+//        ss.setSpan(ass, 0, ss.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        user_input.setHint(new SpannableString(ss));
+//        text = user_input.getText().toString();
+//    }
 
 
 }
