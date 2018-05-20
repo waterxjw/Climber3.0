@@ -408,7 +408,7 @@ public class HistoryActivity extends AppCompatActivity {
         mStart.add(Calendar.DAY_OF_MONTH, -today.get(Calendar.DAY_OF_MONTH)+1);
         while (mStart.compareTo(today) <= 0){
             detaildata=new String[4];
-            File file=new File(getFilesDir(),Integer.toString(today.get(Calendar.MONTH)));
+            File file=new File(getFilesDir(),Integer.toString(today.get(Calendar.MONTH)+1));
             File[] files=file.listFiles();
             File temp=null;
             if (mStart.compareTo(today)==0){
