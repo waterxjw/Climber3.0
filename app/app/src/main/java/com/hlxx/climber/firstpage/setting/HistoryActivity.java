@@ -16,10 +16,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hlxx.climber.secondpage.records.Record;
+import com.hlxx.climber.secondpage.records.RecordReader;
+import com.hlxx.climber.secondpage.records.Records;
 import com.ruesga.timelinechart.TimelineChartView;
 import com.ruesga.timelinechart.TimelineChartView.OnColorPaletteChangedListener;
 import com.ruesga.timelinechart.TimelineChartView.OnSelectedItemChangedListener;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -44,7 +48,7 @@ public class HistoryActivity extends AppCompatActivity {
     private View[] mSeriesColors;
     private TextView concentrateTimes,failTimes,levelInAverage;
     private Calendar mStart;
-    private HashMap<String,int[]> detailData=new HashMap<String,int[]>();
+    private HashMap<String,String[]> detailData=new HashMap<String,String[]>();
     private HashMap<String,String[][]> seriesData=new HashMap<String,String[][]>();
     private String [][] seriesString;
 
@@ -53,6 +57,8 @@ public class HistoryActivity extends AppCompatActivity {
             new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     private final SimpleDateFormat HOURTIME_FORMATTER =
             new SimpleDateFormat("HH:mm", Locale.getDefault());
+    private final SimpleDateFormat MINUTETIME_FORMATTER =
+            new SimpleDateFormat("mm:ss", Locale.getDefault());
     private final NumberFormat NUMBER_FORMATTER = new DecimalFormat("#0.00");
     //private final String[] COLUMN_NAMES = {"timestamp", "Serie 1", "Serie 2", "Serie 3"};
     private final String[] COLUMN_NAMES = {"timestamp","sum"};
@@ -240,40 +246,45 @@ public class HistoryActivity extends AppCompatActivity {
         mGraph.addOnSelectedItemChangedListener(new OnSelectedItemChangedListener() {
             @Override
             public void onSelectedItemChanged(TimelineChartView.Item selectedItem, boolean fromUser) {
-                double sum=0;
+
                 ViewGroup series = findViewById(R.id.item_series);
                 series.removeAllViews();
                 seriesString=seriesData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp));
                 mTimestamp.setText(DATETIME_FORMATTER.format(selectedItem.mTimestamp));
                 //for (int i = 0; i < mSeries.length; i++) {
                     //mSeries[i].setText(NUMBER_FORMATTER.format(selectedItem.mSeries[i]));
-                sum+=selectedItem.mSeries[0];
-                sumOfTime.setText(NUMBER_FORMATTER.format(sum));
-                concentrateTimes.setText(Integer.toString((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[0]));
-                failTimes.setText(Integer.toString((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[1]));
-                levelInAverage.setText(Integer.toString((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[2])+"%");
-                mSeries=new TextView[seriesString.length][5];
-                for (int i=0;i<seriesString.length;i++){
-                    View v = inflater.inflate(R.layout.serie_item_layout, series, false);
-                    mSeries[i][0]=v.findViewById(R.id.singleTime);
-                    mSeries[i][1]=v.findViewById(R.id.actualConcentrateTime);
-                    mSeries[i][2]=v.findViewById(R.id.planConcentrateTime);
-                    mSeries[i][3]=v.findViewById(R.id.level);
-                    mSeries[i][4]=v.findViewById(R.id.isSuccess);
-                    mSeries[i][0].setText(seriesString[i][0]+"     ");
-                    mSeries[i][1].setText(seriesString[i][1]);
-                    mSeries[i][2].setText(seriesString[i][2]);
-                    mSeries[i][3].setText(seriesString[i][3]);
-                    mSeries[i][4].setText("         "+seriesString[i][4]);
-                    series.addView(v);
+                ;
+                sumOfTime.setText((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[3]);
+                concentrateTimes.setText((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[0]);
+                failTimes.setText((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[1]);
+                levelInAverage.setText((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[2]);
+                if (seriesString==null){
+                    mSeries=new TextView[0][5];
+                }else {
+                    mSeries=new TextView[seriesString.length][5];
+                    for (int i=0;i<seriesString.length;i++){
+                        View v = inflater.inflate(R.layout.serie_item_layout, series, false);
+                        mSeries[i][0]=v.findViewById(R.id.singleTime);
+                        mSeries[i][1]=v.findViewById(R.id.actualConcentrateTime);
+                        mSeries[i][2]=v.findViewById(R.id.planConcentrateTime);
+                        mSeries[i][3]=v.findViewById(R.id.level);
+                        mSeries[i][4]=v.findViewById(R.id.isSuccess);
+                        mSeries[i][0].setText(seriesString[i][0]+"     ");
+                        mSeries[i][1].setText(seriesString[i][1]);
+                        mSeries[i][2].setText(seriesString[i][2]);
+                        mSeries[i][3].setText(seriesString[i][3]);
+                        mSeries[i][4].setText("         "+seriesString[i][4]);
+                        series.addView(v);
+                    }
                 }
-               // }
+
+
 
             }
 
             @Override
             public void onNothingSelected() {
-                mTimestamp.setText("-");
+
                 /*for (TextView v : mSeries) {
                     v.setText("-");
                 }*/
@@ -347,11 +358,12 @@ public class HistoryActivity extends AppCompatActivity {
 
     private InMemoryCursor createInMemoryCursor() {
         InMemoryCursor cursor = new InMemoryCursor(COLUMN_NAMES);
-        createRandomData(cursor);
+        //createRandomData(cursor);
+        createData(cursor);
         return cursor;
     }
 
-    private void createRandomData(InMemoryCursor cursor) {
+    /*private void createRandomData(InMemoryCursor cursor) {
         List<Object[]> data = new ArrayList<>();
         String[][] seriesdata;
 
@@ -377,6 +389,112 @@ public class HistoryActivity extends AppCompatActivity {
             seriesData.put(DATETIME_FORMATTER.format(mStart.getTimeInMillis()),seriesdata);
             detailData.put(DATETIME_FORMATTER.format(mStart.getTimeInMillis()),new int[]{random(10),random(5),random(100)});
             data.add(createItem(mStart.getTimeInMillis()));
+            mStart.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        mStart.add(Calendar.DAY_OF_MONTH, -1);
+        cursor.addAll(data);
+    }*/
+    private void createData(InMemoryCursor cursor){
+        List<Object[]> data = new ArrayList<>();
+        String[][] seriesdata;
+        String[] detaildata;
+        Calendar today = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
+        Calendar temporary = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
+        today.set(Calendar.HOUR_OF_DAY, 0);
+        today.set(Calendar.MINUTE, 0);
+        today.set(Calendar.SECOND, 0);
+        today.set(Calendar.MILLISECOND, 0);
+        mStart = (Calendar) today.clone();
+        mStart.add(Calendar.DAY_OF_MONTH, -today.get(Calendar.DAY_OF_MONTH)+1);
+        while (mStart.compareTo(today) <= 0){
+            detaildata=new String[4];
+            File file=new File(getFilesDir(),Integer.toString(today.get(Calendar.MONTH)+1));
+            File[] files=file.listFiles();
+            File temp=null;
+            if (mStart.compareTo(today)==0){
+                seriesdata=null;
+                detaildata[0]="-";
+                detaildata[1]="-";
+                detaildata[2]="-";
+                detaildata[3]="今天还没有结束呢，继续专注吧！";
+
+                seriesData.put(DATETIME_FORMATTER.format(mStart.getTimeInMillis()),seriesdata);
+                detailData.put(DATETIME_FORMATTER.format(mStart.getTimeInMillis()),detaildata);
+                Object[] item = new Object[2];
+                item[0] = mStart.getTimeInMillis();
+                try{
+                    item[1]=Integer.parseInt(detaildata[3]);
+                }catch (Exception e){
+                    item[1]=0;
+                }
+                data.add(item);
+                mStart.add(Calendar.DAY_OF_MONTH, 1);
+                break;
+            }
+            try{
+                for (File aFile:files){
+                    if (aFile.getName().equals(Integer.toString(mStart.get(Calendar.DAY_OF_MONTH))+".hlxx")){
+                        temp=aFile;
+                        break;
+                    }
+            }
+
+            }catch(Exception e){
+
+            }
+            if (temp==null){
+                detaildata[0]="0";
+                detaildata[1]="0";
+                detaildata[2]="0%";
+                detaildata[3]="0";
+                seriesdata=null;
+                seriesData.put(DATETIME_FORMATTER.format(mStart.getTimeInMillis()),seriesdata);
+                detailData.put(DATETIME_FORMATTER.format(mStart.getTimeInMillis()),detaildata);
+            }else{
+                Records records=null;
+                try{
+                    records= RecordReader.recordsReaded(temp);
+                }catch (Exception e){
+                    e.getStackTrace();
+                }
+                detaildata[0]=Integer.toString(records.getTimes());
+                detaildata[1]="-";
+                detaildata[2]="-";
+                detaildata[3]="-";
+                if (records.getTimes()>0){
+                    seriesdata=new String[records.getTimes()][5];
+                    ArrayList<Record> recordArrayList=records.getTheRecord();
+                    for (int i=0;i<recordArrayList.size();i++){
+                        Record record=recordArrayList.get(i);
+                        seriesdata[i][0]="00:00";
+                        temporary.set(Calendar.HOUR_OF_DAY, 0);
+                        temporary.set(Calendar.MINUTE, 0);
+                        temporary.set(Calendar.SECOND, 0);
+                        temporary.set(Calendar.MILLISECOND, 0);
+                        temporary.set(Calendar.SECOND,record.getTotalTime());
+                        seriesdata[i][1]=MINUTETIME_FORMATTER.format(((Calendar)temporary.clone()).getTimeInMillis());
+                        temporary.set(Calendar.SECOND,record.getTimeSetted());
+                        seriesdata[i][2]=MINUTETIME_FORMATTER.format(((Calendar)temporary.clone()).getTimeInMillis());
+                        seriesdata[i][3]="85%";
+                        seriesdata[i][4]=record.isFinish()?"成功":"失败";
+                    }
+                    seriesData.put(DATETIME_FORMATTER.format(mStart.getTimeInMillis()),seriesdata);
+                    detailData.put(DATETIME_FORMATTER.format(mStart.getTimeInMillis()),detaildata);
+                }else {
+                    seriesdata=null;
+                    seriesData.put(DATETIME_FORMATTER.format(mStart.getTimeInMillis()),seriesdata);
+                    detailData.put(DATETIME_FORMATTER.format(mStart.getTimeInMillis()),detaildata);
+                }
+                }
+
+            Object[] item = new Object[2];
+            item[0] = mStart.getTimeInMillis();
+            try{
+                item[1]=Integer.parseInt(detaildata[3]);
+            }catch (Exception e){
+                item[1]=0;
+            }
+            data.add(item);
             mStart.add(Calendar.DAY_OF_MONTH, 1);
         }
         mStart.add(Calendar.DAY_OF_MONTH, -1);

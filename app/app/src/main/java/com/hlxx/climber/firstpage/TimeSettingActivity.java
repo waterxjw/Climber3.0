@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,15 +12,12 @@ import android.widget.Toast;
 import com.ddz.floatingactionbutton.FloatingActionButton;
 import com.hlxx.climber.firstpage.setting.HistoryActivity;
 import com.hlxx.climber.secondpage.ClimbingActivity;
-import com.hlxx.climber.firstpage.setting.LoginActivity;
 import com.hlxx.climber.R;
 import com.hlxx.climber.firstpage.setting.SettingActivity;
 import com.wx.wheelview.adapter.ArrayWheelAdapter;
 import com.wx.wheelview.widget.WheelView;
 
 import java.util.ArrayList;
-
-import com.microsoft.windowsazure.mobileservices.*;
 
 public class TimeSettingActivity extends AppCompatActivity {
     //背景图片
@@ -86,9 +82,9 @@ public class TimeSettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(TimeSettingActivity.this, "Login", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(TimeSettingActivity.this, LoginActivity.class
+               /* Intent intent = new Intent(TimeSettingActivity.this, LoginActivity.class
                 );
-                startActivity(intent);
+                startActivity(intent);*/
             }
         });
     }
@@ -136,16 +132,16 @@ public class TimeSettingActivity extends AppCompatActivity {
         wheelView.setSkin(WheelView.Skin.Holo);
         WheelView.WheelViewStyle style = new WheelView.WheelViewStyle();
         //设置选中的文字颜色与大小
-        style.selectedTextColor = Color.BLACK;
-        style.holoBorderColor = Color.BLACK;
+        style.selectedTextColor = getResources().getColor(R.color.colorbutton);
+        style.holoBorderColor = getResources().getColor(R.color.colorbutton);
         style.selectedTextSize = 25;
         //设置背景颜色为透明
         style.backgroundColor = Color.alpha(0);
-        style.textColor = Color.GRAY;
+        style.textColor = getResources().getColor(R.color.colorbutton);
 
         wheelView.setStyle(style);
         //设置滚轮右侧的指示文字及其格式
-        wheelView.setExtraText("分钟", Color.BLACK, 60, 120);
+        wheelView.setExtraText("分钟", getResources().getColor(R.color.colorbutton), 60, 120);
         //设置滚轮滑动停止时的事件，即更换图片
         wheelView.setOnWheelItemSelectedListener(new WheelView.OnWheelItemSelectedListener() {
             @Override
