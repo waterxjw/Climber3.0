@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,12 +13,15 @@ import android.widget.Toast;
 import com.ddz.floatingactionbutton.FloatingActionButton;
 import com.hlxx.climber.firstpage.setting.HistoryActivity;
 import com.hlxx.climber.secondpage.ClimbingActivity;
+import com.hlxx.climber.firstpage.setting.LoginActivity;
 import com.hlxx.climber.R;
 import com.hlxx.climber.firstpage.setting.SettingActivity;
 import com.wx.wheelview.adapter.ArrayWheelAdapter;
 import com.wx.wheelview.widget.WheelView;
 
 import java.util.ArrayList;
+
+import com.microsoft.windowsazure.mobileservices.*;
 
 public class TimeSettingActivity extends AppCompatActivity {
     //背景图片
@@ -82,9 +86,9 @@ public class TimeSettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(TimeSettingActivity.this, "Login", Toast.LENGTH_SHORT).show();
-               /* Intent intent = new Intent(TimeSettingActivity.this, LoginActivity.class
+                Intent intent = new Intent(TimeSettingActivity.this, LoginActivity.class
                 );
-                startActivity(intent);*/
+                startActivity(intent);
             }
         });
     }
