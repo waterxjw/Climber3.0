@@ -39,6 +39,7 @@
             android:name=".firstpage.setting.SettingActivity"
             android:label="设置" />
         <activity android:name=".firstpage.setting.ContactUsActivity" />
+        <activity android:name=".firstpage.setting.LoginActivity" />
         <activity android:name=".thirdpage.StoneActivity" android:theme="@style/dialog_custom"/>
         <activity android:name=".firstpage.setting.HistoryActivity"/>
         <activity android:name=".firstpage.ToReadFile" />
