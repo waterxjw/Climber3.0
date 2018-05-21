@@ -100,7 +100,7 @@
             app:fab_icon="@drawable/icon_setting"
             app:fab_size="mini" />
     </com.ddz.floatingactionbutton.FloatingActionMenu>
-    <com.hlxx.climber.widget.FButton
+    <Button
             android:id = "@+id/button"
             android:layout_width = "wrap_content"
             android:layout_height = "wrap_content"
@@ -117,7 +117,6 @@
     <Button
             android:id = "@+id/start_read_file"
             android:text = "Button"
-
             android:layout_width = "wrap_content"
             android:layout_height = "wrap_content"
             app:layout_constraintStart_toStartOf = "parent"

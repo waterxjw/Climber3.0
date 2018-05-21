@@ -23,6 +23,15 @@
         android:theme="@style/AppTheme"
         tools:replace="android:label">
         <activity android:name=".firstpage.TimeSettingActivity"/>
+        <activity android:name="com.microsoft.windowsazure.mobileservices.authentication.RedirectUrlActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="focusonclimb"
+                    android:host="easyauth.callback"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".secondpage.ClimbingActivity" />
         <activity android:name=".secondpage.settings.MovePlayActivity" />
         <activity android:name=".thirdpage.EndingActivity" />
@@ -30,6 +39,7 @@
             android:name=".firstpage.setting.SettingActivity"
             android:label="设置" />
         <activity android:name=".firstpage.setting.ContactUsActivity" />
+        <activity android:name=".firstpage.setting.LoginActivity" />
         <activity android:name=".thirdpage.StoneActivity" android:theme="@style/dialog_custom"/>
         <activity android:name=".firstpage.setting.HistoryActivity"/>
         <activity android:name=".firstpage.ToReadFile" />
