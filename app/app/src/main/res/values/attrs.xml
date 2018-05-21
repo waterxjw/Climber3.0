@@ -4,4 +4,11 @@
         <attr name="horizontalPadding" format="dimension|reference" />
         <attr name="verticalPadding" format="dimension|reference" />
     </declare-styleable>
+    <declare-styleable name="FButton">
+        <attr name="shadowEnabled" format="boolean" />
+        <attr name="buttonColor" format="color" />
+        <attr name="shadowColor" format="color" />
+        <attr name="shadowHeight" format="dimension" />
+        <attr name="cornerRadius" format="dimension" />
+    </declare-styleable>
 </resources>
