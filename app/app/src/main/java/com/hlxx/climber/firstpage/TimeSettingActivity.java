@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.ddz.floatingactionbutton.FloatingActionButton;
 import com.hlxx.climber.R;
 import com.hlxx.climber.firstpage.setting.HistoryActivity;
-import com.hlxx.climber.firstpage.setting.LoginActivity;
 import com.hlxx.climber.firstpage.setting.SettingActivity;
 import com.hlxx.climber.secondpage.ClimbingActivity;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
@@ -30,12 +29,6 @@ public class TimeSettingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //azure
-        try {
-            mClient = new MobileServiceClient("https://focusonclimb.azurewebsites.net", this);
-        } catch (Exception e) {
-
-        }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_setting);
@@ -87,15 +80,7 @@ public class TimeSettingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        fabLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(TimeSettingActivity.this, "Login", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(TimeSettingActivity.this, LoginActivity.class
-                );
-                startActivity(intent);
-            }
-        });
+
     }
 
     private void createButton() {

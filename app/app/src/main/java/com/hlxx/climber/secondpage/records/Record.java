@@ -14,6 +14,8 @@ public class Record implements Serializable {
     private boolean finish;
     private int switchTimes;
     private int totalTime;
+    private Calendar now;
+    private int level;
 
     public Calendar getNow() {
         return now;
@@ -23,27 +25,8 @@ public class Record implements Serializable {
         return level;
     }
 
-    private Calendar now;
-    private int level;
-
     public Record() {
         this.now = Calendar.getInstance();
-    }
-
-    public int getTimeSetted() {
-        return timeSetted;
-    }
-
-    public boolean isFinish() {
-        return finish;
-    }
-
-    public int getSwitchTimes() {
-        return switchTimes;
-    }
-
-    public int getTotalTime() {
-        return totalTime;
     }
 
     public void setTimeSetted(int timeSetted) {
