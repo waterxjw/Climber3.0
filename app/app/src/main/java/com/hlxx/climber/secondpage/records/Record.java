@@ -6,6 +6,7 @@ import java.util.Calendar;
 public class Record implements Serializable {
     static final long serialVersionUID = 1L;
 
+
     public void setLevel() {
         this.level = 100 - switchTimes * 25;
     }
@@ -17,8 +18,12 @@ public class Record implements Serializable {
     private Calendar now;
     private int level;
 
+
     public Calendar getNow() {
         return now;
+
+    public int getTimeSetted() {
+        return timeSetted;
     }
 
     public int getLevel() {

@@ -5,19 +5,20 @@ import java.util.ArrayList;
 
 public class Records implements Serializable {
     static final long serialVersionUID = 2L;
-    private int times ;
+    private int times;
     private ArrayList<Record> theRecord;
 
-    public Records() {
-        this.theRecord = new ArrayList<>();
+
+    public int getTimes() {
+        return times;
     }
 
     public ArrayList<Record> getTheRecord() {
         return theRecord;
     }
 
-    public int getTimes() {
-        return times;
+    public Records() {
+        this.theRecord = new ArrayList<>();
     }
 
     @Override
@@ -41,4 +42,5 @@ public class Records implements Serializable {
     public void addRecord(Record newRecord) {
         this.theRecord.add(newRecord);
     }
+
 }

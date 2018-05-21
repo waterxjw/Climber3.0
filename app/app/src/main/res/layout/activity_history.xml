@@ -94,7 +94,6 @@
                     android:id="@+id/sum_time"
                     android:textSize="40dp"
                     android:textStyle="bold"
-                    android:gravity="center"
                     android:textAppearance="@android:style/TextAppearance.Large"/>
             </LinearLayout>
             <LinearLayout
