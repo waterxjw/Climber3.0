@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.hlxx.climber.thirdpage.EndingActivity">
     <ImageView
+        android:id="@+id/ending"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@mipmap/end_background"

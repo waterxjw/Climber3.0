@@ -4,23 +4,6 @@ import java.io.Serializable;
 
 public class Record implements Serializable {
     static final long serialVersionUID = 1L;
-
-    public int getTimeSetted() {
-        return timeSetted;
-    }
-
-    public boolean isFinish() {
-        return finish;
-    }
-
-    public int getSwitchTimes() {
-        return switchTimes;
-    }
-
-    public int getTotalTime() {
-        return totalTime;
-    }
-
     private int timeSetted;//时间
     private boolean finish;
     private int switchTimes;
