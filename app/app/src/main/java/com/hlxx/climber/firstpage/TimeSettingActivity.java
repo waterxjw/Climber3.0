@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -57,6 +59,9 @@ public class TimeSettingActivity extends AppCompatActivity {
         }
         return true;
     }*/
+
+
+
     private void createFAButton() {
         FloatingActionButton fabSetting = findViewById(R.id.fab_setting);
         FloatingActionButton fabHistory = findViewById(R.id.fab_history);
@@ -66,7 +71,8 @@ public class TimeSettingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(TimeSettingActivity.this, "Setting", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(TimeSettingActivity.this, SettingActivity.class);
-                startActivity(intent);
+                ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(TimeSettingActivity.this, new Pair<>(fabSetting, "setting"));
+                startActivity(intent, transitionActivityOptions.toBundle());
             }
         });
         fabHistory.setOnClickListener(new View.OnClickListener() {

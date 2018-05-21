@@ -95,6 +95,7 @@
             android:id="@+id/fab_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:transitionName="setting"
             app:fab_colorNormal="@color/empty"
             app:fab_icon="@drawable/icon_setting"
             app:fab_size="mini" />
