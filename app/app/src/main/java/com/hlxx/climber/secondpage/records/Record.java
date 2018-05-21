@@ -54,8 +54,9 @@ public class Record implements Serializable {
                 ", finish=" + finish +
                 ", switchTimes=" + switchTimes +
                 ", totalTime=" + totalTime +
-                ", now=" + now +
-                ", level=" + level +
+                ", now=[" + now.get(Calendar.MONTH)+":"+now.get(Calendar.DAY_OF_MONTH+1) +"   "
+                +now.get(Calendar.HOUR)+":"+now.get(Calendar.MINUTE)+":"+now.get(Calendar.SECOND)+
+                "], level=" + level +
                 '}';
     }
 
