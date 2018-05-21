@@ -54,6 +54,8 @@ public class Record implements Serializable {
                 ", finish=" + finish +
                 ", switchTimes=" + switchTimes +
                 ", totalTime=" + totalTime +
+                ", now=" + now +
+                ", level=" + level +
                 '}';
     }
 
