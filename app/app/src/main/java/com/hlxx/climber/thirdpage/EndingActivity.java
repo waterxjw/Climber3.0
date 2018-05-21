@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.hlxx.climber.R;
@@ -27,20 +28,33 @@ import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Random;
 
 
 public class EndingActivity extends AppCompatActivity {
     private static final String SAVE_PIC_PATH = Environment.getExternalStorageState().equalsIgnoreCase(Environment.MEDIA_MOUNTED) ? Environment.getExternalStorageDirectory().getAbsolutePath() : "/mnt/sdcard";
     private static final String SAVE_REAL_PATH = SAVE_PIC_PATH + "/hlxx/ClimberPicture";
+    private ImageView imageView;
+    private int[] picarrary;
+    private int picindex;
+    private int realTemp;
+
     // /storage/emulated/0/netease/hlxx/climber相册
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ending);
-        ending_buttons();//按钮跳转：bt1,bt2，bt3
 
+        ending_buttons();//按钮跳转：bt1,bt2，bt3
+        picarrary=new int[]{R.mipmap.end_background,R.mipmap.end_background1,R.mipmap.end_background2,R.mipmap.end_background3,R.mipmap.end_background4};
+        Random rnd=new Random();
+        picindex=rnd.nextInt(4);
+        realTemp=picarrary[picindex];
+        imageView=(ImageView)findViewById(R.id.ending);
+        imageView.setImageResource(realTemp);
 
     }
 
@@ -75,7 +89,7 @@ public class EndingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Bitmap bitmap=BitmapFactory. decodeResource (getResources(),R.mipmap.end_background);
+                Bitmap bitmap=BitmapFactory. decodeResource (getResources(),realTemp);
                 saveImage(getApplicationContext(),bitmap);
                 Log.d("data","-----------------wqnmiaomiaomiao----------------");
                 Toast.makeText(EndingActivity.this, "图片保存成功", Toast.LENGTH_SHORT).show();

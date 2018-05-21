@@ -8,7 +8,9 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.hlxx.climber"
-        minSdkVersion 15
+
+        minSdkVersion 21
+
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -19,6 +21,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = ['redirectUriScheme': 'focusonclimb://easyauth.callback']
+        }
+        debug {
+            // ...
+            manifestPlaceholders = ['redirectUriScheme': 'focusonclimb://easyauth.callback']
         }
     }
     buildToolsVersion '27.0.3'
@@ -43,10 +50,21 @@ dependencies {
     implementation project(':library')
     implementation 'com.android.support:preference-v7:26.1.0'
     implementation 'com.android.support:design:26.1.0'
-    implementation 'com.microsoft.azure:azure-mobile-android:3.4.0'
+    implementation 'com.microsoft.azure:azure-mobile-android:3.2.0@aar'
     implementation 'com.github.ismaeltoe:flowlayout:1.0'
     implementation 'com.ddz.materialdesign:FloatingActionButton:1.0.4'
+<<<<<<< HEAD
     implementation 'com.ruesga.timeline-chart-view:timeline-chart-view:1.0.2'
     //implementation 'codelight.studios:android-smart-login:1.2'
+=======
+    //implementation 'com.ruesga.timeline-chart-view:timeline-chart-view:1.0.2'
+    implementation 'codelight.studios:android-smart-login:1.2'
+>>>>>>> 8f20ab0e22aee22bcfac4efc87054ce99912101f
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.7'
+    implementation 'com.android.support:customtabs:23.0.1'
+    compile 'com.google.code.gson:gson:2.3'
+    compile 'com.google.guava:guava:18.0'
+    implementation 'com.squareup.okhttp:okhttp:2.5.0'
+    implementation 'com.microsoft.azure:azure-notifications-handler:1.0.1@jar'
+
 }
