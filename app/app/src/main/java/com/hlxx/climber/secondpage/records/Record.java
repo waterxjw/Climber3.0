@@ -9,7 +9,25 @@ public class Record implements Serializable {
     private int switchTimes;
     private int totalTime;
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
+    public int getTimeSetted() {
+        return timeSetted;
+    }
+
+    public boolean isFinish() {
+        return finish;
+    }
+
+    public int getSwitchTimes() {
+        return switchTimes;
+    }
+
+    public int getTotalTime() {
+        return totalTime;
+    }
 
     public void setTimeSetted(int timeSetted) {
         this.timeSetted = timeSetted;

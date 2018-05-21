@@ -8,6 +8,15 @@ public class Records implements Serializable {
     private int times;
     private ArrayList<Record> theRecord;
 
+
+    public int getTimes() {
+        return times;
+    }
+
+    public ArrayList<Record> getTheRecord() {
+        return theRecord;
+    }
+
     public Records() {
         this.theRecord = new ArrayList<>();
     }
