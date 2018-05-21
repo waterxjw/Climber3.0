@@ -30,7 +30,7 @@ public class VibrateSetter {
     }
 
     public void setVibrate() {
-        if (true) {
+        if (isVibrate) {
 
             ClimbingActivity activity = theActivity.get();
             //处理震动
@@ -54,7 +54,7 @@ public class VibrateSetter {
                         .setVibrate(new long[]{0, 1500});
             }
 
-            Intent intent=new Intent(activity,EndingActivity.class);
+            Intent intent = new Intent(activity, EndingActivity.class);
             PendingIntent ClickPending = PendingIntent.getActivity(activity, 0, intent, 0);
             builder.setContentIntent(ClickPending);
 

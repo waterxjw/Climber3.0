@@ -25,6 +25,7 @@ import com.microsoft.windowsazure.mobileservices.MobileServiceActivityResult;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.wx.wheelview.adapter.ArrayWheelAdapter;
 import com.wx.wheelview.widget.WheelView;
+
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -49,14 +50,7 @@ public class TimeSettingActivity extends AppCompatActivity {
     private WheelView wheelView;
     private long firstPressedTime;
     private MobileServiceClient mClient;
-
     //login
-    MobileServiceClient mClient;
-    AzureServiceAdapter mServiceAdapter;
-    public static final int MICROSOFT_LOGIN_REQUEST_CODE = 1;
-
-    //login
-    MobileServiceClient mClient;
     AzureServiceAdapter mServiceAdapter;
     public static final int MICROSOFT_LOGIN_REQUEST_CODE = 1;
 
@@ -74,7 +68,7 @@ public class TimeSettingActivity extends AppCompatActivity {
 
         //login
         Initialize(this);
-        mServiceAdapter =AzureServiceAdapter.getInstance();
+        mServiceAdapter = AzureServiceAdapter.getInstance();
         mClient = mServiceAdapter.getClient();
 
 
@@ -85,32 +79,7 @@ public class TimeSettingActivity extends AppCompatActivity {
     //身份认证
     private void authenticate() {
         // Login using the Microsoft provider.
-        mClient.login(MobileServiceAuthenticationProvider.MicrosoftAccount, "focusonclimb",MICROSOFT_LOGIN_REQUEST_CODE);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // When request completes
-        if (resultCode == RESULT_OK) {
-            // Check the request code matches the one we send in the login request
-            if (requestCode == MICROSOFT_LOGIN_REQUEST_CODE) {
-                MobileServiceActivityResult result = mClient.onActivityResult(data);
-                if (result.isLoggedIn()) {
-                    // login succeeded
-                    createAndShowDialog(String.format("You are now logged in - %1$2s", mClient.getCurrentUser().getUserId()), "Success");
-                } else {
-                    // login failed, check the error message
-                    String errorMessage = result.getErrorMessage();
-                    createAndShowDialog(errorMessage, "Error");
-                }
-            }
-        }
-    }
-
-    //身份认证
-    private void authenticate() {
-        // Login using the Microsoft provider.
-        mClient.login(MobileServiceAuthenticationProvider.MicrosoftAccount, "focusonclimb",MICROSOFT_LOGIN_REQUEST_CODE);
+        mClient.login(MobileServiceAuthenticationProvider.MicrosoftAccount, "focusonclimb", MICROSOFT_LOGIN_REQUEST_CODE);
     }
 
     @Override
@@ -145,7 +114,6 @@ public class TimeSettingActivity extends AppCompatActivity {
         }
         return true;
     }*/
-
 
 
     private void createFAButton() {
@@ -277,10 +245,8 @@ public class TimeSettingActivity extends AppCompatActivity {
     /**
      * Creates a dialog and shows it
      *
-     * @param message
-     *            The dialog message
-     * @param title
-     *            The dialog title
+     * @param message The dialog message
+     * @param title   The dialog title
      */
     private void createAndShowDialog(final String message, final String title) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -293,7 +259,7 @@ public class TimeSettingActivity extends AppCompatActivity {
 
     private void createAndShowDialog(Exception exception, String title) {
         Throwable ex = exception;
-        if(exception.getCause() != null){
+        if (exception.getCause() != null) {
             ex = exception.getCause();
         }
         createAndShowDialog(ex.getMessage(), title);

@@ -20,14 +20,8 @@ public class Record implements Serializable {
 
     public Calendar getNow() {
         return now;
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
     }
 
-    public int getTimeSetted() {
-        return timeSetted;
-    }
 
     public int getLevel() {
         return level;
