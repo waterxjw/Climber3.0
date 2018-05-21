@@ -33,11 +33,6 @@ public class Records implements Serializable {
     public void addRecord(Record newRecord) {
         this.theRecord.add(newRecord);
     }
-    public int getTimes(){
-        return times;
-    }
-    public ArrayList<Record> getTheRecord(){
-        return theRecord;
-    }
+
 
 }
