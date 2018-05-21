@@ -1,5 +1,6 @@
 package com.hlxx.climber.firstpage;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,18 +16,42 @@ import android.widget.Toast;
 import com.ddz.floatingactionbutton.FloatingActionButton;
 import com.hlxx.climber.firstpage.setting.HistoryActivity;
 import com.hlxx.climber.secondpage.ClimbingActivity;
+import com.hlxx.climber.firstpage.setting.LoginActivity;
 import com.hlxx.climber.R;
 import com.hlxx.climber.firstpage.setting.SettingActivity;
+import com.hlxx.climber.services.AzureServiceAdapter;
+import com.microsoft.windowsazure.mobileservices.MobileServiceActivityResult;
+import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.wx.wheelview.adapter.ArrayWheelAdapter;
 import com.wx.wheelview.widget.WheelView;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+
+import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider;
+import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceUser;
 
 import java.util.ArrayList;
+
+
+import static com.hlxx.climber.services.AzureServiceAdapter.Initialize;
+
+import com.microsoft.windowsazure.mobileservices.*;
+
 
 public class TimeSettingActivity extends AppCompatActivity {
     //背景图片
     private ImageView imageView;
     private WheelView wheelView;
     private long firstPressedTime;
+
+    //login
+    MobileServiceClient mClient;
+    AzureServiceAdapter mServiceAdapter;
+    public static final int MICROSOFT_LOGIN_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +65,41 @@ public class TimeSettingActivity extends AppCompatActivity {
         createFAButton();//设置右上角浮动按钮
         //下面是自定义一个任务栏，取代原先自带的任务栏
 
+        //login
+        Initialize(this);
+        mServiceAdapter =AzureServiceAdapter.getInstance();
+        mClient = mServiceAdapter.getClient();
+
 
         Button aButton =findViewById(R.id.start_read_file);
         aButton.setOnClickListener((view) -> startActivity(new Intent(TimeSettingActivity.this, ToReadFile.class)));
 
     }
 
+    //身份认证
+    private void authenticate() {
+        // Login using the Microsoft provider.
+        mClient.login(MobileServiceAuthenticationProvider.MicrosoftAccount, "focusonclimb",MICROSOFT_LOGIN_REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // When request completes
+        if (resultCode == RESULT_OK) {
+            // Check the request code matches the one we send in the login request
+            if (requestCode == MICROSOFT_LOGIN_REQUEST_CODE) {
+                MobileServiceActivityResult result = mClient.onActivityResult(data);
+                if (result.isLoggedIn()) {
+                    // login succeeded
+                    createAndShowDialog(String.format("You are now logged in - %1$2s", mClient.getCurrentUser().getUserId()), "Success");
+                } else {
+                    // login failed, check the error message
+                    String errorMessage = result.getErrorMessage();
+                    createAndShowDialog(errorMessage, "Error");
+                }
+            }
+        }
+    }
     //任务栏右侧的菜单按钮
     /*public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.toolbar,menu);
@@ -88,9 +143,10 @@ public class TimeSettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(TimeSettingActivity.this, "Login", Toast.LENGTH_SHORT).show();
-               /* Intent intent = new Intent(TimeSettingActivity.this, LoginActivity.class
-                );
-                startActivity(intent);*/
+
+                //login
+                authenticate();
+
             }
         });
     }
@@ -185,5 +241,29 @@ public class TimeSettingActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Creates a dialog and shows it
+     *
+     * @param message
+     *            The dialog message
+     * @param title
+     *            The dialog title
+     */
+    private void createAndShowDialog(final String message, final String title) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+
+        builder.setMessage(message);
+        builder.setTitle(title);
+        builder.create().show();
+    }
+
+    private void createAndShowDialog(Exception exception, String title) {
+        Throwable ex = exception;
+        if(exception.getCause() != null){
+            ex = exception.getCause();
+        }
+        createAndShowDialog(ex.getMessage(), title);
+    }
 }
 

@@ -16,18 +16,18 @@ public class AzureServiceAdapter {
         mContext = context;
         try {
             mClient = new MobileServiceClient(mMobileBackendUrl, mContext);
-        }
-        catch (Exception e){
-            Log.e("...", "AzureServiceAdapter: Error" );
+        } catch (Exception e) {
+            Log.e("...", "AzureServiceAdapter: Error");
         }
     }
 
     public static void Initialize(Context context) {
         if (mInstance == null) {
             mInstance = new AzureServiceAdapter(context);
-        } else {
-            throw new IllegalStateException("AzureServiceAdapter is already initialized");
         }
+//        } else {
+//            // throw new IllegalStateException("AzureServiceAdapter is already initialized");
+//        }
     }
 
     public static AzureServiceAdapter getInstance() {
