@@ -14,6 +14,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.ddz.floatingactionbutton.FloatingActionButton;
+import com.hlxx.climber.firstpage.setting.HistoryActivity;
+import com.hlxx.climber.secondpage.ClimbingActivity;
+import com.hlxx.climber.firstpage.setting.LoginActivity;
 import com.hlxx.climber.R;
 import com.hlxx.climber.firstpage.setting.HistoryActivity;
 import com.hlxx.climber.firstpage.setting.SettingActivity;
@@ -46,6 +49,11 @@ public class TimeSettingActivity extends AppCompatActivity {
     private WheelView wheelView;
     private long firstPressedTime;
     private MobileServiceClient mClient;
+
+    //login
+    MobileServiceClient mClient;
+    AzureServiceAdapter mServiceAdapter;
+    public static final int MICROSOFT_LOGIN_REQUEST_CODE = 1;
 
     //login
     MobileServiceClient mClient;
@@ -99,6 +107,30 @@ public class TimeSettingActivity extends AppCompatActivity {
         }
     }
 
+    //身份认证
+    private void authenticate() {
+        // Login using the Microsoft provider.
+        mClient.login(MobileServiceAuthenticationProvider.MicrosoftAccount, "focusonclimb",MICROSOFT_LOGIN_REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // When request completes
+        if (resultCode == RESULT_OK) {
+            // Check the request code matches the one we send in the login request
+            if (requestCode == MICROSOFT_LOGIN_REQUEST_CODE) {
+                MobileServiceActivityResult result = mClient.onActivityResult(data);
+                if (result.isLoggedIn()) {
+                    // login succeeded
+                    createAndShowDialog(String.format("You are now logged in - %1$2s", mClient.getCurrentUser().getUserId()), "Success");
+                } else {
+                    // login failed, check the error message
+                    String errorMessage = result.getErrorMessage();
+                    createAndShowDialog(errorMessage, "Error");
+                }
+            }
+        }
+    }
     //任务栏右侧的菜单按钮
     /*public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.toolbar,menu);
