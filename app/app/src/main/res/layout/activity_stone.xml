@@ -2,42 +2,41 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
-    android:layout_height="300dp"
+    android:layout_height="400dp"
     android:layout_gravity="center"
-    android:background="#cabae3"
+    android:background="@mipmap/stone_dialog"
     android:orientation="vertical"
-    android:padding="20dp"
-    android:alpha="0.8"
     tools:context="com.hlxx.climber.thirdpage.StoneActivity">
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="我还是觉得用炭条写留言比刻下来更环保(￣ ﹌ ￣)  " />
-
         <Button
             android:id="@+id/upload"
-            android:layout_width="45dp"
-            android:layout_height="20dp"
+            android:layout_width="40dp"
+            android:layout_height="25dp"
             android:layout_alignParentBottom="true"
+            android:layout_marginBottom="13dp"
+            android:layout_marginRight="35dp"
             android:layout_alignParentRight="true"
             android:padding="5dp"
             android:text="写下"
+            android:textColor="@color/colorwhite"
             android:gravity="center"
-            android:background="@color/white"
-            android:textSize="8dp" />
+            android:background="@drawable/button_shape"
+            android:textSize="8dp"
+            android:onClick="addItem"/>
 
         <Button
             android:id="@+id/out"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:text="x"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="12dp"
             android:padding="0dp"
             android:gravity="center"
-            android:background="@color/white"
+
+            android:background="#302a36"
+            android:textColor="#4c4150"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"/>
@@ -46,14 +45,28 @@
             android:id="@+id/user_to_talk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="#e7f0f1"
-            android:textSize="8dp"
-            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/upload"
+            android:layout_marginBottom="48dp"
+            android:layout_marginRight="45dp"
+            android:layout_marginLeft="45dp"
             android:layout_alignParentBottom="true"
-            android:layout_above="@+id/upload"
-            android:maxLines="5"
+            android:layout_alignParentRight="true"
+            android:hint="在雨季到来前，写下你想说的话吧"
             android:maxLength="150"
-            android:hint="在雨季到来前，写下你想说的话吧"/>
+            android:maxLines="5"
+            android:textColorHint="#ffffff"
+            android:textColor="#FFFFFF"
+            android:textSize="8dp"
+            />
+
+    <ListView
+        android:id="@+id/listViewComment"
+        android:layout_width="219dp"
+        android:layout_height="142dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="73dp"
+        tools:listitem="@layout/row_list_comment" />
 
 </RelativeLayout>
 

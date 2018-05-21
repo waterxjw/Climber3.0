@@ -30,6 +30,22 @@ public class Record implements Serializable {
         this.now = Calendar.getInstance();
     }
 
+    public int getTimeSetted() {
+        return timeSetted;
+    }
+
+    public boolean isFinish() {
+        return finish;
+    }
+
+    public int getSwitchTimes() {
+        return switchTimes;
+    }
+
+    public int getTotalTime() {
+        return totalTime;
+    }
+
     public void setTimeSetted(int timeSetted) {
         this.timeSetted = timeSetted;
     }
