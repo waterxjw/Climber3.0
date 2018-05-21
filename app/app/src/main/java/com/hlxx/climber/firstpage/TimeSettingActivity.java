@@ -5,23 +5,21 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.ddz.floatingactionbutton.FloatingActionButton;
-import com.hlxx.climber.firstpage.setting.HistoryActivity;
-import com.hlxx.climber.secondpage.ClimbingActivity;
-import com.hlxx.climber.firstpage.setting.LoginActivity;
 import com.hlxx.climber.R;
+import com.hlxx.climber.firstpage.setting.HistoryActivity;
+import com.hlxx.climber.firstpage.setting.LoginActivity;
 import com.hlxx.climber.firstpage.setting.SettingActivity;
+import com.hlxx.climber.secondpage.ClimbingActivity;
+import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.wx.wheelview.adapter.ArrayWheelAdapter;
 import com.wx.wheelview.widget.WheelView;
 
 import java.util.ArrayList;
-
-import com.microsoft.windowsazure.mobileservices.*;
 
 public class TimeSettingActivity extends AppCompatActivity {
     //背景图片
@@ -49,20 +47,10 @@ public class TimeSettingActivity extends AppCompatActivity {
         //下面是自定义一个任务栏，取代原先自带的任务栏
 
 
-        Button aButton =findViewById(R.id.start_read_file);
+        Button aButton = findViewById(R.id.start_read_file);
         aButton.setOnClickListener((view) -> startActivity(new Intent(TimeSettingActivity.this, ToReadFile.class)));
-
-
-
-
-
-
-
-
-
-
-
     }
+
 
     //任务栏右侧的菜单按钮
     /*public boolean onCreateOptionsMenu(Menu menu){

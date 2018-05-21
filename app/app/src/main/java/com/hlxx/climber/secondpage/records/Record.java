@@ -1,30 +1,34 @@
 package com.hlxx.climber.secondpage.records;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 public class Record implements Serializable {
     static final long serialVersionUID = 1L;
 
-    public int getTimeSetted() {
-        return timeSetted;
-    }
-
-    public boolean isFinish() {
-        return finish;
-    }
-
-    public int getSwitchTimes() {
-        return switchTimes;
-    }
-
-    public int getTotalTime() {
-        return totalTime;
+    public void setLevel() {
+        this.level = 100 - switchTimes * 25;
     }
 
     private int timeSetted;//时间
     private boolean finish;
     private int switchTimes;
     private int totalTime;
+
+    public Calendar getNow() {
+        return now;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    private Calendar now;
+    private int level;
+
+    public Record() {
+        this.now = Calendar.getInstance();
+    }
 
     public void setTimeSetted(int timeSetted) {
         this.timeSetted = timeSetted;
@@ -51,4 +55,21 @@ public class Record implements Serializable {
                 ", totalTime=" + totalTime +
                 '}';
     }
+
+    public int getTimeSetted() {
+        return timeSetted;
+    }
+
+    public boolean isFinish() {
+        return finish;
+    }
+
+    public int getSwitchTimes() {
+        return switchTimes;
+    }
+
+    public int getTotalTime() {
+        return totalTime;
+    }
+
 }
