@@ -1,14 +1,19 @@
 package com.hlxx.climber.secondpage;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.*;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Chronometer;
 import android.widget.ImageView;
@@ -45,7 +50,6 @@ public class ClimbingActivity extends AppCompatActivity {
     private static Bitmap sourceBitmap;
     private static Bitmap toShowBitmap;
     private Handler mHandler = new MyHandler(this);
-    private PowerManager.WakeLock wakeLock = null;
 
     //设置是否常亮
     public static void setWillScreenOn(boolean willScreenOn) {
@@ -113,7 +117,6 @@ public class ClimbingActivity extends AppCompatActivity {
             public void onFinish() {
                 theRestTime.setText("到达");
                 recordWrite(true);
-                releaseWakeLock();
                 ((TextView) findViewById(R.id.theRestTimePrompt)).setText("");
                 ((Chronometer) findViewById(R.id.lastTime)).stop();//Chronometer暂停
                 Toast.makeText(ClimbingActivity.this, "成功！", Toast.LENGTH_LONG).show();//进行弹窗提示
@@ -140,7 +143,6 @@ public class ClimbingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_climbing);
         String data = getIntent().getStringExtra("time");
@@ -156,7 +158,6 @@ public class ClimbingActivity extends AppCompatActivity {
         Chronometer lastTimeChronometer = findViewById(R.id.lastTime);
         lastTimeChronometer.setBase(SystemClock.elapsedRealtime() - 1000);
         lastTimeChronometer.start();
-        acquireWakeLock();
         //进行弹窗提示
         Toast.makeText(ClimbingActivity.this, "文文傻蛋！", Toast.LENGTH_SHORT).show();
 
@@ -185,7 +186,6 @@ public class ClimbingActivity extends AppCompatActivity {
             if (System.currentTimeMillis() - firstPressedTime < 5000) {
                 cancle = true;
                 recordWrite(false);
-                releaseWakeLock();
                 if (gcRequest != null) {
                     gcRequest.interrupt();
                     gcRequest = null;
@@ -219,6 +219,7 @@ public class ClimbingActivity extends AppCompatActivity {
             });
             gcRequest.start();
         }
+
     }
 
     @Override
@@ -258,7 +259,6 @@ public class ClimbingActivity extends AppCompatActivity {
         if (System.currentTimeMillis() - firstPressedTime < 5000) {
             mHandler = null;
             recordWrite(false);
-            releaseWakeLock();
             ActivityCompat.finishAffinity(this);//退出整个程序
         } else {
             Toast.makeText(getBaseContext(), "再点一次退出", Toast.LENGTH_SHORT).show();
@@ -272,6 +272,7 @@ public class ClimbingActivity extends AppCompatActivity {
         aRecord.setTotalTime(Integer.parseInt(times[0]) * 60 + Integer.parseInt(times[1]));
         aRecord.setSwitchTimes(IsForeground.getTimes());
         aRecord.setFinish(finish);
+        aRecord.setLevel();
         try {
             aRecorderEditor.oneRecordAdd(aRecord);
         } catch (IOException e) {
@@ -279,21 +280,4 @@ public class ClimbingActivity extends AppCompatActivity {
         }
     }
 
-
-    private void acquireWakeLock() {
-        if (null == wakeLock) {
-            PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-            wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getCanonicalName());
-            if (null != wakeLock) {
-                wakeLock.acquire();
-            }
-        }
-    }
-
-    private void releaseWakeLock() {
-        if (null != wakeLock && wakeLock.isHeld()) {
-            wakeLock.release();
-            wakeLock = null;
-        }
-    }
 }
