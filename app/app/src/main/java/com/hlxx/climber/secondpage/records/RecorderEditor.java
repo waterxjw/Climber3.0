@@ -14,6 +14,8 @@ public class RecorderEditor {
     private File timeOfDay;
     private File oneRecord;
     public int time;
+    private int finishTime;
+    private boolean finish;
 
     public RecorderEditor(File applicationDir) {
         this.applicationDir = applicationDir;
@@ -25,14 +27,17 @@ public class RecorderEditor {
     private void timeChange() {
         try {
             time = RecordReader.timeOfDayGet(timeOfDay);
+            finishTime = RecordReader.timeOfDayGet(timeOfDay);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             time = 0;
+            finishTime = 0;
         }
         time++;
-
+        finishTime++;
         try {
             objectWriter(timeOfDay, time);
+            objectWriter(timeOfDay, finishTime);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,9 +45,10 @@ public class RecorderEditor {
 
     public void oneRecordAdd(Record theRecord) throws IOException {
         if (creatFiles()) {
-
+            finishTime = 1;
             time = 1;
             objectWriter(timeOfDay, time);
+            objectWriter(timeOfDay, finishTime);
         } else {
             timeChange();
         }

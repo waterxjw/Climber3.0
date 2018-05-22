@@ -56,15 +56,16 @@ public class VibrateSetter {
             }
         }
 
-        Intent intent = new Intent(activity, EndingActivity.class);
+        /*Intent intent = new Intent(activity, EndingActivity.class);
         PendingIntent ClickPending = PendingIntent.getActivity(activity, 0, intent, 0);
         builder.setContentIntent(ClickPending);
-        activity.finish();
+        activity.finish();*/
 
         //设置 通知 图标
         builder.setSmallIcon(R.mipmap.ic_launcher_round);
         //设置 通知 显示标题
         builder.setTicker("恭喜");
+        builder.setAutoCancel(true);
         //设置 通知栏 标题
         builder.setContentTitle("成功");
         //设置 通知内容
@@ -74,11 +75,9 @@ public class VibrateSetter {
             builder.setVibrate(new long[]{0, 1500, 0, 0});//builder.setDefaults(Notification.DEFAULT_ALL);
             //.setDefaults(Notification.DEFAULT_VIBRATE);*/
         Notification notification = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            notification = builder.build();
-            notification.flags = Notification.FLAG_SHOW_LIGHTS;
-            notification.flags = Notification.FLAG_AUTO_CANCEL;
-        }
+        notification = builder.build();
+        notification.flags = Notification.FLAG_SHOW_LIGHTS;
+        notification.flags = Notification.FLAG_AUTO_CANCEL;
         manager.notify(5, notification);
     }
 }

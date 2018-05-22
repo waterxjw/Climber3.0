@@ -1,13 +1,11 @@
 package com.hlxx.climber.secondpage;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.*;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -46,10 +44,12 @@ public class ClimbingActivity extends AppCompatActivity {
     private Record aRecord = new Record();
     private RecorderEditor aRecorderEditor;
     private static int hightPixels;
-    private static double speed;
-    private static Bitmap sourceBitmap;
-    private static Bitmap toShowBitmap;
+    private static double backgroundSpeed;
+    private static Bitmap sourceBGBitmap;
+    private static Bitmap toShowBGBitmap;
+    private static Bitmap sourceMBitmap;
     private Handler mHandler = new MyHandler(this);
+    private boolean newWokInf;
 
     //设置是否常亮
     public static void setWillScreenOn(boolean willScreenOn) {
@@ -79,10 +79,10 @@ public class ClimbingActivity extends AppCompatActivity {
                     case 1:
                         TextView tv = activity.findViewById(R.id.lastTime);
                         int timeUsed = intsToSecond(stringToInts(tv.getText().toString()));
-                        int yLocation = (int) speed * timeUsed + hightPixels;
-                        if (yLocation / (double) sourceBitmap.getHeight() < 0.595) {
+                        int yLocation = (int) backgroundSpeed * timeUsed + hightPixels;
+                        if (yLocation / (double) sourceBGBitmap.getHeight() < 0.595) {
                             tv.setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_start));
-                        } else if (yLocation / (double) sourceBitmap.getHeight() > 0.79) {
+                        } else if (yLocation / (double) sourceBGBitmap.getHeight() > 0.79) {
                             tv.setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
                             ((TextView) activity.findViewById(R.id.theRestTimePrompt)).setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
                             ((TextView) activity.findViewById(R.id.restTime)).setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
@@ -91,10 +91,10 @@ public class ClimbingActivity extends AppCompatActivity {
                         }
                         ImageView testImageView = activity.findViewById(R.id.climb_background);
                         tv = null;
-                        yLocation = yLocation > sourceBitmap.getHeight() ? sourceBitmap.getHeight() : yLocation;
-                        toShowBitmap = null;
-                        toShowBitmap = Bitmap.createBitmap(sourceBitmap, 0, sourceBitmap.getHeight() - yLocation, sourceBitmap.getWidth(), hightPixels);
-                        testImageView.setImageBitmap(toShowBitmap);
+                        yLocation = yLocation > sourceBGBitmap.getHeight() ? sourceBGBitmap.getHeight() : yLocation;
+                        toShowBGBitmap = null;
+                        toShowBGBitmap = Bitmap.createBitmap(sourceBGBitmap, 0, sourceBGBitmap.getHeight() - yLocation, sourceBGBitmap.getWidth(), hightPixels);
+                        testImageView.setImageBitmap(toShowBGBitmap);
                         break;
                     default:
                         break;
@@ -170,11 +170,18 @@ public class ClimbingActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         hightPixels = dm.heightPixels;
         dm = null;
-        sourceBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.climb_sky);
-        speed = (sourceBitmap.getHeight() - hightPixels) / (double) getTimeSecondSetted();
-        ImageView testImageView = findViewById(R.id.climb_background);
-        toShowBitmap = Bitmap.createBitmap(sourceBitmap, 0, sourceBitmap.getHeight() - hightPixels, sourceBitmap.getWidth(), hightPixels);
-        testImageView.setImageBitmap(toShowBitmap);
+        sourceBGBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.climb_sky);
+        backgroundSpeed = (sourceBGBitmap.getHeight() - hightPixels) / (double) getTimeSecondSetted();
+        ImageView bgImageView = findViewById(R.id.climb_background);
+        toShowBGBitmap = Bitmap.createBitmap(sourceBGBitmap, 0, sourceBGBitmap.getHeight() - hightPixels, sourceBGBitmap.getWidth(), hightPixels);
+        bgImageView.setImageBitmap(toShowBGBitmap);
+
+        //设置山
+        sourceMBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.climb_mountain);
+        Log.e("PNG", sourceMBitmap.getHeight() + "   " + sourceMBitmap.getWidth());
+
+
+
     }
 
     @Override
@@ -219,7 +226,6 @@ public class ClimbingActivity extends AppCompatActivity {
             });
             gcRequest.start();
         }
-
     }
 
     @Override

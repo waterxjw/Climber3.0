@@ -14,14 +14,14 @@
         tools:ignore="ContentDescription" />
 
     <ImageView
-        android:id="@+id/climer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/app_name"
-        android:scaleType="fitXY"
-        android:src="@drawable/climbing"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:src = "@drawable/climbing"
+            android:layout_width = "0dp"
+            android:layout_height = "wrap_content"
+            android:id = "@+id/mountain"
+            android:scaleType = "fitXY"
+            android:contentDescription = "@string/mountain_description"
+            app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintTop_toTopOf = "parent" />
 
     <Button
         android:id="@+id/button_giveUp"
