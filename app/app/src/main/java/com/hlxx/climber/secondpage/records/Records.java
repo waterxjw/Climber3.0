@@ -30,6 +30,8 @@ public class Records implements Serializable {
         return "times:" + times + ",\n theRecord:" + aStringBuilder + '}';
     }
 
+
+
     public Records(int times, ArrayList<Record> theRecord) {
         this.times = times;
         this.theRecord = theRecord;

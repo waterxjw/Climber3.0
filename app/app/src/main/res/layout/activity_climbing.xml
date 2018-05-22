@@ -15,9 +15,9 @@
             android:src = "@drawable/climbing"
             android:layout_width = "0dp"
             android:layout_height = "wrap_content"
-            android:id = "@+id/climer"
+            android:id = "@+id/mountain"
             android:scaleType = "fitXY"
-            android:contentDescription = "@string/app_name"
+            android:contentDescription = "@string/mountain_description"
             app:layout_constraintStart_toStartOf = "parent"
             app:layout_constraintTop_toTopOf = "parent" />
     <Chronometer
@@ -31,8 +31,7 @@
             app:layout_constraintTop_toTopOf = "parent"
             android:textColorHint = "@android:color/background_light" app:layout_constraintEnd_toEndOf = "parent"
             android:layout_marginTop = "320dp"
-            android:layout_marginEnd = "120dp"
-            android:layout_marginRight = "120dp" />
+            android:layout_marginEnd = "120dp" />
     <TextView
             android:text = "@string/message_timeOut"
             android:layout_width = "111dp"
