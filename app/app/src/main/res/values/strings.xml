@@ -3,9 +3,10 @@
     <string name="timesettedbutton_name">开始专注</string>
     <string name="settingofmenu">设置</string>
     <string name="message_timeOut">00:00:00</string>
-    <string name="message_outPrompt">距山顶：</string>
+    <string name="message_outPrompt">You still need</string>
+    <string name="last_time_prompt">You have climbed</string>
     <string name="title_activity_stone">stoneActivity</string>
-    <string name="button_giveUp">放弃</string>
+    <string name="button_giveUp">Give Up</string>
     <string name="title_activity_settings2">Settings</string>
     <string name="mode">Mode</string>
     <string name="footer">Footer</string>
