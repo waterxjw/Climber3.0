@@ -13,9 +13,12 @@ public class RecorderEditor {
     private File applicationDir;
     private File timeOfDay;
     private File oneRecord;
-    public int time;
-    private int finishTime;
-    private boolean finish;
+    public int[] time=new int [2];
+    private boolean finish = false;
+
+    public void setFinish(boolean finish) {
+        this.finish = finish;
+    }
 
     public RecorderEditor(File applicationDir) {
         this.applicationDir = applicationDir;
@@ -27,17 +30,15 @@ public class RecorderEditor {
     private void timeChange() {
         try {
             time = RecordReader.timeOfDayGet(timeOfDay);
-            finishTime = RecordReader.timeOfDayGet(timeOfDay);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-            time = 0;
-            finishTime = 0;
         }
-        time++;
-        finishTime++;
+        time[0]++;
+        if (finish) {
+            time[1]++;
+        }
         try {
-            objectWriter(timeOfDay, time);
-            objectWriter(timeOfDay, finishTime);
+            objectWriter(timeOfDay, time, false);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -45,17 +46,16 @@ public class RecorderEditor {
 
     public void oneRecordAdd(Record theRecord) throws IOException {
         if (creatFiles()) {
-            finishTime = 1;
-            time = 1;
-            objectWriter(timeOfDay, time);
-            objectWriter(timeOfDay, finishTime);
+            time[1] = 0;
+            time[0] = 1;
+            objectWriter(timeOfDay, time, false);
         } else {
             timeChange();
         }
         recordSort();
-        oneRecord = new File(fileDay, time + ".hlxx");
+        oneRecord = new File(fileDay, time[0] + ".hlxx");
         oneRecord.createNewFile();
-        objectWriter(oneRecord, theRecord);
+        objectWriter(oneRecord, theRecord, false);
     }
 
 
@@ -72,8 +72,8 @@ public class RecorderEditor {
         }
     }
 
-    public static <T> void objectWriter(File objectPath, T object) throws IOException {
-        FileOutputStream objectFOS = new FileOutputStream(objectPath);
+    public static <T> void objectWriter(File objectPath, T object, boolean append) throws IOException {
+        FileOutputStream objectFOS = new FileOutputStream(objectPath, append);
         ObjectOutputStream objectOOS = new ObjectOutputStream(objectFOS);
         objectOOS.writeObject(object);
         objectOOS.close();
@@ -84,7 +84,7 @@ public class RecorderEditor {
         File[] filesDay = fileMonth.listFiles();
         for (File file : filesDay) {
             if (file.isDirectory() && !file.equals(fileDay)) {
-                File newRecords = new File(fileMonth, "" + file.getName() + ".hlxx");
+                File newRecords = new File(fileMonth, "" + file.getName() + ".day");
                 try {
                     newRecords.createNewFile();
                 } catch (IOException e) {
@@ -95,7 +95,7 @@ public class RecorderEditor {
                 records.remove(total);
                 Records toWrite = new Records();
                 try {
-                    toWrite.setTimes(objectReader(total));
+                    toWrite.setTime(objectReader(total));
                 } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -107,7 +107,7 @@ public class RecorderEditor {
                     }
                 }
                 try {
-                    objectWriter(newRecords, toWrite);
+                    objectWriter(newRecords, toWrite, false);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

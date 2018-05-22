@@ -44,12 +44,14 @@ public class ClimbingActivity extends AppCompatActivity {
     private Record aRecord = new Record();
     private RecorderEditor aRecorderEditor;
     private static int hightPixels;
+    private static int widthPixels;
     private static double backgroundSpeed;
+    private static double mountainSpeed = 10;
     private static Bitmap sourceBGBitmap;
     private static Bitmap toShowBGBitmap;
     private static Bitmap sourceMBitmap;
+    private static Bitmap toShowMBitmap;
     private Handler mHandler = new MyHandler(this);
-    private boolean newWokInf;
 
     //设置是否常亮
     public static void setWillScreenOn(boolean willScreenOn) {
@@ -89,12 +91,20 @@ public class ClimbingActivity extends AppCompatActivity {
                         } else {
                             tv.setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_mid));
                         }
-                        ImageView testImageView = activity.findViewById(R.id.climb_background);
                         tv = null;
+
+                        ImageView bgdImageView = activity.findViewById(R.id.climb_background);
                         yLocation = yLocation > sourceBGBitmap.getHeight() ? sourceBGBitmap.getHeight() : yLocation;
                         toShowBGBitmap = null;
                         toShowBGBitmap = Bitmap.createBitmap(sourceBGBitmap, 0, sourceBGBitmap.getHeight() - yLocation, sourceBGBitmap.getWidth(), hightPixels);
-                        testImageView.setImageBitmap(toShowBGBitmap);
+                        bgdImageView.setImageBitmap(toShowBGBitmap);
+
+                        ImageView mtImageView = activity.findViewById(R.id.mountain);
+                        yLocation = (int) mountainSpeed * timeUsed + hightPixels;
+                        yLocation = yLocation > sourceMBitmap.getHeight() ? sourceMBitmap.getHeight() : yLocation;
+                        toShowMBitmap = null;
+                        toShowMBitmap = Bitmap.createBitmap(sourceMBitmap, 0, sourceMBitmap.getHeight() - yLocation, sourceMBitmap.getWidth(), hightPixels);
+                        mtImageView.setImageBitmap(toShowMBitmap);
                         break;
                     default:
                         break;
@@ -169,6 +179,7 @@ public class ClimbingActivity extends AppCompatActivity {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         hightPixels = dm.heightPixels;
+        widthPixels = dm.widthPixels;
         dm = null;
         sourceBGBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.climb_sky);
         backgroundSpeed = (sourceBGBitmap.getHeight() - hightPixels) / (double) getTimeSecondSetted();
@@ -178,9 +189,10 @@ public class ClimbingActivity extends AppCompatActivity {
 
         //设置山
         sourceMBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.climb_mountain);
-        Log.e("PNG", sourceMBitmap.getHeight() + "   " + sourceMBitmap.getWidth());
-
-
+        mountainSpeed = mountainSpeed < (sourceMBitmap.getHeight() - hightPixels) / (double) getTimeSecondSetted() ? mountainSpeed : (sourceMBitmap.getHeight() - hightPixels) / (double) getTimeSecondSetted();
+        ImageView mtImageView = findViewById(R.id.mountain);
+        toShowMBitmap = Bitmap.createBitmap(sourceMBitmap, 0, sourceMBitmap.getHeight() - hightPixels, sourceMBitmap.getWidth(), hightPixels);
+        mtImageView.setImageBitmap(toShowMBitmap);
 
     }
 
@@ -216,7 +228,7 @@ public class ClimbingActivity extends AppCompatActivity {
                         msg.what = 1;  //消息(一个整型值)
                         if (mHandler != null) {
                             mHandler.sendMessage(msg);// 每隔1秒发送一个msg给mHandler
-                            Thread.sleep(5000);
+                            Thread.sleep(1000);
                         }
                     } catch (InterruptedException e) {
                         threadState = false;
@@ -278,6 +290,7 @@ public class ClimbingActivity extends AppCompatActivity {
         aRecord.setTotalTime(Integer.parseInt(times[0]) * 60 + Integer.parseInt(times[1]));
         aRecord.setSwitchTimes(IsForeground.getTimes());
         aRecord.setFinish(finish);
+        aRecorderEditor.setFinish(finish);
         aRecord.setLevel();
         try {
             aRecorderEditor.oneRecordAdd(aRecord);

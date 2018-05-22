@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.hlxx.climber.secondpage.ClimbingActivity">
+<android.support.constraint.ConstraintLayout xmlns:android = "http://schemas.android.com/apk/res/android"
+                                             xmlns:app = "http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools = "http://schemas.android.com/tools"
+                                             android:layout_width = "match_parent"
+                                             android:layout_height = "match_parent"
+                                             tools:context = "com.hlxx.climber.secondpage.ClimbingActivity">
 
     <ImageView
-        android:id="@+id/climb_background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        tools:ignore="ContentDescription" />
+            android:id = "@+id/climb_background"
+            android:layout_width = "match_parent"
+            android:layout_height = "match_parent"
+            android:scaleType = "fitXY"
+            tools:ignore = "ContentDescription" />
 
-    <ImageView
+    <!--ImageView
         android:src = "@drawable/climbing"
             android:layout_width = "0dp"
             android:layout_height = "wrap_content"
@@ -21,86 +21,94 @@
             android:scaleType = "fitXY"
             android:contentDescription = "@string/mountain_description"
             app:layout_constraintStart_toStartOf = "parent"
-            app:layout_constraintTop_toTopOf = "parent" />
-
+            app:layout_constraintTop_toTopOf = "parent" /-->
+    <ImageView
+            android:layout_width = "0dp"
+            android:layout_height = "wrap_content"
+            android:id = "@+id/mountain"
+            android:scaleType = "fitXY"
+            android:contentDescription = "@string/mountain_description"
+            app:layout_constraintStart_toStartOf = "parent"
+            app:layout_constraintTop_toTopOf = "parent"
+            tools:ignore = "ContentDescription" />
     <Button
-        android:id="@+id/button_giveUp"
-        android:layout_width="146dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/text_background"
-        android:text="@string/button_giveUp"
-        android:textColor="@color/color_button_text"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/text_background"
-        app:layout_constraintTop_toBottomOf="@+id/text_background"
-        app:layout_constraintVertical_bias="1.0" />
+            android:id = "@+id/button_giveUp"
+            android:layout_width = "146dp"
+            android:layout_height = "38dp"
+            android:layout_marginTop = "8dp"
+            android:background = "@drawable/text_background"
+            android:text = "@string/button_giveUp"
+            android:textColor = "@color/color_button_text"
+            android:textSize = "25sp"
+            app:layout_constraintBottom_toBottomOf = "parent"
+            app:layout_constraintStart_toStartOf = "@+id/text_background"
+            app:layout_constraintTop_toBottomOf = "@+id/text_background"
+            app:layout_constraintVertical_bias = "1.0" />
 
     <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/climber"
-        android:layout_width="57dp"
-        android:layout_height="132dp"
-        android:layout_marginBottom="220dp"
-        android:background="@drawable/climber"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+            android:id = "@+id/climber"
+            android:layout_width = "57dp"
+            android:layout_height = "132dp"
+            android:layout_marginBottom = "320dp"
+            android:background = "@drawable/climber"
+            app:layout_constraintBottom_toBottomOf = "parent"
+            app:layout_constraintStart_toStartOf = "parent" android:layout_marginStart = "16dp" />
 
     <ImageView
-        android:id="@+id/text_background"
-        android:layout_width="147dp"
-        android:layout_height="112dp"
-        android:layout_marginBottom="44dp"
-        app:layout_constraintBottom_toBottomOf="@+id/climb_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/text_background" />
+            android:id = "@+id/text_background"
+            android:layout_width = "147dp"
+            android:layout_height = "112dp"
+            android:layout_marginBottom = "44dp"
+            app:layout_constraintBottom_toBottomOf = "@+id/climb_background"
+            app:layout_constraintEnd_toEndOf = "parent"
+            app:srcCompat = "@drawable/text_background" />
 
     <TextView
-        android:id="@+id/restTime"
-        android:layout_width="100dp"
-        android:layout_height="23dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:text="@string/message_timeOut"
-        android:textColor="@color/color_time_rest_start"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/text_background"
-        app:layout_constraintEnd_toEndOf="parent" />
+            android:id = "@+id/restTime"
+            android:layout_width = "100dp"
+            android:layout_height = "23dp"
+            android:layout_marginBottom = "8dp"
+            android:layout_marginEnd = "16dp"
+            android:text = "@string/message_timeOut"
+            android:textColor = "@color/color_time_rest_start"
+            android:textSize = "20sp"
+            android:textStyle = "bold"
+            app:layout_constraintBottom_toBottomOf = "@+id/text_background"
+            app:layout_constraintEnd_toEndOf = "parent" />
 
     <Chronometer
-        android:id="@+id/lastTime"
-        android:layout_width="78dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="20dp"
-        android:format="%s"
-        android:textColor="@color/color_time_rest_start"
-        android:textColorHint="@android:color/background_light"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/theLastTimePrompt"
-        app:layout_constraintTop_toTopOf="@+id/theLastTimePrompt" />
+            android:id = "@+id/lastTime"
+            android:layout_width = "78dp"
+            android:layout_height = "33dp"
+            android:layout_marginStart = "12dp"
+            android:layout_marginTop = "20dp"
+            android:format = "%s"
+            android:textColor = "@color/color_time_rest_start"
+            android:textColorHint = "@android:color/background_light"
+            android:textSize = "28sp"
+            android:textStyle = "bold"
+            app:layout_constraintStart_toStartOf = "@+id/theLastTimePrompt"
+            app:layout_constraintTop_toTopOf = "@+id/theLastTimePrompt" />
 
     <TextView
-        android:id="@+id/theLastTimePrompt"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/last_time_prompt"
-        android:textColor="@color/color_time_rest_start"
-        app:layout_constraintStart_toStartOf="@+id/text_background"
-        app:layout_constraintTop_toTopOf="@+id/text_background" />
+            android:id = "@+id/theLastTimePrompt"
+            android:layout_width = "wrap_content"
+            android:layout_height = "0dp"
+            android:layout_marginStart = "24dp"
+            android:layout_marginTop = "8dp"
+            android:text = "@string/last_time_prompt"
+            android:textColor = "@color/color_time_rest_start"
+            app:layout_constraintStart_toStartOf = "@+id/text_background"
+            app:layout_constraintTop_toTopOf = "@+id/text_background" />
 
     <TextView
-        android:id="@+id/theRestTimePrompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/message_outPrompt"
-        android:textColor="@color/color_time_rest_start"
-        app:layout_constraintBottom_toTopOf="@+id/restTime"
-        app:layout_constraintStart_toStartOf="@+id/restTime" />
+            android:id = "@+id/theRestTimePrompt"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:layout_marginStart = "8dp"
+            android:text = "@string/message_outPrompt"
+            android:textColor = "@color/color_time_rest_start"
+            app:layout_constraintBottom_toTopOf = "@+id/restTime"
+            app:layout_constraintStart_toStartOf = "@+id/restTime" />
 
 </android.support.constraint.ConstraintLayout>
