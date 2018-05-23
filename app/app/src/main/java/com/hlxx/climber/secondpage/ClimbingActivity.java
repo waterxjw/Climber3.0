@@ -9,7 +9,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Chronometer;
 import android.widget.ImageView;
@@ -78,30 +77,33 @@ public class ClimbingActivity extends AppCompatActivity {
             if (activity != null) {
                 switch (msg.what) {
                     case 1:
-                        TextView tv = activity.findViewById(R.id.lastTime);
-                        int timeUsed = intsToSecond(stringToInts(tv.getText().toString()));
-                        int yLocation = (int) backgroundSpeed * timeUsed + hightPixels;
-                        if (yLocation / (double) sourceBGBitmap.getHeight() < 0.595) {
-                            tv.setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_start));
-                        } else if (yLocation / (double) sourceBGBitmap.getHeight() > 0.79) {
-                            tv.setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
-                            ((TextView) activity.findViewById(R.id.theRestTimePrompt)).setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
-                            ((TextView) activity.findViewById(R.id.restTime)).setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
+                        if (sourceBGBitmap != null && sourceMBitmap != null) {
+                            TextView tv = activity.findViewById(R.id.lastTime);
+                            int timeUsed = intsToSecond(stringToInts(tv.getText().toString()));
+                            int yLocation = (int) backgroundSpeed * timeUsed + hightPixels;
+                            if (yLocation / (double) sourceBGBitmap.getHeight() < 0.595) {
+                                tv.setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_start));
+                            } else if (yLocation / (double) sourceBGBitmap.getHeight() > 0.79) {
+                                tv.setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
+                                ((TextView) activity.findViewById(R.id.theRestTimePrompt)).setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
+                                ((TextView) activity.findViewById(R.id.theRestTimePrompt)).setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
+                                ((TextView) activity.findViewById(R.id.restTime)).setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
+                            }
+                            tv = null;
+
+                            ImageView bgdImageView = activity.findViewById(R.id.climb_background);
+                            yLocation = yLocation > sourceBGBitmap.getHeight() ? sourceBGBitmap.getHeight() : yLocation;
+                            toShowBGBitmap = null;
+                            toShowBGBitmap = Bitmap.createBitmap(sourceBGBitmap, 0, sourceBGBitmap.getHeight() - yLocation, sourceBGBitmap.getWidth(), hightPixels);
+                            bgdImageView.setImageBitmap(toShowBGBitmap);
+
+                            ImageView mtImageView = activity.findViewById(R.id.mountain);
+                            yLocation = (int) mountainSpeed * timeUsed + hightPixels;
+                            yLocation = yLocation > sourceMBitmap.getHeight() ? sourceMBitmap.getHeight() : yLocation;
+                            toShowMBitmap = null;
+                            toShowMBitmap = Bitmap.createBitmap(sourceMBitmap, 0, sourceMBitmap.getHeight() - yLocation, sourceMBitmap.getWidth(), hightPixels);
+                            mtImageView.setImageBitmap(toShowMBitmap);
                         }
-                        tv = null;
-
-                        ImageView bgdImageView = activity.findViewById(R.id.climb_background);
-                        yLocation = yLocation > sourceBGBitmap.getHeight() ? sourceBGBitmap.getHeight() : yLocation;
-                        toShowBGBitmap = null;
-                        toShowBGBitmap = Bitmap.createBitmap(sourceBGBitmap, 0, sourceBGBitmap.getHeight() - yLocation, sourceBGBitmap.getWidth(), hightPixels);
-                        bgdImageView.setImageBitmap(toShowBGBitmap);
-
-                        ImageView mtImageView = activity.findViewById(R.id.mountain);
-                        yLocation = (int) mountainSpeed * timeUsed + hightPixels;
-                        yLocation = yLocation > sourceMBitmap.getHeight() ? sourceMBitmap.getHeight() : yLocation;
-                        toShowMBitmap = null;
-                        toShowMBitmap = Bitmap.createBitmap(sourceMBitmap, 0, sourceMBitmap.getHeight() - yLocation, sourceMBitmap.getWidth(), hightPixels);
-                        mtImageView.setImageBitmap(toShowMBitmap);
                         break;
                     default:
                         break;
@@ -124,12 +126,12 @@ public class ClimbingActivity extends AppCompatActivity {
             public void onFinish() {
                 theRestTime.setText("到达");
                 recordWrite(true);
-                sourceMBitmap=null;
-                sourceBGBitmap=null;
+                sourceMBitmap = null;
+                sourceBGBitmap = null;
                 ((TextView) findViewById(R.id.theRestTimePrompt)).setText("");
                 ((Chronometer) findViewById(R.id.lastTime)).stop();//Chronometer暂停
                 Toast.makeText(ClimbingActivity.this, "成功！", Toast.LENGTH_LONG).show();//进行弹窗提示
-                vibrateSetter.setVibrate();//处理震动
+                vibrateSetter.makeVibrate(true);//处理震动
                 IsForeground.setTimes(0);
                 if (gcRequest != null) {
                     gcRequest.interrupt();
@@ -137,12 +139,7 @@ public class ClimbingActivity extends AppCompatActivity {
                 }
                 screenState();
                 //切换
-                Intent nextIntent;
-                if (isScreenOn) {
-                    nextIntent = new Intent(ClimbingActivity.this, MovePlayActivity.class);
-                } else {
-                    nextIntent = new Intent(ClimbingActivity.this, EndingActivity.class);
-                }
+                Intent nextIntent = new Intent(ClimbingActivity.this, EndingActivity.class);
                 startActivity(nextIntent);
                 mHandler = null;
                 finish();
@@ -155,7 +152,7 @@ public class ClimbingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_climbing);
         String data = getIntent().getStringExtra("time");
-        setTimeSecondSetted(Integer.parseInt(data) - 4);
+        setTimeSecondSetted(Integer.parseInt(data));
         aRecorderEditor = new RecorderEditor(getFilesDir());
         aRecord.setTimeSetted(getTimeSecondSetted());//默认+和上一页面交接+初始化记录仪
 
@@ -204,6 +201,8 @@ public class ClimbingActivity extends AppCompatActivity {
             if (System.currentTimeMillis() - firstPressedTime < 5000) {
                 cancle = true;
                 recordWrite(false);
+                sourceMBitmap = null;
+                sourceBGBitmap = null;
                 if (gcRequest != null) {
                     gcRequest.interrupt();
                     gcRequest = null;
@@ -249,8 +248,27 @@ public class ClimbingActivity extends AppCompatActivity {
         if (!cancle && !theRestTime.getText().toString().equals("到达") && isScreenOn) {
             isSwitch = true;
             IsForeground.setTimes(IsForeground.getTimes() + 1);
-            TimeChange.changeTime(theRestTime.getText().toString());
-            timer.cancel();
+            try {
+                TimeChange.changeTime(theRestTime.getText().toString());
+            } catch (TooManyTimesException e) {//强制退出
+                cancle = true;
+                timer.cancel();
+                timer = null;
+                recordWrite(false);
+                sourceMBitmap = null;
+                sourceBGBitmap = null;
+                if (gcRequest != null) {
+                    gcRequest.interrupt();
+                    gcRequest = null;
+                }
+                mHandler = null;
+                startActivity(new Intent(ClimbingActivity.this, EndingActivity.class));
+                finish();
+                vibrateSetter.makeVibrate(false);//处理震动
+            }
+            if (timer != null) {
+                timer.cancel();
+            }
             timer = null;
             timer = creatNewOne();
             timer.start();
@@ -264,8 +282,8 @@ public class ClimbingActivity extends AppCompatActivity {
     protected void onDestroy() {
         ((Chronometer) findViewById(R.id.lastTime)).stop();
         timer.cancel();
-        sourceMBitmap=null;
-        sourceBGBitmap=null;
+        sourceMBitmap = null;
+        sourceBGBitmap = null;
         timer = null;
         super.onDestroy();
         IsForeground.setTimes(0);
@@ -276,8 +294,8 @@ public class ClimbingActivity extends AppCompatActivity {
         if (System.currentTimeMillis() - firstPressedTime < 5000) {
             cancle = true;
             mHandler = null;
-            sourceMBitmap=null;
-            sourceBGBitmap=null;
+            sourceMBitmap = null;
+            sourceBGBitmap = null;
             recordWrite(false);
             ActivityCompat.finishAffinity(this);//退出整个程序
         } else {
