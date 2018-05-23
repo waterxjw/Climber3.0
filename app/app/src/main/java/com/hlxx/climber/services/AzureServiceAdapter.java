@@ -7,7 +7,7 @@ import android.util.Log;
 import com.microsoft.windowsazure.mobileservices.*;
 
 public class AzureServiceAdapter {
-    private String mMobileBackendUrl = "https://focusonclimb.azurewebsites.net";
+    private String mMobileBackendUrl = "https://focusclimb.azurewebsites.net";
     private Context mContext;
     private MobileServiceClient mClient;
     private static AzureServiceAdapter mInstance = null;

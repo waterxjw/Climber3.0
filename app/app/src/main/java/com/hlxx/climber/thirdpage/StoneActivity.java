@@ -170,8 +170,11 @@ public class StoneActivity extends Activity {
 
         // Create a new item
         final Comments item = new Comments();
-
-        item.setText(mText.getText().toString());
+        String text = mText.getText().toString();
+        if (text == null){
+            Toast.makeText(this, "Sorry, we can't send blank.", Toast.LENGTH_SHORT).show();
+        }
+        item.setText(text);
         item.setThumb(false);
 
         // Insert the new item
