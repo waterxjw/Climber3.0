@@ -254,6 +254,7 @@ public class HistoryActivity extends AppCompatActivity {
                 //for (int i = 0; i < mSeries.length; i++) {
                     //mSeries[i].setText(NUMBER_FORMATTER.format(selectedItem.mSeries[i]));
                 ;
+
                 sumOfTime.setText((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[3]);
                 concentrateTimes.setText((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[0]);
                 failTimes.setText((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[1]);
