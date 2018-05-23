@@ -70,6 +70,7 @@ public class StoneActivity extends Activity {
         setFinishOnTouchOutside(true);//点击Dialog外退出
         stone_buttons();//按钮操作：upload,out
         try{
+            Initialize(this);
             mServiceAdapter =AzureServiceAdapter.getInstance();
             mClient = mServiceAdapter.getClient();
 
