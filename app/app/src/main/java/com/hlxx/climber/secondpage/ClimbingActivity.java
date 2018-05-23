@@ -87,8 +87,6 @@ public class ClimbingActivity extends AppCompatActivity {
                             tv.setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
                             ((TextView) activity.findViewById(R.id.theRestTimePrompt)).setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
                             ((TextView) activity.findViewById(R.id.restTime)).setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
-                        } else {
-                            tv.setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_mid));
                         }
                         tv = null;
 
@@ -115,7 +113,7 @@ public class ClimbingActivity extends AppCompatActivity {
     //返回由TimeGet的时间决定的新的计时器
     private CountDownTimer creatNewOne() {
         final TextView theRestTime = findViewById(R.id.restTime);
-        return new CountDownTimer(TimeGet.getTime(true), 10000) {
+        return new CountDownTimer(TimeGet.getTime(true), 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 theRestTime.setText(TimePut.intsToString(millisUntilFinished));
