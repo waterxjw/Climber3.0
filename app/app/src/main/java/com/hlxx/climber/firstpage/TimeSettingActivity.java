@@ -79,7 +79,7 @@ public class TimeSettingActivity extends AppCompatActivity {
     //身份认证
     private void authenticate() {
         // Login using the Microsoft provider.
-        mClient.login(MobileServiceAuthenticationProvider.MicrosoftAccount, "focusonclimb", MICROSOFT_LOGIN_REQUEST_CODE);
+        mClient.login(MobileServiceAuthenticationProvider.MicrosoftAccount, "focusclimb", MICROSOFT_LOGIN_REQUEST_CODE);
     }
 
     @Override
@@ -91,7 +91,7 @@ public class TimeSettingActivity extends AppCompatActivity {
                 MobileServiceActivityResult result = mClient.onActivityResult(data);
                 if (result.isLoggedIn()) {
                     // login succeeded
-                    createAndShowDialog(String.format("You are now logged in - %1$2s", mClient.getCurrentUser().getUserId()), "Success");
+                    createAndShowDialog(String.format("You are now logged in!"), "Success");
                 } else {
                     // login failed, check the error message
                     String errorMessage = result.getErrorMessage();
