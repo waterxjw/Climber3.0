@@ -31,6 +31,7 @@ import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceUse
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+
 import java.util.ArrayList;
 
 
@@ -49,6 +50,7 @@ public class TimeSettingActivity extends AppCompatActivity {
     public static final String SHAREDPREFFILE = "temp";
     public static final String USERIDPREF = "uid";
     public static final String TOKENPREF = "tkn";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         System.gc();
@@ -65,14 +67,9 @@ public class TimeSettingActivity extends AppCompatActivity {
         Initialize(this);
         mServiceAdapter = AzureServiceAdapter.getInstance();
         mClient = mServiceAdapter.getClient();
-
-
-        Button aButton = findViewById(R.id.start_read_file);
-        aButton.setOnClickListener((view) -> startActivity(new Intent(TimeSettingActivity.this, ToReadFile.class)));
     }
 
-    private void cacheUserToken(MobileServiceUser user)
-    {
+    private void cacheUserToken(MobileServiceUser user) {
         SharedPreferences prefs = getSharedPreferences(SHAREDPREFFILE, Context.MODE_PRIVATE);
         Editor editor = prefs.edit();
         editor.putString(USERIDPREF, user.getUserId());
@@ -80,8 +77,7 @@ public class TimeSettingActivity extends AppCompatActivity {
         editor.commit();
     }
 
-    private boolean loadUserTokenCache(MobileServiceClient client)
-    {
+    private boolean loadUserTokenCache(MobileServiceClient client) {
         SharedPreferences prefs = getSharedPreferences(SHAREDPREFFILE, Context.MODE_PRIVATE);
         String userId = prefs.getString(USERIDPREF, null);
         if (userId == null)
@@ -99,13 +95,11 @@ public class TimeSettingActivity extends AppCompatActivity {
 
     //身份认证
     private void authenticate() {
-        if (loadUserTokenCache(mClient))
-        {
+        if (loadUserTokenCache(mClient)) {
             Toast.makeText(TimeSettingActivity.this, "您已经登录啦", Toast.LENGTH_SHORT).show();
         }
         // If we failed to load a token cache, login and create a token cache
-        else
-        {
+        else {
             // Login using the Microsoft provider.
             mClient.login(MobileServiceAuthenticationProvider.MicrosoftAccount, "focusclimb", MICROSOFT_LOGIN_REQUEST_CODE);
         }

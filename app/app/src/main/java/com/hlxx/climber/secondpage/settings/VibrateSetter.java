@@ -3,13 +3,11 @@ package com.hlxx.climber.secondpage.settings;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import com.hlxx.climber.R;
 import com.hlxx.climber.secondpage.ClimbingActivity;
-import com.hlxx.climber.thirdpage.EndingActivity;
 
 import java.lang.ref.WeakReference;
 
@@ -27,8 +25,7 @@ public class VibrateSetter {
         this.theActivity = new WeakReference<ClimbingActivity>(theActivity);
     }
 
-    public void setVibrate() {
-
+    public void makeVibrate(boolean finish) {
 
         ClimbingActivity activity = theActivity.get();
         //处理震动
@@ -55,25 +52,19 @@ public class VibrateSetter {
                 builder.setVibrate(new long[]{0, 1500});
             }
         }
-
-        /*Intent intent = new Intent(activity, EndingActivity.class);
-        PendingIntent ClickPending = PendingIntent.getActivity(activity, 0, intent, 0);
-        builder.setContentIntent(ClickPending);
-        activity.finish();*/
-
         //设置 通知 图标
-        builder.setSmallIcon(R.mipmap.ic_launcher_round);
-        //设置 通知 显示标题
-        builder.setTicker("恭喜");
+        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setLargeIcon(BitmapFactory.decodeResource(activity.getResources(), R.mipmap.ic_launcher_round));
         builder.setAutoCancel(true);
-        //设置 通知栏 标题
-        builder.setContentTitle("成功");
-        //设置 通知内容
-        builder.setContentText("你这次坚持成功了！");
-            /*builder.setLights(Color.WHITE, 3000, 500);
-            //设置 提醒 声音/震动/指示灯
-            builder.setVibrate(new long[]{0, 1500, 0, 0});//builder.setDefaults(Notification.DEFAULT_ALL);
-            //.setDefaults(Notification.DEFAULT_VIBRATE);*/
+        if (finish) {
+            builder.setTicker("恭喜");
+            builder.setContentTitle("成功");
+            builder.setContentText("你这次坚持成功了！");
+        } else {
+            builder.setTicker("可惜");
+            builder.setContentTitle("失败");
+            builder.setContentText("切换过多，下次加油！");
+        }
         Notification notification = null;
         notification = builder.build();
         notification.flags = Notification.FLAG_SHOW_LIGHTS;
