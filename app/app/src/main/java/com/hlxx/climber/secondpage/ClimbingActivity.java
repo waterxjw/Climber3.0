@@ -264,9 +264,7 @@ public class ClimbingActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        Chronometer lastTimeChronometer = findViewById(R.id.lastTime);//持续时间
-        lastTimeChronometer.stop();
-        lastTimeChronometer = null;
+        ((Chronometer) findViewById(R.id.lastTime)).stop();
         timer.cancel();
         sourceMBitmap=null;
         sourceBGBitmap=null;
@@ -291,8 +289,6 @@ public class ClimbingActivity extends AppCompatActivity {
     }
 
     private void recordWrite(boolean finish) {
-
-        String[] times = ((Chronometer) findViewById(R.id.lastTime)).getText().toString().split(":");
         Calendar tempVer = Calendar.getInstance();
         int seconds = (int) ((tempVer.getTimeInMillis() - aRecord.getNow().getTimeInMillis()) / 1000);
         Log.d("TIME!!", "recordWrite: " + seconds);
