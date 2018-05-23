@@ -115,7 +115,7 @@ public class ClimbingActivity extends AppCompatActivity {
     //返回由TimeGet的时间决定的新的计时器
     private CountDownTimer creatNewOne() {
         final TextView theRestTime = findViewById(R.id.restTime);
-        return new CountDownTimer(TimeGet.getTime(true), 1000) {
+        return new CountDownTimer(TimeGet.getTime(true), 10000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 theRestTime.setText(TimePut.intsToString(millisUntilFinished));

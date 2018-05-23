@@ -21,11 +21,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = ['redirectUriScheme': 'focusonclimb://easyauth.callback']
+            manifestPlaceholders = ['redirectUriScheme': 'focusclimb://easyauth.callback']
         }
         debug {
             // ...
-            manifestPlaceholders = ['redirectUriScheme': 'focusonclimb://easyauth.callback']
+            manifestPlaceholders = ['redirectUriScheme': 'focusclimb://easyauth.callback']
         }
     }
     buildToolsVersion '27.0.3'
