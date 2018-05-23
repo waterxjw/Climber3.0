@@ -11,7 +11,7 @@ public class TimeGet {
 
     public static void setTimeSecondSetted(int minutes) {
         TimeGet.timeSecondSetted = minutes * 60;
-        TimeGet.timeSecond = minutes * 60-50;
+        TimeGet.timeSecond = minutes * 60-30;
         TimeGet.totalTime = minutes * 60;
     }
 

@@ -470,7 +470,7 @@ public class HistoryActivity extends AppCompatActivity {
                         seriesdata[i][1]=MINUTETIME_FORMATTER.format(((Calendar)temporary.clone()).getTimeInMillis());
                         temporary.set(Calendar.SECOND,record.getTimeSetted());
                         seriesdata[i][2]=MINUTETIME_FORMATTER.format(((Calendar)temporary.clone()).getTimeInMillis());
-                        seriesdata[i][3]="85%";
+                        seriesdata[i][3]=record.getLevel()+"%";
                         seriesdata[i][4]=record.isFinish()?"成功":"失败";
                     }
                     seriesData.put(DATETIME_FORMATTER.format(mStart.getTimeInMillis()),seriesdata);
