@@ -47,7 +47,11 @@ public class RecorderEditor {
 
     public void oneRecordAdd(Record theRecord) throws IOException {
         if (creatFiles()) {
-            time[1] = 0;
+            if (finish) {
+                time[1] = 1;
+            } else {
+                time[1] = 0;
+            }
             time[0] = 1;
             time[2] = theRecord.getTotalTime();
             objectWriter(timeOfDay, time, false);
@@ -82,10 +86,10 @@ public class RecorderEditor {
         objectFOS.close();
     }
 
-    private void recordSort() {
+    public void recordSort() {
         File[] filesDay = fileMonth.listFiles();
         for (File file : filesDay) {
-            if (file.isDirectory() && !file.equals(fileDay)) {
+            if (!file.equals(fileDay)) {
                 File newRecords = new File(fileMonth, "" + file.getName() + ".day");
                 try {
                     newRecords.createNewFile();
@@ -98,12 +102,14 @@ public class RecorderEditor {
                 Records toWrite = new Records();
                 try {
                     toWrite.setTime(objectReader(total));
+                    total.delete();
                 } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
                 for (File record : records) {
                     try {
                         toWrite.addRecord(objectReader(record));
+                        record.delete();
                     } catch (IOException | ClassNotFoundException e) {
                         e.printStackTrace();
                     }
