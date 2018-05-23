@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.hlxx.climber.secondpage.records.Record;
 import com.hlxx.climber.secondpage.records.RecordReader;
+import com.hlxx.climber.secondpage.records.RecorderEditor;
 import com.hlxx.climber.secondpage.records.Records;
 import com.ruesga.timelinechart.TimelineChartView;
 import com.ruesga.timelinechart.TimelineChartView.OnColorPaletteChangedListener;
@@ -58,7 +59,7 @@ public class HistoryActivity extends AppCompatActivity {
     private final SimpleDateFormat HOURTIME_FORMATTER =
             new SimpleDateFormat("HH:mm", Locale.getDefault());
     private final SimpleDateFormat MINUTETIME_FORMATTER =
-            new SimpleDateFormat("mm:ss", Locale.getDefault());
+            new SimpleDateFormat("mm", Locale.getDefault());
     private final NumberFormat NUMBER_FORMATTER = new DecimalFormat("#0.00");
     //private final String[] COLUMN_NAMES = {"timestamp", "Serie 1", "Serie 2", "Serie 3"};
     private final String[] COLUMN_NAMES = {"timestamp","sum"};
@@ -165,7 +166,8 @@ public class HistoryActivity extends AppCompatActivity {
         mHandler = new Handler(Looper.getMainLooper());
         Calendar today = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
         setContentView(R.layout.activity_history);
-
+        RecorderEditor editor=new RecorderEditor(getFilesDir());
+        editor.recordSort();
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -256,7 +258,7 @@ public class HistoryActivity extends AppCompatActivity {
                 ;
                 if (!DATETIME_FORMATTER.format(today.getTimeInMillis()).equals(DATETIME_FORMATTER.format(selectedItem.mTimestamp))){
                     sumOfTime.setTextSize(40);
-                    sumOfTime.setText((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[3]);
+                    sumOfTime.setText((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[3]+"分钟");
                 }else {
                     sumOfTime.setTextSize(20);
                     sumOfTime.setText("\n"+(detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[3]+"\n");
@@ -464,10 +466,15 @@ public class HistoryActivity extends AppCompatActivity {
                 }catch (Exception e){
                     e.getStackTrace();
                 }
+                temporary.set(Calendar.HOUR_OF_DAY, 0);
+                temporary.set(Calendar.MINUTE, 0);
+                temporary.set(Calendar.SECOND, 0);
+                temporary.set(Calendar.MILLISECOND, 0);
                 detaildata[0]=Integer.toString(records.getTimes());
                 detaildata[1]=Integer.toString(records.getTimes()-records.getFinishTimes());
                 detaildata[2]="-";
-                detaildata[3]="-";
+                temporary.set(Calendar.SECOND,records.getTimeAllTogether());
+                detaildata[3]=MINUTETIME_FORMATTER.format(temporary.getTimeInMillis());
                 if (records.getTimes()>0){
                     seriesdata=new String[records.getTimes()][5];
                     ArrayList<Record> recordArrayList=records.getTheRecord();
@@ -479,9 +486,9 @@ public class HistoryActivity extends AppCompatActivity {
                         temporary.set(Calendar.SECOND, 0);
                         temporary.set(Calendar.MILLISECOND, 0);
                         temporary.set(Calendar.SECOND,record.getTotalTime());
-                        seriesdata[i][1]=MINUTETIME_FORMATTER.format(((Calendar)temporary.clone()).getTimeInMillis());
+                        seriesdata[i][1]=MINUTETIME_FORMATTER.format(((Calendar)temporary.clone()).getTimeInMillis())+"分钟";
                         temporary.set(Calendar.SECOND,record.getTimeSetted());
-                        seriesdata[i][2]=MINUTETIME_FORMATTER.format(((Calendar)temporary.clone()).getTimeInMillis());
+                        seriesdata[i][2]=MINUTETIME_FORMATTER.format(((Calendar)temporary.clone()).getTimeInMillis())+"分钟";
                         seriesdata[i][3]=record.getLevel()+"%";
                         seriesdata[i][4]=record.isFinish()?"成功":"失败";
                     }
