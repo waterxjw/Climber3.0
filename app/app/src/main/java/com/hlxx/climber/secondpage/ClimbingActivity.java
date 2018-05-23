@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.*;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -26,6 +24,7 @@ import com.hlxx.climber.thirdpage.EndingActivity;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.util.Calendar;
 
 import static com.hlxx.climber.secondpage.settings.TimeGet.getTimeSecondSetted;
 import static com.hlxx.climber.secondpage.settings.TimeGet.setTimeSecondSetted;
@@ -127,6 +126,8 @@ public class ClimbingActivity extends AppCompatActivity {
             public void onFinish() {
                 theRestTime.setText("到达");
                 recordWrite(true);
+                sourceMBitmap=null;
+                sourceBGBitmap=null;
                 ((TextView) findViewById(R.id.theRestTimePrompt)).setText("");
                 ((Chronometer) findViewById(R.id.lastTime)).stop();//Chronometer暂停
                 Toast.makeText(ClimbingActivity.this, "成功！", Toast.LENGTH_LONG).show();//进行弹窗提示
@@ -263,10 +264,10 @@ public class ClimbingActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        Chronometer lastTimeChronometer = findViewById(R.id.lastTime);//持续时间
-        lastTimeChronometer.stop();
-        lastTimeChronometer = null;
+        ((Chronometer) findViewById(R.id.lastTime)).stop();
         timer.cancel();
+        sourceMBitmap=null;
+        sourceBGBitmap=null;
         timer = null;
         super.onDestroy();
         IsForeground.setTimes(0);
@@ -275,8 +276,10 @@ public class ClimbingActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (System.currentTimeMillis() - firstPressedTime < 5000) {
-            cancle=true;
+            cancle = true;
             mHandler = null;
+            sourceMBitmap=null;
+            sourceBGBitmap=null;
             recordWrite(false);
             ActivityCompat.finishAffinity(this);//退出整个程序
         } else {
@@ -286,9 +289,10 @@ public class ClimbingActivity extends AppCompatActivity {
     }
 
     private void recordWrite(boolean finish) {
-
-        String[] times = ((Chronometer) findViewById(R.id.lastTime)).getText().toString().split(":");
-        aRecord.setTotalTime(Integer.parseInt(times[0]) * 60 + Integer.parseInt(times[1]));
+        Calendar tempVer = Calendar.getInstance();
+        int seconds = (int) ((tempVer.getTimeInMillis() - aRecord.getNow().getTimeInMillis()) / 1000);
+        Log.d("TIME!!", "recordWrite: " + seconds);
+        aRecord.setTotalTime(seconds);
         aRecord.setSwitchTimes(IsForeground.getTimes());
         aRecord.setFinish(finish);
         aRecorderEditor.setFinish(finish);
