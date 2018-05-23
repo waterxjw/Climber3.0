@@ -163,7 +163,7 @@ public class HistoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mHandler = new Handler(Looper.getMainLooper());
-
+        Calendar today = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
         setContentView(R.layout.activity_history);
 
         mToolbar = findViewById(R.id.toolbar);
@@ -254,8 +254,14 @@ public class HistoryActivity extends AppCompatActivity {
                 //for (int i = 0; i < mSeries.length; i++) {
                     //mSeries[i].setText(NUMBER_FORMATTER.format(selectedItem.mSeries[i]));
                 ;
+                if (!DATETIME_FORMATTER.format(today.getTimeInMillis()).equals(DATETIME_FORMATTER.format(selectedItem.mTimestamp))){
+                    sumOfTime.setTextSize(40);
+                    sumOfTime.setText((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[3]);
+                }else {
+                    sumOfTime.setTextSize(20);
+                    sumOfTime.setText("\n"+(detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[3]+"\n");
+                }
 
-                sumOfTime.setText((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[3]);
                 concentrateTimes.setText((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[0]);
                 failTimes.setText((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[1]);
                 levelInAverage.setText((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[2]);
@@ -434,7 +440,7 @@ public class HistoryActivity extends AppCompatActivity {
             }
             try{
                 for (File aFile:files){
-                    if (aFile.getName().equals(Integer.toString(mStart.get(Calendar.DAY_OF_MONTH))+".hlxx")){
+                    if (aFile.getName().equals(Integer.toString(mStart.get(Calendar.DAY_OF_MONTH))+".day")){
                         temp=aFile;
                         break;
                     }
@@ -459,7 +465,7 @@ public class HistoryActivity extends AppCompatActivity {
                     e.getStackTrace();
                 }
                 detaildata[0]=Integer.toString(records.getTimes());
-                detaildata[1]="-";
+                detaildata[1]=Integer.toString(records.getTimes()-records.getFinishTimes());
                 detaildata[2]="-";
                 detaildata[3]="-";
                 if (records.getTimes()>0){
@@ -467,7 +473,7 @@ public class HistoryActivity extends AppCompatActivity {
                     ArrayList<Record> recordArrayList=records.getTheRecord();
                     for (int i=0;i<recordArrayList.size();i++){
                         Record record=recordArrayList.get(i);
-                        seriesdata[i][0]="00:00";
+                        seriesdata[i][0]=HOURTIME_FORMATTER.format(record.getNow().getTimeInMillis());
                         temporary.set(Calendar.HOUR_OF_DAY, 0);
                         temporary.set(Calendar.MINUTE, 0);
                         temporary.set(Calendar.SECOND, 0);

@@ -110,7 +110,6 @@ public class TimeSettingActivity extends AppCompatActivity {
         fabSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(TimeSettingActivity.this, "Setting", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(TimeSettingActivity.this, SettingActivity.class);
                 ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(TimeSettingActivity.this, new Pair<>(fabSetting, "setting"));
                 startActivity(intent, transitionActivityOptions.toBundle());
@@ -119,7 +118,7 @@ public class TimeSettingActivity extends AppCompatActivity {
         fabHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(TimeSettingActivity.this, "History", Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(TimeSettingActivity.this, HistoryActivity.class
                 );
                 startActivity(intent);
@@ -129,8 +128,6 @@ public class TimeSettingActivity extends AppCompatActivity {
         fabLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(TimeSettingActivity.this, "Login", Toast.LENGTH_SHORT).show();
-
                 //login
                 authenticate();
 
