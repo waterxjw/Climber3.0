@@ -41,23 +41,23 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"/>
 
-        <EditText
-            android:id="@+id/user_to_talk"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/upload"
-            android:layout_marginBottom="48dp"
-            android:layout_marginRight="45dp"
-            android:layout_marginLeft="45dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:hint="在雨季到来前，写下你想说的话吧"
-            android:maxLength="150"
-            android:maxLines="5"
-            android:textColorHint="#ffffff"
-            android:textColor="#FFFFFF"
-            android:textSize="8dp"
-            />
+    <EditText
+        android:id="@+id/user_to_talk"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="48dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_toLeftOf="@+id/upload"
+        android:hint="在雨季到来前，写下你想说的话吧"
+        android:maxLength="150"
+        android:maxLines="5"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#ffffff"
+
+        android:textSize="13sp" />
 
     <ListView
         android:id="@+id/listViewComment"
