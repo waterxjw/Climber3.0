@@ -43,9 +43,6 @@
         <activity android:name = ".firstpage.setting.ContactUsActivity"
                   android:screenOrientation = "portrait"
         />
-        <activity android:name = ".firstpage.setting.LoginActivity"
-                  android:screenOrientation = "portrait"
-        />
         <activity android:name = ".thirdpage.StoneActivity"
                   android:screenOrientation = "portrait"
                   android:theme = "@style/dialog_custom" />
