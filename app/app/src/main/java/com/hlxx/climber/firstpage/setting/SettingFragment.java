@@ -25,7 +25,6 @@ public class SettingFragment extends PreferenceFragmentCompat {
 
     class RemindonPreferenceChangerListener implements Preference.OnPreferenceChangeListener {
         public boolean onPreferenceChange(Preference preference, Object shockState) {
-            Toast.makeText(getActivity(), "震动后是否提醒？" + shockState, Toast.LENGTH_SHORT).show();
             VibrateSetter.setVibrate(Boolean.parseBoolean(shockState.toString()));
             return true;
         }
@@ -33,7 +32,6 @@ public class SettingFragment extends PreferenceFragmentCompat {
 
     class AlwaysLightonPreferenceChangerListener implements Preference.OnPreferenceChangeListener {
         public boolean onPreferenceChange(Preference preference, Object newValue) {
-            Toast.makeText(getActivity(), "屏幕是否常亮？" + newValue, Toast.LENGTH_SHORT).show();
             ClimbingActivity.setWillScreenOn(Boolean.parseBoolean(newValue.toString()) );
             return true;
         }
