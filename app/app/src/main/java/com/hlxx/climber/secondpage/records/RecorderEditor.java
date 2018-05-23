@@ -89,7 +89,7 @@ public class RecorderEditor {
     public void recordSort() {
         File[] filesDay = fileMonth.listFiles();
         for (File file : filesDay) {
-            if (!file.equals(fileDay)) {
+            if (file.isDirectory() && !file.equals(fileDay)) {
                 File newRecords = new File(fileMonth, "" + file.getName() + ".day");
                 try {
                     newRecords.createNewFile();
@@ -102,7 +102,6 @@ public class RecorderEditor {
                 Records toWrite = new Records();
                 try {
                     toWrite.setTime(objectReader(total));
-                    total.delete();
                 } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -119,6 +118,8 @@ public class RecorderEditor {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                total.delete();
+                file.delete();
             }
         }
     }
