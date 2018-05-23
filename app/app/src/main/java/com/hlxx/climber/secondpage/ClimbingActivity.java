@@ -275,6 +275,7 @@ public class ClimbingActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (System.currentTimeMillis() - firstPressedTime < 5000) {
+            cancle=true;
             mHandler = null;
             recordWrite(false);
             ActivityCompat.finishAffinity(this);//退出整个程序

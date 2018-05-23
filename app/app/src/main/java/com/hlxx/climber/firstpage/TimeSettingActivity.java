@@ -56,7 +56,7 @@ public class TimeSettingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        System.gc();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_setting);
         // createScaleImage();
