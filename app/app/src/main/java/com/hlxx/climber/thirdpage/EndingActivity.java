@@ -44,7 +44,7 @@ public class EndingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+System.gc();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ending);
 
