@@ -20,11 +20,11 @@
         />
         <activity android:name = "com.microsoft.windowsazure.mobileservices.authentication.RedirectUrlActivity">
             <intent-filter>
-                <action android:name = "android.intent.action.VIEW" />
-                <category android:name = "android.intent.category.DEFAULT" />
-                <category android:name = "android.intent.category.BROWSABLE" />
-                <data android:scheme = "focusonclimb"
-                      android:host = "easyauth.callback" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="focusclimb"
+                    android:host="easyauth.callback"/>
             </intent-filter>
         </activity>
         <activity android:name = ".secondpage.ClimbingActivity"

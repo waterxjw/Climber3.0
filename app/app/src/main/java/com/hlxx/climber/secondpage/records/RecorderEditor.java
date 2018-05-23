@@ -13,7 +13,7 @@ public class RecorderEditor {
     private File applicationDir;
     private File timeOfDay;
     private File oneRecord;
-    public int[] time=new int [2];
+    public int[] time = new int[3];
     private boolean finish = false;
 
     public void setFinish(boolean finish) {
@@ -27,7 +27,7 @@ public class RecorderEditor {
         timeOfDay = new File(fileDay, "timeOfDay.hlxx");
     }
 
-    private void timeChange() {
+    private void timeChange(Record theRecord) {
         try {
             time = RecordReader.timeOfDayGet(timeOfDay);
         } catch (IOException | ClassNotFoundException e) {
@@ -37,6 +37,7 @@ public class RecorderEditor {
         if (finish) {
             time[1]++;
         }
+        time[2] += theRecord.getTotalTime();
         try {
             objectWriter(timeOfDay, time, false);
         } catch (IOException e) {
@@ -48,9 +49,10 @@ public class RecorderEditor {
         if (creatFiles()) {
             time[1] = 0;
             time[0] = 1;
+            time[2] = theRecord.getTotalTime();
             objectWriter(timeOfDay, time, false);
         } else {
-            timeChange();
+            timeChange(theRecord);
         }
         recordSort();
         oneRecord = new File(fileDay, time[0] + ".hlxx");

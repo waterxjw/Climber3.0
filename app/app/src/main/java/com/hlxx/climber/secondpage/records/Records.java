@@ -7,8 +7,17 @@ public class Records implements Serializable {
     static final long serialVersionUID = 2L;
     private int times;
     private int finishTimes;
-    private int[] time = new int [2];
+    private int timeAllTogether;
+    private int[] time = new int[3];
     private ArrayList<Record> theRecord;
+
+    public int getTimeAllTogether() {
+        return timeAllTogether;
+    }
+
+    public void setTimeAllTogether(int timeAllTogether) {
+        this.timeAllTogether = timeAllTogether;
+    }
 
     public void setFinishTimes(int finishTimes) {
         this.finishTimes = finishTimes;
@@ -32,7 +41,7 @@ public class Records implements Serializable {
         for (Record aRecord : theRecord) {
             aStringBuilder.append(aRecord).append("\n");
         }
-        return "Records{" + "times=" + times + ", finishTimes=" + finishTimes +
+        return "Records{" + "times=" + times + ", finishTimes=" + finishTimes + ",timeAllTogether=" + timeAllTogether +
                 ",\n theRecord:" + aStringBuilder + '}';
     }
 
@@ -40,6 +49,7 @@ public class Records implements Serializable {
         this.time = time;
         times = time[0];
         finishTimes = time[1];
+        timeAllTogether = time[2];
     }
 
     public void addRecord(Record newRecord) {
