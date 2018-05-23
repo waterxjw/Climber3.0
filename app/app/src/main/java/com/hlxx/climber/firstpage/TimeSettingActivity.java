@@ -1,11 +1,13 @@
 package com.hlxx.climber.firstpage;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,25 +15,43 @@ import android.widget.Toast;
 import com.ddz.floatingactionbutton.FloatingActionButton;
 import com.hlxx.climber.firstpage.setting.HistoryActivity;
 import com.hlxx.climber.secondpage.ClimbingActivity;
-import com.hlxx.climber.firstpage.setting.LoginActivity;
 import com.hlxx.climber.R;
 import com.hlxx.climber.firstpage.setting.SettingActivity;
+import com.hlxx.climber.services.AzureServiceAdapter;
+import com.microsoft.windowsazure.mobileservices.MobileServiceActivityResult;
+import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.wx.wheelview.adapter.ArrayWheelAdapter;
 import com.wx.wheelview.widget.WheelView;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider;
+import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceUser;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import java.util.ArrayList;
 
-import com.microsoft.windowsazure.mobileservices.*;
+
+import static com.hlxx.climber.services.AzureServiceAdapter.Initialize;
+
 
 public class TimeSettingActivity extends AppCompatActivity {
     //背景图片
     private ImageView imageView;
     private WheelView wheelView;
     private long firstPressedTime;
-
+    private MobileServiceClient mClient;
+    //login
+    AzureServiceAdapter mServiceAdapter;
+    public static final int MICROSOFT_LOGIN_REQUEST_CODE = 1;
+    public static final String SHAREDPREFFILE = "temp";
+    public static final String USERIDPREF = "uid";
+    public static final String TOKENPREF = "tkn";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        System.gc();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_setting);
         // createScaleImage();
@@ -41,12 +61,75 @@ public class TimeSettingActivity extends AppCompatActivity {
         createFAButton();//设置右上角浮动按钮
         //下面是自定义一个任务栏，取代原先自带的任务栏
 
+        //login
+        Initialize(this);
+        mServiceAdapter = AzureServiceAdapter.getInstance();
+        mClient = mServiceAdapter.getClient();
 
-        Button aButton =findViewById(R.id.start_read_file);
+
+        Button aButton = findViewById(R.id.start_read_file);
         aButton.setOnClickListener((view) -> startActivity(new Intent(TimeSettingActivity.this, ToReadFile.class)));
-
     }
 
+    private void cacheUserToken(MobileServiceUser user)
+    {
+        SharedPreferences prefs = getSharedPreferences(SHAREDPREFFILE, Context.MODE_PRIVATE);
+        Editor editor = prefs.edit();
+        editor.putString(USERIDPREF, user.getUserId());
+        editor.putString(TOKENPREF, user.getAuthenticationToken());
+        editor.commit();
+    }
+
+    private boolean loadUserTokenCache(MobileServiceClient client)
+    {
+        SharedPreferences prefs = getSharedPreferences(SHAREDPREFFILE, Context.MODE_PRIVATE);
+        String userId = prefs.getString(USERIDPREF, null);
+        if (userId == null)
+            return false;
+        String token = prefs.getString(TOKENPREF, null);
+        if (token == null)
+            return false;
+
+        MobileServiceUser user = new MobileServiceUser(userId);
+        user.setAuthenticationToken(token);
+        client.setCurrentUser(user);
+
+        return true;
+    }
+
+    //身份认证
+    private void authenticate() {
+        if (loadUserTokenCache(mClient))
+        {
+            Toast.makeText(TimeSettingActivity.this, "您已经登录啦", Toast.LENGTH_SHORT).show();
+        }
+        // If we failed to load a token cache, login and create a token cache
+        else
+        {
+            // Login using the Microsoft provider.
+            mClient.login(MobileServiceAuthenticationProvider.MicrosoftAccount, "focusclimb", MICROSOFT_LOGIN_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // When request completes
+        if (resultCode == RESULT_OK) {
+            // Check the request code matches the one we send in the login request
+            if (requestCode == MICROSOFT_LOGIN_REQUEST_CODE) {
+                MobileServiceActivityResult result = mClient.onActivityResult(data);
+                if (result.isLoggedIn()) {
+                    // login succeeded
+                    createAndShowDialog(String.format("You are now logged in - %1$2s", mClient.getCurrentUser().getUserId()), "Success");
+                    cacheUserToken(mClient.getCurrentUser());
+                } else {
+                    // login failed, check the error message
+                    String errorMessage = result.getErrorMessage();
+                    createAndShowDialog(errorMessage, "Error");
+                }
+            }
+        }
+    }
     //任务栏右侧的菜单按钮
     /*public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.toolbar,menu);
@@ -61,6 +144,8 @@ public class TimeSettingActivity extends AppCompatActivity {
         }
         return true;
     }*/
+
+
     private void createFAButton() {
         FloatingActionButton fabSetting = findViewById(R.id.fab_setting);
         FloatingActionButton fabHistory = findViewById(R.id.fab_history);
@@ -68,29 +153,29 @@ public class TimeSettingActivity extends AppCompatActivity {
         fabSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(TimeSettingActivity.this, "Setting", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(TimeSettingActivity.this, SettingActivity.class);
-                startActivity(intent);
+                ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(TimeSettingActivity.this, new Pair<>(fabSetting, "setting"));
+                startActivity(intent, transitionActivityOptions.toBundle());
             }
         });
         fabHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(TimeSettingActivity.this, "History", Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(TimeSettingActivity.this, HistoryActivity.class
                 );
                 startActivity(intent);
             }
         });
+
         fabLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(TimeSettingActivity.this, "Login", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(TimeSettingActivity.this, LoginActivity.class
-                );
-                startActivity(intent);
+                //login
+                authenticate();
             }
         });
+
     }
 
     private void createButton() {
@@ -183,5 +268,27 @@ public class TimeSettingActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Creates a dialog and shows it
+     *
+     * @param message The dialog message
+     * @param title   The dialog title
+     */
+    private void createAndShowDialog(final String message, final String title) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+
+        builder.setMessage(message);
+        builder.setTitle(title);
+        builder.create().show();
+    }
+
+    private void createAndShowDialog(Exception exception, String title) {
+        Throwable ex = exception;
+        if (exception.getCause() != null) {
+            ex = exception.getCause();
+        }
+        createAndShowDialog(ex.getMessage(), title);
+    }
 }
 
