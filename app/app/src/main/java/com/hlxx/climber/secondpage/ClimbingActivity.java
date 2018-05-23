@@ -289,7 +289,6 @@ public class ClimbingActivity extends AppCompatActivity {
     private void recordWrite(boolean finish) {
         Calendar tempVer = Calendar.getInstance();
         int seconds = (int) ((tempVer.getTimeInMillis() - aRecord.getNow().getTimeInMillis()) / 1000);
-        Log.d("TIME!!", "recordWrite: " + seconds);
         aRecord.setTotalTime(seconds);
         aRecord.setSwitchTimes(IsForeground.getTimes());
         aRecord.setFinish(finish);
