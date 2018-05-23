@@ -47,12 +47,12 @@
 
     <pl.droidsonroids.gif.GifImageView
             android:id = "@+id/climber"
-            android:layout_width = "57dp"
-            android:layout_height = "132dp"
-            android:layout_marginBottom = "320dp"
+            android:layout_width = "75dp"
+            android:layout_height = "131dp"
+            android:layout_marginBottom = "400dp"
             android:background = "@drawable/climber"
             app:layout_constraintBottom_toBottomOf = "parent"
-            app:layout_constraintStart_toStartOf = "parent" android:layout_marginStart = "16dp" />
+            app:layout_constraintStart_toStartOf = "parent" />
 
     <ImageView
             android:id = "@+id/text_background"
