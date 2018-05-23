@@ -49,11 +49,11 @@ public class EndingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ending);
 
         ending_buttons();//按钮跳转：bt1,bt2，bt3
-        picarrary=new int[]{R.mipmap.end_background,R.mipmap.end_background1,R.mipmap.end_background2,R.mipmap.end_background3,R.mipmap.end_background4};
-        Random rnd=new Random();
-        picindex=rnd.nextInt(4);
-        realTemp=picarrary[picindex];
-        imageView=(ImageView)findViewById(R.id.ending);
+        picarrary = new int[]{R.mipmap.end_background, R.mipmap.end_background1, R.mipmap.end_background2, R.mipmap.end_background3, R.mipmap.end_background4};
+        Random rnd = new Random();
+        picindex = rnd.nextInt(4);
+        realTemp = picarrary[picindex];
+        imageView = (ImageView) findViewById(R.id.ending);
         imageView.setImageResource(realTemp);
 
     }
@@ -89,9 +89,9 @@ public class EndingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Bitmap bitmap=BitmapFactory. decodeResource (getResources(),realTemp);
-                saveImage(getApplicationContext(),bitmap);
-                Log.d("data","-----------------wqnmiaomiaomiao----------------");
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), realTemp);
+                saveImage(getApplicationContext(), bitmap);
+                Log.d("data", "-----------------wqnmiaomiaomiao----------------");
                 Toast.makeText(EndingActivity.this, "图片保存成功", Toast.LENGTH_SHORT).show();
             }
         });
@@ -100,14 +100,14 @@ public class EndingActivity extends AppCompatActivity {
 
 
     //保存图片1
-    public static void saveImage(Context context,Bitmap bmp){
-        Log.d("data","___________成功调用函数_______________________");
-        String fileName=null;
-        File file=null;
-        FileOutputStream outStream=null;
+    public static void saveImage(Context context, Bitmap bmp) {
+        Log.d("data", "___________成功调用函数_______________________");
+        String fileName = null;
+        File file = null;
+        FileOutputStream outStream = null;
         try {
-            file=new File(SAVE_REAL_PATH,System.currentTimeMillis()+".jpg");
-            if(!file.exists()){
+            file = new File(SAVE_REAL_PATH, System.currentTimeMillis() + ".jpg");
+            if (!file.exists()) {
                 //先得到文件的上级目录，并创建上级目录，在创建文件
                 file.getParentFile().mkdir();
                 try {
@@ -117,26 +117,26 @@ public class EndingActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-            Log.d("data","___________成功建立相册_______________________");
-            fileName=file.toString();
-            outStream=new FileOutputStream(fileName);
-            if(null!=outStream){
-                bmp.compress(Bitmap.CompressFormat.JPEG,90,outStream);
+            Log.d("data", "___________成功建立相册_______________________");
+            fileName = file.toString();
+            outStream = new FileOutputStream(fileName);
+            if (null != outStream) {
+                bmp.compress(Bitmap.CompressFormat.JPEG, 90, outStream);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
-                if(outStream!=null){
+                if (outStream != null) {
                     outStream.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        MediaStore.Images.Media.insertImage(context.getContentResolver(),bmp,fileName,null);
-        Intent intent=new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        Uri uri=Uri.fromFile(file);
+        MediaStore.Images.Media.insertImage(context.getContentResolver(), bmp, fileName, null);
+        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        Uri uri = Uri.fromFile(file);
         intent.setData(uri);
         context.sendBroadcast(intent);
 
