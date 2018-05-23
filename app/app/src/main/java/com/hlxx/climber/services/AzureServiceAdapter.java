@@ -7,7 +7,7 @@ import android.util.Log;
 import com.microsoft.windowsazure.mobileservices.*;
 
 public class AzureServiceAdapter {
-    private String mMobileBackendUrl = "https://focusonclimb.azurewebsites.net";
+    private String mMobileBackendUrl = "https://focusclimb.azurewebsites.net";
     private Context mContext;
     private MobileServiceClient mClient;
     private static AzureServiceAdapter mInstance = null;
@@ -16,18 +16,18 @@ public class AzureServiceAdapter {
         mContext = context;
         try {
             mClient = new MobileServiceClient(mMobileBackendUrl, mContext);
-        }
-        catch (Exception e){
-            Log.e("...", "AzureServiceAdapter: Error" );
+        } catch (Exception e) {
+            Log.e("...", "AzureServiceAdapter: Error");
         }
     }
 
     public static void Initialize(Context context) {
         if (mInstance == null) {
             mInstance = new AzureServiceAdapter(context);
-        } else {
-            throw new IllegalStateException("AzureServiceAdapter is already initialized");
         }
+//        } else {
+//            // throw new IllegalStateException("AzureServiceAdapter is already initialized");
+//        }
     }
 
     public static AzureServiceAdapter getInstance() {

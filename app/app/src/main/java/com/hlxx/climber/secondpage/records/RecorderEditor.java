@@ -13,7 +13,12 @@ public class RecorderEditor {
     private File applicationDir;
     private File timeOfDay;
     private File oneRecord;
-    public int time;
+    public int[] time = new int[3];
+    private boolean finish = false;
+
+    public void setFinish(boolean finish) {
+        this.finish = finish;
+    }
 
     public RecorderEditor(File applicationDir) {
         this.applicationDir = applicationDir;
@@ -22,17 +27,19 @@ public class RecorderEditor {
         timeOfDay = new File(fileDay, "timeOfDay.hlxx");
     }
 
-    private void timeChange() {
+    private void timeChange(Record theRecord) {
         try {
             time = RecordReader.timeOfDayGet(timeOfDay);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-            time = 0;
         }
-        time++;
-
+        time[0]++;
+        if (finish) {
+            time[1]++;
+        }
+        time[2] += theRecord.getTotalTime();
         try {
-            objectWriter(timeOfDay, time);
+            objectWriter(timeOfDay, time, false);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,16 +47,21 @@ public class RecorderEditor {
 
     public void oneRecordAdd(Record theRecord) throws IOException {
         if (creatFiles()) {
-
-            time = 1;
-            objectWriter(timeOfDay, time);
+            if (finish) {
+                time[1] = 1;
+            } else {
+                time[1] = 0;
+            }
+            time[0] = 1;
+            time[2] = theRecord.getTotalTime();
+            objectWriter(timeOfDay, time, false);
         } else {
-            timeChange();
+            timeChange(theRecord);
         }
         recordSort();
-        oneRecord = new File(fileDay, time + ".hlxx");
+        oneRecord = new File(fileDay, time[0] + ".hlxx");
         oneRecord.createNewFile();
-        objectWriter(oneRecord, theRecord);
+        objectWriter(oneRecord, theRecord, false);
     }
 
 
@@ -66,19 +78,19 @@ public class RecorderEditor {
         }
     }
 
-    public static <T> void objectWriter(File objectPath, T object) throws IOException {
-        FileOutputStream objectFOS = new FileOutputStream(objectPath);
+    public static <T> void objectWriter(File objectPath, T object, boolean append) throws IOException {
+        FileOutputStream objectFOS = new FileOutputStream(objectPath, append);
         ObjectOutputStream objectOOS = new ObjectOutputStream(objectFOS);
         objectOOS.writeObject(object);
         objectOOS.close();
         objectFOS.close();
     }
 
-    private void recordSort() {
+    public void recordSort() {
         File[] filesDay = fileMonth.listFiles();
         for (File file : filesDay) {
             if (file.isDirectory() && !file.equals(fileDay)) {
-                File newRecords = new File(fileMonth, "" + file.getName() + ".hlxx");
+                File newRecords = new File(fileMonth, "" + file.getName() + ".day");
                 try {
                     newRecords.createNewFile();
                 } catch (IOException e) {
@@ -89,22 +101,25 @@ public class RecorderEditor {
                 records.remove(total);
                 Records toWrite = new Records();
                 try {
-                    toWrite.setTimes(objectReader(total));
+                    toWrite.setTime(objectReader(total));
                 } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
                 for (File record : records) {
                     try {
                         toWrite.addRecord(objectReader(record));
+                        record.delete();
                     } catch (IOException | ClassNotFoundException e) {
                         e.printStackTrace();
                     }
                 }
                 try {
-                    objectWriter(newRecords, toWrite);
+                    objectWriter(newRecords, toWrite, false);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                total.delete();
+                file.delete();
             }
         }
     }

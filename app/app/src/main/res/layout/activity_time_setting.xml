@@ -95,11 +95,12 @@
             android:id="@+id/fab_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:transitionName="setting"
             app:fab_colorNormal="@color/empty"
             app:fab_icon="@drawable/icon_setting"
             app:fab_size="mini" />
     </com.ddz.floatingactionbutton.FloatingActionMenu>
-    <Button
+    <com.hlxx.climber.widget.FButton
             android:id = "@+id/button"
             android:layout_width = "wrap_content"
             android:layout_height = "wrap_content"
@@ -110,6 +111,7 @@
             android:text = "@string/timesettedbutton_name"
             android:textColor = "@color/colorwhite"
             android:textStyle="bold"
+            app:shadowHeight="2dp"
             app:layout_constraintEnd_toStartOf = "@+id/guideline4"
             app:layout_constraintStart_toStartOf = "@+id/guideline3"
             app:layout_constraintTop_toTopOf = "@+id/guideline2" />

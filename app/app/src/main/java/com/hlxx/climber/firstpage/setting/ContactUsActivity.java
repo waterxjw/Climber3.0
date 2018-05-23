@@ -12,6 +12,6 @@ public class ContactUsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_us);
         ImageView imageView = (ImageView) findViewById(R.id.imagelsn);
-        imageView.setImageResource(R.mipmap.lsn);
+        imageView.setImageResource(R.mipmap.contact_us);
     }
 }

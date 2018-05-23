@@ -6,7 +6,30 @@ import java.util.ArrayList;
 public class Records implements Serializable {
     static final long serialVersionUID = 2L;
     private int times;
+    private int finishTimes;
+    private int timeAllTogether;
+    private int[] time = new int[3];
     private ArrayList<Record> theRecord;
+
+    public int getTimeAllTogether() {
+        return timeAllTogether;
+    }
+
+    public void setTimeAllTogether(int timeAllTogether) {
+        this.timeAllTogether = timeAllTogether;
+    }
+
+    public void setFinishTimes(int finishTimes) {
+        this.finishTimes = finishTimes;
+    }
+
+    public int getTimes() {
+        return times;
+    }
+
+    public ArrayList<Record> getTheRecord() {
+        return theRecord;
+    }
 
     public Records() {
         this.theRecord = new ArrayList<>();
@@ -18,26 +41,22 @@ public class Records implements Serializable {
         for (Record aRecord : theRecord) {
             aStringBuilder.append(aRecord).append("\n");
         }
-        return "times:" + times + ",\n theRecord:" + aStringBuilder + '}';
+        return "Records{" + "times=" + times + ", finishTimes=" + finishTimes + ",timeAllTogether=" + timeAllTogether +
+                ",\n theRecord:" + aStringBuilder + '}';
     }
 
-    public Records(int times, ArrayList<Record> theRecord) {
-        this.times = times;
-        this.theRecord = theRecord;
-    }
-
-    public void setTimes(int times) {
-        this.times = times;
+    public void setTime(int[] time) {
+        this.time = time;
+        times = time[0];
+        finishTimes = time[1];
+        timeAllTogether = time[2];
     }
 
     public void addRecord(Record newRecord) {
         this.theRecord.add(newRecord);
     }
-    public int getTimes(){
-        return times;
-    }
-    public ArrayList<Record> getTheRecord(){
-        return theRecord;
-    }
 
+    public int getFinishTimes() {
+        return finishTimes;
+    }
 }

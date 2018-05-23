@@ -83,8 +83,8 @@ public class ToReadFile extends AppCompatActivity {
             changeFilePath(toSearch);
             if (command.equals("timeOfDay.hlxx")) {
                 try {
-                    int times = timeOfDayGet(toSearch);
-                    aTextView.setText("" + times);
+                    int[] times = timeOfDayGet(toSearch);
+                    aTextView.setText("" + times[0]+"\n"+times[1]+"\n"+times[2]);
                 } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
