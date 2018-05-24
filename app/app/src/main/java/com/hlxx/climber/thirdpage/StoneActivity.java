@@ -172,7 +172,7 @@ public class StoneActivity extends Activity {
         // Create a new item
         final Comments item = new Comments();
         String text = mText.getText().toString();
-        if (text == null || text.isEmpty()){
+        if (text == null || text.isEmpty()||text.trim() == null||text.trim().isEmpty()){
             Toast.makeText(this, "Sorry, we can't send blank.", Toast.LENGTH_SHORT).show();
         }
         else {
