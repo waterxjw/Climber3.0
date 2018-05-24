@@ -92,19 +92,19 @@ public class ClimbingActivity extends AppCompatActivity {
                                 ((TextView) activity.findViewById(R.id.theLastTimePrompt)).setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
                                 ((TextView) activity.findViewById(R.id.restTime)).setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
                             }
-                            if (yLocation / (double) sourceBGBitmap.getHeight()>0.5){
+                            if (yLocation / (double) sourceBGBitmap.getHeight() > 0.5) {
                                 hint.setText(R.string.noon_hint);
                             }
-                            if (yLocation/ (double) sourceBGBitmap.getHeight()>0.71){
+                            if (yLocation / (double) sourceBGBitmap.getHeight() > 0.71) {
                                 hint.setText(R.string.dust_hint);
                             }
-                            if (yLocation/ (double) sourceBGBitmap.getHeight()>0.91){
+                            if (yLocation / (double) sourceBGBitmap.getHeight() > 0.91) {
                                 hint.setText(R.string.night_hint);
                             }
                             tv = null;
 
                             int[] restTime = stringToInts(String.valueOf(((TextView) activity.findViewById(R.id.restTime)).getText()));
-                            if (restTime[0] == 0 && restTime[1] == 0 && restTime[2] > 31) {
+                            if (restTime[0] != 0 || restTime[1] != 0 || restTime[2] > 31) {
                                 ImageView bgdImageView = activity.findViewById(R.id.climb_background);
                                 yLocation = yLocation > sourceBGBitmap.getHeight() ? sourceBGBitmap.getHeight() : yLocation;
                                 toShowBGBitmap = null;
@@ -121,7 +121,7 @@ public class ClimbingActivity extends AppCompatActivity {
                                 gcRequest.interrupt();
                                 ImageView climber = activity.findViewById(R.id.climber);
 
-                                TranslateAnimation animation = new TranslateAnimation(0, 0, 0, (float) climber.getTop() *-1);
+                                TranslateAnimation animation = new TranslateAnimation(0, 0, 0, (float) climber.getTop() * -1);
                                 animation.setDuration(33000);
                                 animation.setAnimationListener(new Animation.AnimationListener() {
                                     @Override
@@ -131,7 +131,7 @@ public class ClimbingActivity extends AppCompatActivity {
                                     @Override
                                     public void onAnimationEnd(Animation animation) {
                                         ImageView climber = activity.findViewById(R.id.climber);
-                                        climber.layout(climber.getLeft(), climber.getTop() -  climber.getTop(), climber.getRight(), climber.getBottom() -  climber.getTop());
+                                        climber.layout(climber.getLeft(), climber.getTop() - climber.getTop(), climber.getRight(), climber.getBottom() - climber.getTop());
                                     }
 
                                     @Override
@@ -189,7 +189,7 @@ public class ClimbingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_climbing);
         String data = getIntent().getStringExtra("time");
-        setTimeSecondSetted(Integer.parseInt(data) - 4);
+        setTimeSecondSetted(Integer.parseInt(data));
         aRecorderEditor = new RecorderEditor(getFilesDir());
         int settingTime = getTimeSecondSetted();
         aRecord.setTimeSetted(settingTime);//默认+和上一页面交接+初始化记录仪
@@ -227,9 +227,9 @@ public class ClimbingActivity extends AppCompatActivity {
         ImageView mtImageView = findViewById(R.id.mountain);
         toShowMBitmap = Bitmap.createBitmap(sourceMBitmap, 0, sourceMBitmap.getHeight() - hightPixels, sourceMBitmap.getWidth(), hightPixels);
         mtImageView.setImageBitmap(toShowMBitmap);
+
+        Toast.makeText(ClimbingActivity.this, "加油！", Toast.LENGTH_LONG).show();//进行弹窗提示
     }
-
-
 
 
     @Override
