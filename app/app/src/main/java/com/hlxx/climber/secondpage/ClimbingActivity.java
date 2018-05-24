@@ -189,7 +189,7 @@ public class ClimbingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_climbing);
         String data = getIntent().getStringExtra("time");
-        setTimeSecondSetted(Integer.parseInt(data) - 4);
+        setTimeSecondSetted(Integer.parseInt(data));
         aRecorderEditor = new RecorderEditor(getFilesDir());
         int settingTime = getTimeSecondSetted();
         aRecord.setTimeSetted(settingTime);//默认+和上一页面交接+初始化记录仪
