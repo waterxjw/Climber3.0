@@ -39,6 +39,8 @@ public class VibrateSetter {
             if (isVibrate) {
                 mNotificationChannel.enableVibration(true);
                 mNotificationChannel.setVibrationPattern(new long[]{0, 1500});
+            }else {
+                mNotificationChannel.enableVibration(false);
             }
             manager.createNotificationChannel(mNotificationChannel);
         }

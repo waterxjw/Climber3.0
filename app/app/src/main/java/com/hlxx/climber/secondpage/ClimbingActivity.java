@@ -287,6 +287,10 @@ public class ClimbingActivity extends AppCompatActivity {
                     gcRequest2.interrupt();
                     gcRequest2 = null;
                 }
+                if (gcRequest1 != null) {
+                    gcRequest1.interrupt();
+                    gcRequest1 = null;
+                }
                 mHandler = null;
                 startActivity(new Intent(ClimbingActivity.this, TimeSettingActivity.class));
                 finish();
@@ -367,6 +371,10 @@ public class ClimbingActivity extends AppCompatActivity {
                 if (gcRequest2 != null) {
                     gcRequest2.interrupt();
                     gcRequest2 = null;
+                }
+                if (gcRequest1 != null) {
+                    gcRequest1.interrupt();
+                    gcRequest1 = null;
                 }
                 mHandler = null;
                 startActivity(new Intent(ClimbingActivity.this, EndingActivity.class));
