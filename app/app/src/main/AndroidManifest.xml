@@ -16,7 +16,7 @@
             android:allowBackup = "true"
             android:hardwareAccelerated = "false"
             android:icon = "@mipmap/ic_launcher"
-            android:label = "HLXX"
+            android:label = "Climber"
             android:largeHeap = "true"
             android:roundIcon = "@mipmap/ic_launcher_round"
             android:supportsRtl = "true"
@@ -41,6 +41,7 @@
                 android:name = ".firstpage.setting.SettingActivity"
                 android:label = "设置" android:screenOrientation = "portrait" />
         <activity android:name = ".firstpage.setting.ContactUsActivity"
+                  android:parentActivityName=".firstpage.setting.SettingActivity"
                   android:screenOrientation = "portrait" />
         <activity android:name = ".thirdpage.StoneActivity"
                   android:screenOrientation = "portrait"

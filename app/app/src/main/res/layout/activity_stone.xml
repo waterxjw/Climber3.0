@@ -54,8 +54,8 @@
         android:hint="在雨季到来前，写下你想说的话吧"
         android:maxLength="150"
         android:maxLines="5"
-        android:textColor="#000000"
-        android:textColorHint="#000000"
+        android:textColor="@color/colorwhite"
+        android:textColorHint="@color/colorwhite"
         android:textSize="13sp" />
 
     <ListView

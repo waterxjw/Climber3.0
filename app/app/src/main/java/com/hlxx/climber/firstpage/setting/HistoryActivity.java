@@ -1,7 +1,5 @@
 package com.hlxx.climber.firstpage.setting;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -12,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +43,6 @@ public class HistoryActivity extends AppCompatActivity {
     private TextView mTimestamp;
     private TextView[][] mSeries;
     private TextView sumOfTime;
-    private View[] mSeriesColors;
     private TextView concentrateTimes,failTimes,levelInAverage;
     private Calendar mStart;
     private HashMap<String,String[]> detailData=new HashMap<String,String[]>();
@@ -61,7 +57,6 @@ public class HistoryActivity extends AppCompatActivity {
     private final SimpleDateFormat MINUTETIME_FORMATTER =
             new SimpleDateFormat("mm", Locale.getDefault());
     private final NumberFormat NUMBER_FORMATTER = new DecimalFormat("#0.00");
-    //private final String[] COLUMN_NAMES = {"timestamp", "Serie 1", "Serie 2", "Serie 3"};
     private final String[] COLUMN_NAMES = {"timestamp","sum"};
 
     private final int[] MODES = {
@@ -88,78 +83,6 @@ public class HistoryActivity extends AppCompatActivity {
         }
     };
 
-   /* private final View.OnClickListener mClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.mode:
-                    mMode++;
-                    if (mMode >= MODES.length) {
-                        mMode = 0;
-                    }
-                    mGraph.setGraphMode(MODES[mMode]);
-                    Toast.makeText(HistoryActivity.this, MODES_TEXT[mMode], Toast.LENGTH_SHORT).show();
-                    break;
-                case R.id.footer:
-                    mGraph.setShowFooter(!mGraph.isShowFooter());
-                    break;
-                case R.id.color:
-                    int color = Color.rgb(random(255), random(255), random(255));
-                    mToolbar.setBackgroundColor(color);
-                    mGraph.setBackgroundColor(color);
-                    mGraph.setGraphAreaBackground(color);
-                    break;
-                case R.id.sound:
-                    mSound++;
-                    if (mSound > 2) {
-                        mSound = 0;
-                    }
-                    if (mSound == 0) {
-                        mGraph.setPlaySelectionSoundEffect(false);
-                    } else if (mSound == 1) {
-                        mGraph.setSelectionSoundEffectSource(0);
-                        mGraph.setPlaySelectionSoundEffect(true);
-                    } else {
-                        mGraph.setSelectionSoundEffectSource(R.raw.selection_effect);
-                    }
-                    break;
-                case R.id.reload:
-                    mCursor = createInMemoryCursor();
-                    mGraph.observeData(mCursor);
-                    break;
-                case R.id.live_update:
-                    mHandler.removeCallbacks(mLiveUpdateTask);
-                    mCursor.removeAll();
-                    if (!mInLiveUpdate) {
-                        mGraph.setFollowCursorPosition(true);
-                        mHandler.post(mLiveUpdateTask);
-                    } else {
-                        mGraph.setFollowCursorPosition(false);
-                        createRandomData(mCursor);
-                    }
-                    mInLiveUpdate = !mInLiveUpdate;
-                    findViewById(R.id.reload).setEnabled(!mInLiveUpdate);
-                    findViewById(R.id.add).setEnabled(!mInLiveUpdate);
-                    findViewById(R.id.update).setEnabled(!mInLiveUpdate);
-                    findViewById(R.id.delete).setEnabled(!mInLiveUpdate);
-                    break;
-                case R.id.add:
-                    mStart.add(Calendar.HOUR_OF_DAY, 1);
-                    mCursor.add(createItem(mStart.getTimeInMillis()));
-                    break;
-                case R.id.delete:
-                    int position = mCursor.getCount() - 1;
-                    mCursor.remove(position);
-                    mStart.add(Calendar.HOUR_OF_DAY, -1);
-                    break;
-                case R.id.update:
-                    position = mCursor.getCount() - 1;
-                    mCursor.update(position, createItem(mStart.getTimeInMillis()));
-                    break;
-            }
-        }
-    };*/
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -176,39 +99,6 @@ public class HistoryActivity extends AppCompatActivity {
             getSupportActionBar().setTitle("历史记录");
         }
 
-        // Buttons
-        /*Button button = findViewById(R.id.add);
-        button.setOnClickListener(mClickListener);
-        button = findViewById(R.id.delete);
-        button.setOnClickListener(mClickListener);
-        button = findViewById(R.id.update);
-        button.setOnClickListener(mClickListener);
-        button = findViewById(R.id.reload);
-        button.setOnClickListener(mClickListener);
-        button = findViewById(R.id.live_update);
-        button.setOnClickListener(mClickListener);
-        button = findViewById(R.id.mode);
-        button.setOnClickListener(mClickListener);
-        button = findViewById(R.id.footer);
-        button.setOnClickListener(mClickListener);
-        button = findViewById(R.id.color);
-        button.setOnClickListener(mClickListener);
-        button = findViewById(R.id.sound);
-        button.setOnClickListener(mClickListener);
-
-        button = findViewById(R.id.mode);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mMode++;
-                if (mMode >= MODES.length) {
-                    mMode = 0;
-                }
-                mGraph.setGraphMode(MODES[mMode]);
-                Toast.makeText(HistoryActivity.this, MODES_TEXT[mMode], Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
 
         // Create random data
         mCursor = createInMemoryCursor();
@@ -224,19 +114,8 @@ public class HistoryActivity extends AppCompatActivity {
         mTimestamp = findViewById(R.id.item_timestamp);
 
         inflater = LayoutInflater.from(this);
-        //mSeries = new TextView[COLUMN_NAMES.length - 1];
         sumOfTime=findViewById(R.id.sum_time);
-        //mSeriesColors = new View[COLUMN_NAMES.length - 1];
-        /*for (int i = 1; i < COLUMN_NAMES.length; i++) {
-            View v = inflater.inflate(R.layout.serie_item_layout, series, false);
-            TextView title = v.findViewById(R.id.title);
-            title.setText(getString(R.string.item_name, COLUMN_NAMES[i]));
-            mSeries[i - 1] = v.findViewById(R.id.value);
-            mSeries[i - 1].setText("-");
-            mSeriesColors[i - 1] = v.findViewById(R.id.color);
-            mSeriesColors[i - 1].setBackgroundColor(Color.TRANSPARENT);
-            series.addView(v);
-        }*/
+
         concentrateTimes=findViewById(R.id.concentrationtimes);
         failTimes=findViewById(R.id.failtimes);
         levelInAverage=findViewById(R.id.levelinaverage);
@@ -253,9 +132,6 @@ public class HistoryActivity extends AppCompatActivity {
                 series.removeAllViews();
                 seriesString=seriesData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp));
                 mTimestamp.setText(DATETIME_FORMATTER.format(selectedItem.mTimestamp));
-                //for (int i = 0; i < mSeries.length; i++) {
-                    //mSeries[i].setText(NUMBER_FORMATTER.format(selectedItem.mSeries[i]));
-                ;
                 if (!DATETIME_FORMATTER.format(today.getTimeInMillis()).equals(DATETIME_FORMATTER.format(selectedItem.mTimestamp))){
                     sumOfTime.setTextSize(40);
                     sumOfTime.setText((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[3]+"分钟");
@@ -293,19 +169,12 @@ public class HistoryActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected() {
-
-                /*for (TextView v : mSeries) {
-                    v.setText("-");
-                }*/
             }
         });
         mGraph.addOnColorPaletteChangedListener(new OnColorPaletteChangedListener() {
             @Override
             public void onColorPaletteChanged(int[] palette) {
-                /*int count = mSeriesColors.length;
-                for (int i = 0; i < count; i++) {
-                    mSeriesColors[i].setBackgroundColor(palette[i]);
-                }*/
+
             }
         });
         mGraph.setOnClickItemListener(new TimelineChartView.OnClickItemListener() {
@@ -372,37 +241,6 @@ public class HistoryActivity extends AppCompatActivity {
         return cursor;
     }
 
-    /*private void createRandomData(InMemoryCursor cursor) {
-        List<Object[]> data = new ArrayList<>();
-        String[][] seriesdata;
-
-        Calendar today = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
-        Calendar temporary = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault());
-        today.set(Calendar.HOUR_OF_DAY, 0);
-        today.set(Calendar.MINUTE, 0);
-        today.set(Calendar.SECOND, 0);
-        today.set(Calendar.MILLISECOND, 0);
-        mStart = (Calendar) today.clone();
-        mStart.add(Calendar.DAY_OF_MONTH, -30);
-        while (mStart.compareTo(today) <= 0) {
-            seriesdata=new String[random(5)][5];
-            for (int i=0;i<seriesdata.length;i++){
-
-                temporary.set(Calendar.HOUR_OF_DAY,random(10));
-                seriesdata[i][0]=HOURTIME_FORMATTER.format(temporary.getTimeInMillis());
-                seriesdata[i][1]=Integer.toString(random(10));
-                seriesdata[i][2]=Integer.toString(random(10));
-                seriesdata[i][3]=Integer.toString(random(100))+"%";
-                seriesdata[i][4]=(random(2)==0)?"成功":"失败";
-            }
-            seriesData.put(DATETIME_FORMATTER.format(mStart.getTimeInMillis()),seriesdata);
-            detailData.put(DATETIME_FORMATTER.format(mStart.getTimeInMillis()),new int[]{random(10),random(5),random(100)});
-            data.add(createItem(mStart.getTimeInMillis()));
-            mStart.add(Calendar.DAY_OF_MONTH, 1);
-        }
-        mStart.add(Calendar.DAY_OF_MONTH, -1);
-        cursor.addAll(data);
-    }*/
     private void createData(InMemoryCursor cursor){
         List<Object[]> data = new ArrayList<>();
         String[][] seriesdata;
