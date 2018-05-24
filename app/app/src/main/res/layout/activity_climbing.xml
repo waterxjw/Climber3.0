@@ -12,16 +12,6 @@
             android:layout_height = "match_parent"
             android:scaleType = "fitXY"
             tools:ignore = "ContentDescription" />
-
-    <!--ImageView
-        android:src = "@drawable/climbing"
-            android:layout_width = "0dp"
-            android:layout_height = "wrap_content"
-            android:id = "@+id/mountain"
-            android:scaleType = "fitXY"
-            android:contentDescription = "@string/mountain_description"
-            app:layout_constraintStart_toStartOf = "parent"
-            app:layout_constraintTop_toTopOf = "parent" /-->
     <ImageView
             android:layout_width = "0dp"
             android:layout_height = "wrap_content"
@@ -44,16 +34,14 @@
             app:layout_constraintStart_toStartOf = "@+id/text_background"
             app:layout_constraintTop_toBottomOf = "@+id/text_background"
             app:layout_constraintVertical_bias = "1.0" />
-
     <pl.droidsonroids.gif.GifImageView
             android:id = "@+id/climber"
             android:layout_width = "75dp"
             android:layout_height = "131dp"
-            android:layout_marginBottom = "400dp"
+            android:layout_marginBottom = "180dp"
             android:background = "@drawable/climber"
             app:layout_constraintBottom_toBottomOf = "parent"
             app:layout_constraintStart_toStartOf = "parent" />
-
     <ImageView
             android:id = "@+id/text_background"
             android:layout_width = "147dp"
@@ -62,7 +50,6 @@
             app:layout_constraintBottom_toBottomOf = "@+id/climb_background"
             app:layout_constraintEnd_toEndOf = "parent"
             app:srcCompat = "@drawable/text_background" />
-
     <TextView
             android:id = "@+id/restTime"
             android:layout_width = "100dp"
@@ -75,7 +62,6 @@
             android:textStyle = "bold"
             app:layout_constraintBottom_toBottomOf = "@+id/text_background"
             app:layout_constraintEnd_toEndOf = "parent" />
-
     <Chronometer
             android:id = "@+id/lastTime"
             android:layout_width = "78dp"
@@ -89,7 +75,6 @@
             android:textStyle = "bold"
             app:layout_constraintStart_toStartOf = "@+id/theLastTimePrompt"
             app:layout_constraintTop_toTopOf = "@+id/theLastTimePrompt" />
-
     <TextView
             android:id = "@+id/theLastTimePrompt"
             android:layout_width = "wrap_content"
@@ -100,7 +85,6 @@
             android:textColor = "@color/color_time_rest_start"
             app:layout_constraintStart_toStartOf = "@+id/text_background"
             app:layout_constraintTop_toTopOf = "@+id/text_background" />
-
     <TextView
             android:id = "@+id/theRestTimePrompt"
             android:layout_width = "wrap_content"
@@ -110,7 +94,6 @@
             android:textColor = "@color/color_time_rest_start"
             app:layout_constraintBottom_toTopOf = "@+id/restTime"
             app:layout_constraintStart_toStartOf = "@+id/restTime" />
-
     <TextView
         android:id="@+id/hint"
         android:layout_width="wrap_content"
