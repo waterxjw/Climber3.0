@@ -172,37 +172,39 @@ public class StoneActivity extends Activity {
         // Create a new item
         final Comments item = new Comments();
         String text = mText.getText().toString();
-        if (text == null){
+        if (text == null || text.isEmpty()||text.trim() == null||text.trim().isEmpty()){
             Toast.makeText(this, "Sorry, we can't send blank.", Toast.LENGTH_SHORT).show();
         }
-        item.setText(text);
-        item.setThumb(false);
+        else {
+            item.setText(text);
+            item.setThumb(false);
 
-        // Insert the new item
-        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    final Comments entity = addItemInTable(item);
+            // Insert the new item
+            AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(Void... params) {
+                    try {
+                        final Comments entity = addItemInTable(item);
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if(!entity.isThumb()){
-                                mAdapter.add(entity);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (!entity.isThumb()) {
+                                    mAdapter.add(entity);
+                                }
                             }
-                        }
-                    });
-                } catch (final Exception e) {
-                    createAndShowDialogFromTask(e, "Error");
+                        });
+                    } catch (final Exception e) {
+                        createAndShowDialogFromTask(e, "Error");
+                    }
+                    return null;
                 }
-                return null;
-            }
-        };
+            };
 
-        runAsyncTask(task);
+            runAsyncTask(task);
 
-        mText.setText("");
+            mText.setText("");
+        }
     }
 
     private void refreshItemsFromTable() {
