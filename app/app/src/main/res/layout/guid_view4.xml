@@ -16,8 +16,10 @@
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="100dp"
 
-        android:text="点击进入"
-        android:textColor="#ce102c"
+        android:text="GO!"
+        android:textColor="@color/colorwhite"
+        android:textStyle="bold"
+        android:background="@drawable/btn_zero"
         android:textSize="18sp"
         android:visibility="visible" />
 
