@@ -41,6 +41,7 @@
                 android:name = ".firstpage.setting.SettingActivity"
                 android:label = "设置" android:screenOrientation = "portrait" />
         <activity android:name = ".firstpage.setting.ContactUsActivity"
+                  android:parentActivityName=".firstpage.setting.SettingActivity"
                   android:screenOrientation = "portrait" />
         <activity android:name = ".thirdpage.StoneActivity"
                   android:screenOrientation = "portrait"
