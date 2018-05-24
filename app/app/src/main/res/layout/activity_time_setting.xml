@@ -115,13 +115,6 @@
             app:layout_constraintEnd_toStartOf = "@+id/guideline4"
             app:layout_constraintStart_toStartOf = "@+id/guideline3"
             app:layout_constraintTop_toTopOf = "@+id/guideline2" />
-    <Button
-            android:id = "@+id/start_read_file"
-            android:text = "Button"
-            android:layout_width = "wrap_content"
-            android:layout_height = "wrap_content"
-            app:layout_constraintStart_toStartOf = "parent"
-            app:layout_constraintBottom_toBottomOf = "parent" />
 
 
 </android.support.constraint.ConstraintLayout>
