@@ -16,6 +16,7 @@
     <color name="accent">#FF4081</color>
     <color name="primary_text">#212121</color>
     <color name="gray">#5e6fb7cc</color>
+    <color name="gray_fb">#6fb7cc</color>
     <color name="fbutton_default_shadow_color">#ff3493c8</color>
     <color name="empty">#00000000</color>
 </resources>
