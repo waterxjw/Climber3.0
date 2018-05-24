@@ -10,6 +10,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,7 +40,7 @@ public class ClimbingActivity extends AppCompatActivity {
     private CountDownTimer timer;
     private VibrateSetter vibrateSetter = new VibrateSetter(this);
     private boolean isScreenOn = true;
-    private Thread gcRequest;
+    private static Thread gcRequest;
     private Record aRecord = new Record();
     private RecorderEditor aRecorderEditor;
     private static int hightPixels;
@@ -101,18 +103,43 @@ public class ClimbingActivity extends AppCompatActivity {
                             }
                             tv = null;
 
-                            ImageView bgdImageView = activity.findViewById(R.id.climb_background);
-                            yLocation = yLocation > sourceBGBitmap.getHeight() ? sourceBGBitmap.getHeight() : yLocation;
-                            toShowBGBitmap = null;
-                            toShowBGBitmap = Bitmap.createBitmap(sourceBGBitmap, 0, sourceBGBitmap.getHeight() - yLocation, sourceBGBitmap.getWidth(), hightPixels);
-                            bgdImageView.setImageBitmap(toShowBGBitmap);
+                            int[] restTime = stringToInts(String.valueOf(((TextView) activity.findViewById(R.id.restTime)).getText()));
+                            if (restTime[0] == 0 && restTime[1] == 0 && restTime[2] > 31) {
+                                ImageView bgdImageView = activity.findViewById(R.id.climb_background);
+                                yLocation = yLocation > sourceBGBitmap.getHeight() ? sourceBGBitmap.getHeight() : yLocation;
+                                toShowBGBitmap = null;
+                                toShowBGBitmap = Bitmap.createBitmap(sourceBGBitmap, 0, sourceBGBitmap.getHeight() - yLocation, sourceBGBitmap.getWidth(), hightPixels);
+                                bgdImageView.setImageBitmap(toShowBGBitmap);
 
-                            ImageView mtImageView = activity.findViewById(R.id.mountain);
-                            yLocation = (int) mountainSpeed * timeUsed + hightPixels;
-                            yLocation = yLocation > sourceMBitmap.getHeight() ? sourceMBitmap.getHeight() : yLocation;
-                            toShowMBitmap = null;
-                            toShowMBitmap = Bitmap.createBitmap(sourceMBitmap, 0, sourceMBitmap.getHeight() - yLocation, sourceMBitmap.getWidth(), hightPixels);
-                            mtImageView.setImageBitmap(toShowMBitmap);
+                                ImageView mtImageView = activity.findViewById(R.id.mountain);
+                                yLocation = (int) mountainSpeed * timeUsed + hightPixels;
+                                yLocation = yLocation > sourceMBitmap.getHeight() ? sourceMBitmap.getHeight() : yLocation;
+                                toShowMBitmap = null;
+                                toShowMBitmap = Bitmap.createBitmap(sourceMBitmap, 0, sourceMBitmap.getHeight() - yLocation, sourceMBitmap.getWidth(), hightPixels);
+                                mtImageView.setImageBitmap(toShowMBitmap);
+                            } else {
+                                gcRequest.interrupt();
+                                ImageView climber = activity.findViewById(R.id.climber);
+
+                                TranslateAnimation animation = new TranslateAnimation(0, 0, 0, (float) climber.getTop() *-1);
+                                animation.setDuration(33000);
+                                animation.setAnimationListener(new Animation.AnimationListener() {
+                                    @Override
+                                    public void onAnimationStart(Animation animation) {
+                                    }
+
+                                    @Override
+                                    public void onAnimationEnd(Animation animation) {
+                                        ImageView climber = activity.findViewById(R.id.climber);
+                                        climber.layout(climber.getLeft(), climber.getTop() -  climber.getTop(), climber.getRight(), climber.getBottom() -  climber.getTop());
+                                    }
+
+                                    @Override
+                                    public void onAnimationRepeat(Animation animation) {
+                                    }
+                                });
+                                climber.startAnimation(animation);
+                            }
                         }
                         break;
                     default:
@@ -162,7 +189,7 @@ public class ClimbingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_climbing);
         String data = getIntent().getStringExtra("time");
-        setTimeSecondSetted(Integer.parseInt(data));
+        setTimeSecondSetted(Integer.parseInt(data) - 4);
         aRecorderEditor = new RecorderEditor(getFilesDir());
         int settingTime = getTimeSecondSetted();
         aRecord.setTimeSetted(settingTime);//默认+和上一页面交接+初始化记录仪
@@ -200,7 +227,6 @@ public class ClimbingActivity extends AppCompatActivity {
         ImageView mtImageView = findViewById(R.id.mountain);
         toShowMBitmap = Bitmap.createBitmap(sourceMBitmap, 0, sourceMBitmap.getHeight() - hightPixels, sourceMBitmap.getWidth(), hightPixels);
         mtImageView.setImageBitmap(toShowMBitmap);
-
     }
 
 
