@@ -29,7 +29,7 @@
             android:background = "@drawable/text_background"
             android:text = "@string/button_giveUp"
             android:textColor = "@color/color_button_text"
-            android:textSize = "25sp"
+            android:textSize = "20sp"
             app:layout_constraintBottom_toBottomOf = "parent"
             app:layout_constraintStart_toStartOf = "@+id/text_background"
             app:layout_constraintTop_toBottomOf = "@+id/text_background"
@@ -94,4 +94,17 @@
             android:textColor = "@color/color_time_rest_start"
             app:layout_constraintBottom_toTopOf = "@+id/restTime"
             app:layout_constraintStart_toStartOf = "@+id/restTime" />
+    <TextView
+        android:id="@+id/hint"
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:layout_marginTop="108dp"
+        android:background="@drawable/text_bg_white"
+        android:gravity="center"
+        android:text="万瓦宵光曙，重檐夕雾收。\n一日之计在于晨，少年，加油啊！"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/climb_background" />
+
 </android.support.constraint.ConstraintLayout>

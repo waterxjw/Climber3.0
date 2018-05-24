@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -22,9 +20,6 @@ import com.microsoft.windowsazure.mobileservices.MobileServiceActivityResult;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.wx.wheelview.adapter.ArrayWheelAdapter;
 import com.wx.wheelview.widget.WheelView;
-
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceAuthenticationProvider;
 import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceUser;
@@ -124,21 +119,6 @@ public class TimeSettingActivity extends AppCompatActivity {
             }
         }
     }
-    //任务栏右侧的菜单按钮
-    /*public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.toolbar,menu);
-        return true;
-    }
-    //为菜单项设置时间响应
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case R.id.setting:
-                Toast.makeText(this,"setting",Toast.LENGTH_SHORT).show();
-                break;
-        }
-        return true;
-    }*/
-
 
     private void createFAButton() {
         FloatingActionButton fabSetting = findViewById(R.id.fab_setting);
@@ -148,8 +128,7 @@ public class TimeSettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(TimeSettingActivity.this, SettingActivity.class);
-                ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(TimeSettingActivity.this, new Pair<>(fabSetting, "setting"));
-                startActivity(intent, transitionActivityOptions.toBundle());
+                startActivity(intent);
             }
         });
         fabHistory.setOnClickListener(new View.OnClickListener() {
@@ -189,12 +168,6 @@ public class TimeSettingActivity extends AppCompatActivity {
         });
     }
 
-    //暂时弃用的图片缩放
-    /*private void createScaleImage(){
-            scaleImage=(ScaleImage)findViewById(R.id.scaleimage);
-            scaleImage.startScale(R.mipmap.mountain1);
-
-     }*/
     private void createImageView(int num) {
         imageView = findViewById(R.id.imageview);
         imageView.setImageResource(num);
@@ -229,10 +202,10 @@ public class TimeSettingActivity extends AppCompatActivity {
         wheelView.setOnWheelItemSelectedListener(new WheelView.OnWheelItemSelectedListener() {
             @Override
             public void onItemSelected(int i, Object o) {
-                //必须先清零，以避免内存过度占用问题，艹，老子为了这一行代码浪费了一中午
+                //必须先清零，以避免内存过度占用问题
                 imageView.setImageResource(0);
                 //切换图片
-                imageView.setImageResource(R.mipmap.remote_mountain1 + i);
+                imageView.setImageResource(R.mipmap.remote_mountain1 + (i+2)/3);
 
 
             }
@@ -242,13 +215,11 @@ public class TimeSettingActivity extends AppCompatActivity {
     //为滚轮设置数据
     private ArrayList<String> createMinutes() {
         ArrayList<String> list = new ArrayList<String>();
-        for (int i = 5; i <= 20; i += 5) {
-            if (i == 5)
-                list.add("0" + i);
-            else {
-                list.add("" + i);
-            }
-        }
+        list.add("01");list.add("05");
+        list.add("10");list.add("20");
+        list.add("30");list.add("40");
+        list.add("50");list.add("60");
+        list.add("90");list.add("120");
         return list;
     }
 

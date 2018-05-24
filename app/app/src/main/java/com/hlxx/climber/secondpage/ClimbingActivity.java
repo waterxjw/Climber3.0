@@ -81,6 +81,7 @@ public class ClimbingActivity extends AppCompatActivity {
                     case 1:
                         if (sourceBGBitmap != null && sourceMBitmap != null) {
                             TextView tv = activity.findViewById(R.id.lastTime);
+                            TextView hint = activity.findViewById(R.id.hint);
                             int timeUsed = intsToSecond(stringToInts(tv.getText().toString()));
                             int yLocation = (int) backgroundSpeed * timeUsed + hightPixels;
                             if (yLocation / (double) sourceBGBitmap.getHeight() < 0.595) {
@@ -88,8 +89,17 @@ public class ClimbingActivity extends AppCompatActivity {
                             } else if (yLocation / (double) sourceBGBitmap.getHeight() > 0.79) {
                                 tv.setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
                                 ((TextView) activity.findViewById(R.id.theRestTimePrompt)).setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
-                                ((TextView) activity.findViewById(R.id.theRestTimePrompt)).setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
+                                ((TextView) activity.findViewById(R.id.theLastTimePrompt)).setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
                                 ((TextView) activity.findViewById(R.id.restTime)).setTextColor(ContextCompat.getColor(activity, R.color.color_time_rest_end));
+                            }
+                            if (yLocation / (double) sourceBGBitmap.getHeight()>0.5){
+                                hint.setText(R.string.noon_hint);
+                            }
+                            if (yLocation/ (double) sourceBGBitmap.getHeight()>0.71){
+                                hint.setText(R.string.dust_hint);
+                            }
+                            if (yLocation/ (double) sourceBGBitmap.getHeight()>0.91){
+                                hint.setText(R.string.night_hint);
                             }
                             tv = null;
 
@@ -181,7 +191,8 @@ public class ClimbingActivity extends AppCompatActivity {
         String data = getIntent().getStringExtra("time");
         setTimeSecondSetted(Integer.parseInt(data) - 4);
         aRecorderEditor = new RecorderEditor(getFilesDir());
-        aRecord.setTimeSetted(getTimeSecondSetted());//默认+和上一页面交接+初始化记录仪
+        int settingTime = getTimeSecondSetted();
+        aRecord.setTimeSetted(settingTime);//默认+和上一页面交接+初始化记录仪
 
         if (willScreenOn) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -191,12 +202,12 @@ public class ClimbingActivity extends AppCompatActivity {
         Chronometer lastTimeChronometer = findViewById(R.id.lastTime);
         lastTimeChronometer.setBase(SystemClock.elapsedRealtime() - 1000);
         lastTimeChronometer.start();
-        //进行弹窗提示
-        Toast.makeText(ClimbingActivity.this, "文文傻蛋！", Toast.LENGTH_SHORT).show();
+
 
         //剩余时间输出
         timer = creatNewOne();
         timer.start();
+
 
         //设置背景
         DisplayMetrics dm = new DisplayMetrics();
@@ -217,6 +228,9 @@ public class ClimbingActivity extends AppCompatActivity {
         toShowMBitmap = Bitmap.createBitmap(sourceMBitmap, 0, sourceMBitmap.getHeight() - hightPixels, sourceMBitmap.getWidth(), hightPixels);
         mtImageView.setImageBitmap(toShowMBitmap);
     }
+
+
+
 
     @Override
     protected void onResume() {
