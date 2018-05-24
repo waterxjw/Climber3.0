@@ -49,7 +49,7 @@ public class SettingActivity extends AppCompatActivity {
         revealTransition.setInterpolator(new FastOutSlowInInterpolator());
         revealTransition.setDuration(300);
 
-        ChangeColor changeColor = new ChangeColor(getResources().getColor(R.color.primary_text), getResources().getColor(R.color.gray));
+        ChangeColor changeColor = new ChangeColor(getResources().getColor(R.color.primary_text), getResources().getColor(R.color.grayblue));
         changeColor.addTarget(R.id.frag);
         changeColor.setDuration(350);
 
