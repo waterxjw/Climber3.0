@@ -7,7 +7,7 @@
     <string name="message_outPrompt">You still need</string>
     <string name="last_time_prompt">You have climbed</string>
     <string name="title_activity_stone">stoneActivity</string>
-    <string name="button_giveUp">Give Up</string>
+    <string name="button_giveUp">Give up</string>
     <string name="title_activity_settings2">Settings</string>
     <string name="mode">Mode</string>
     <string name="footer">Footer</string>
@@ -93,4 +93,9 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
 
+    <string name="noon_hint">&#160;&#160;旁映白日光,缥缈轻霞容&#160;\n日上三竿啦，坚持！   </string>
+
+    <string name="dust_hint">&#160;&#160;明月出天山，苍茫云海间&#160;\n快登顶了！   </string>
+
+    <string name="night_hint">&#160;&#160;流波将月去，潮水带星来&#160;\n夜色渐深，山顶将至……</string>
 </resources>
