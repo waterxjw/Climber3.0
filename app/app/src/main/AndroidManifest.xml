@@ -16,7 +16,7 @@
             android:allowBackup = "true"
             android:hardwareAccelerated = "false"
             android:icon = "@mipmap/ic_launcher"
-            android:label = "HLXX"
+            android:label = "Climber"
             android:largeHeap = "true"
             android:roundIcon = "@mipmap/ic_launcher_round"
             android:supportsRtl = "true"
