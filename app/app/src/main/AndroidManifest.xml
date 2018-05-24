@@ -16,8 +16,7 @@
             android:theme = "@style/AppTheme"
             tools:replace = "android:label">
         <activity android:name = ".firstpage.TimeSettingActivity"
-                  android:screenOrientation = "portrait"
-        />
+                  android:screenOrientation = "portrait" />
         <activity android:name = "com.microsoft.windowsazure.mobileservices.authentication.RedirectUrlActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -28,41 +27,28 @@
             </intent-filter>
         </activity>
         <activity android:name = ".secondpage.ClimbingActivity"
-                  android:screenOrientation = "portrait"
-        />
-        <activity android:name = ".secondpage.settings.MovePlayActivity"
-                  android:screenOrientation = "portrait"
-        />
+                  android:screenOrientation = "portrait" />
         <activity android:name = ".thirdpage.EndingActivity"
-                  android:screenOrientation = "portrait"
-        />
+                  android:screenOrientation = "portrait" />
         <activity
                 android:name = ".firstpage.setting.SettingActivity"
-                android:label = "设置" android:screenOrientation = "portrait"
-        />
+                android:label = "设置" android:screenOrientation = "portrait" />
         <activity android:name = ".firstpage.setting.ContactUsActivity"
-                  android:screenOrientation = "portrait"
-        />
+                  android:screenOrientation = "portrait" />
         <activity android:name = ".thirdpage.StoneActivity"
                   android:screenOrientation = "portrait"
                   android:theme = "@style/dialog_custom" />
         <activity android:name = ".firstpage.setting.HistoryActivity"
-                  android:screenOrientation = "portrait"
-        />
-        <activity android:name = ".firstpage.ToReadFile"
-                  android:screenOrientation = "portrait"
-        />
+                  android:screenOrientation = "portrait" />
         <activity android:name = ".zerothpage.SplashActivity"
-                  android:screenOrientation = "portrait"
-        >
+                  android:screenOrientation = "portrait">
             <intent-filter>
                 <action android:name = "android.intent.action.MAIN" />
                 <category android:name = "android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name = ".zerothpage.WelcomeGuideActivity"
-                  android:screenOrientation = "portrait"
-        />
+                  android:screenOrientation = "portrait" />
     </application>
 
 </manifest>

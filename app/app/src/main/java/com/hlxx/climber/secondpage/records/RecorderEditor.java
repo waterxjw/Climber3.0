@@ -88,39 +88,32 @@ public class RecorderEditor {
 
     public void recordSort() {
         File[] filesDay = fileMonth.listFiles();
-        for (File file : filesDay) {
-            if (file.isDirectory() && !file.equals(fileDay)) {
-                File newRecords = new File(fileMonth, "" + file.getName() + ".day");
-                try {
+        if (filesDay == null) {
+            return;
+        }
+        try {
+            for (File file : filesDay) {
+                if (file.isDirectory() && !file.equals(fileDay)) {
+                    File newRecords = new File(fileMonth, "" + file.getName() + ".day");
                     newRecords.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                ArrayList<File> records = new ArrayList<>(Arrays.asList(file.listFiles()));
-                File total = new File(file, "timeOfDay.hlxx");
-                records.remove(total);
-                Records toWrite = new Records();
-                try {
+                    ArrayList<File> records = new ArrayList<>(Arrays.asList(file.listFiles()));
+                    File total = new File(file, "timeOfDay.hlxx");
+                    records.remove(total);
+                    Records toWrite = new Records();
                     toWrite.setTime(objectReader(total));
-                } catch (IOException | ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-                for (File record : records) {
-                    try {
+                    for (File record : records) {
                         toWrite.addRecord(objectReader(record));
                         record.delete();
-                    } catch (IOException | ClassNotFoundException e) {
-                        e.printStackTrace();
                     }
-                }
-                try {
                     objectWriter(newRecords, toWrite, false);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    total.delete();
+                    file.delete();
                 }
                 total.delete();
                 file.delete();
             }
+        } catch (IOException | ClassNotFoundException ignored) {
         }
+
     }
 }
