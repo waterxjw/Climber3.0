@@ -105,12 +105,6 @@ public class ClimbingActivity extends AppCompatActivity {
 
                             int[] restTime = stringToInts(String.valueOf(((TextView) activity.findViewById(R.id.restTime)).getText()));
                             if (restTime[0] != 0 || restTime[1] != 0 || restTime[2] > 31) {
-                                ImageView bgdImageView = activity.findViewById(R.id.climb_background);
-                                yLocation = yLocation > sourceBGBitmap.getHeight() ? sourceBGBitmap.getHeight() : yLocation;
-                                toShowBGBitmap = null;
-                                toShowBGBitmap = Bitmap.createBitmap(sourceBGBitmap, 0, sourceBGBitmap.getHeight() - yLocation, sourceBGBitmap.getWidth(), hightPixels);
-                                bgdImageView.setImageBitmap(toShowBGBitmap);
-
                                 ImageView mtImageView = activity.findViewById(R.id.mountain);
                                 yLocation = (int) mountainSpeed * timeUsed + hightPixels;
                                 yLocation = yLocation > sourceMBitmap.getHeight() ? sourceMBitmap.getHeight() : yLocation;
@@ -118,7 +112,6 @@ public class ClimbingActivity extends AppCompatActivity {
                                 toShowMBitmap = Bitmap.createBitmap(sourceMBitmap, 0, sourceMBitmap.getHeight() - yLocation, sourceMBitmap.getWidth(), hightPixels);
                                 mtImageView.setImageBitmap(toShowMBitmap);
                             } else {
-                                gcRequest.interrupt();
                                 ImageView climber = activity.findViewById(R.id.climber);
 
                                 TranslateAnimation animation = new TranslateAnimation(0, 0, 0, (float) climber.getTop() * -1);
@@ -140,6 +133,11 @@ public class ClimbingActivity extends AppCompatActivity {
                                 });
                                 climber.startAnimation(animation);
                             }
+                            ImageView bgdImageView = activity.findViewById(R.id.climb_background);
+                            yLocation = yLocation > sourceBGBitmap.getHeight() ? sourceBGBitmap.getHeight() : yLocation;
+                            toShowBGBitmap = null;
+                            toShowBGBitmap = Bitmap.createBitmap(sourceBGBitmap, 0, sourceBGBitmap.getHeight() - yLocation, sourceBGBitmap.getWidth(), hightPixels);
+                            bgdImageView.setImageBitmap(toShowBGBitmap);
                         }
                         break;
                     default:
