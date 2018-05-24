@@ -359,7 +359,27 @@ public class ClimbingActivity extends AppCompatActivity {
             isSwitch = true;
             IsForeground.setTimes(IsForeground.getTimes() + 1);
             try {
-                TimeChange.changeTime(theRestTime.getText().toString());
+                int swtichTimes = TimeChange.changeTime(theRestTime.getText().toString());
+                ImageView clouds = findViewById(R.id.clouds);
+                switch (swtichTimes) {
+                    case 1:
+                        clouds.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.cloud1));
+                        clouds.setAlpha(0.5f);
+                        break;
+                    case 2:
+                        clouds.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.cloud2));
+                        clouds.setAlpha(0.7f);
+                        break;
+                    case 3:
+                        clouds.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.cloud3));
+                        clouds.setAlpha(0.8f);
+                        break;
+                    default:
+                        clouds.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.cloud2));
+                        clouds.setAlpha(1f);
+                        break;
+                }
+                clouds=null;
             } catch (TooManyTimesException e) {//强制退出
                 cancle = true;
                 timer.cancel();
