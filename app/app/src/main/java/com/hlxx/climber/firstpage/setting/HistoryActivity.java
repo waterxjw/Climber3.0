@@ -472,7 +472,7 @@ public class HistoryActivity extends AppCompatActivity {
                 temporary.set(Calendar.MILLISECOND, 0);
                 detaildata[0]=Integer.toString(records.getTimes());
                 detaildata[1]=Integer.toString(records.getTimes()-records.getFinishTimes());
-                detaildata[2]="-";
+                detaildata[2]=Integer.toString((int)((double)records.getFinishTimes()/(double)records.getTimes()*100))+"%";
                 temporary.set(Calendar.SECOND,records.getTimeAllTogether());
                 detaildata[3]=MINUTETIME_FORMATTER.format(temporary.getTimeInMillis());
                 if (records.getTimes()>0){
