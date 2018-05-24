@@ -109,8 +109,6 @@ public class RecorderEditor {
                     total.delete();
                     file.delete();
                 }
-                total.delete();
-                file.delete();
             }
         } catch (IOException | ClassNotFoundException ignored) {
         }
