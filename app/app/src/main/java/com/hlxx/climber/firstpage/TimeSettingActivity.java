@@ -130,8 +130,7 @@ public class TimeSettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(TimeSettingActivity.this, SettingActivity.class);
-                ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(TimeSettingActivity.this, new Pair<>(fabSetting, "setting"));
-                startActivity(intent, transitionActivityOptions.toBundle());
+                startActivity(intent);
             }
         });
         fabHistory.setOnClickListener(new View.OnClickListener() {
