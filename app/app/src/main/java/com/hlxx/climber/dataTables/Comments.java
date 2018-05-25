@@ -26,9 +26,10 @@ public class Comments {
 
     public Comments() { }
 
-    public Comments(String id, String text) {
+    public Comments(String id, String text,boolean isThumb) {
         this.setId(id);
         this.setText(text);
+        this.setThumb(isThumb);
     }
 
     @Override

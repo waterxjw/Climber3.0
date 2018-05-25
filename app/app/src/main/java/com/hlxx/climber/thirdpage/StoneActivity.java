@@ -131,7 +131,7 @@ public class StoneActivity extends Activity {
                         @Override
                         public void run() {
                             if (item.isThumb()) {
-                                //mAdapter.remove(item);
+                                //mAdapter.add(item);
                             }
                         }
                     });
@@ -146,7 +146,39 @@ public class StoneActivity extends Activity {
         runAsyncTask(task);
 
     }
+    public void inCheckItem(final Comments item) {
+        if (mClient == null) {
+            return;
+        }
 
+        // Set the item as thumbed and update it in the table
+        item.setThumb(false);
+
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+
+                    checkItemInTable(item);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (item.isThumb()) {
+                                //mAdapter.add(item);
+                            }
+                        }
+                    });
+                } catch (final Exception e) {
+                    createAndShowDialogFromTask(e, "Error");
+                }
+
+                return null;
+            }
+        };
+
+        runAsyncTask(task);
+
+    }
     /**
      * Add an item to the Mobile Service Table
      *
@@ -220,7 +252,7 @@ public class StoneActivity extends Activity {
                     final List<Comments> results = refreshItemsFromMobileServiceTable();
 
                     //Offline Sync
-                    //final List<ToDoItem> results = refreshItemsFromMobileServiceTableSyncTable();
+                    //final List<ToDoItem> results = refreshItem sFromMobileServiceTableSyncTable();
 
                     runOnUiThread(new Runnable() {
                         @Override
