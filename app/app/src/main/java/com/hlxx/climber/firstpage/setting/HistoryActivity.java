@@ -38,7 +38,7 @@ public class HistoryActivity extends AppCompatActivity {
 
     private InMemoryCursor mCursor;
 
-    private Toolbar mToolbar;
+    //private Toolbar mToolbar;
     private TimelineChartView mGraph;
     private TextView mTimestamp;
     private TextView[][] mSeries;
@@ -91,13 +91,13 @@ public class HistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_history);
         RecorderEditor editor=new RecorderEditor(getFilesDir());
         editor.recordSort();
-        mToolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
+        //mToolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(mToolbar);
+        //ActionBar actionBar = getSupportActionBar();
+        /*if (actionBar != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("历史记录");
-        }
+        }*/
 
 
         // Create random data
@@ -105,6 +105,8 @@ public class HistoryActivity extends AppCompatActivity {
 
         // Retrieve the data and inject the cursor so the view can start observing changes
         mGraph = findViewById(R.id.graph);
+
+
         mMode = mGraph.getGraphMode();
         mSound = mGraph.isPlaySelectionSoundEffect() ? 1 : 0;
         mSound += mGraph.getSelectionSoundEffectSource() != 0 ? 1 : 0;
@@ -134,7 +136,7 @@ public class HistoryActivity extends AppCompatActivity {
                 mTimestamp.setText(DATETIME_FORMATTER.format(selectedItem.mTimestamp));
                 if (!DATETIME_FORMATTER.format(today.getTimeInMillis()).equals(DATETIME_FORMATTER.format(selectedItem.mTimestamp))){
                     sumOfTime.setTextSize(40);
-                    sumOfTime.setText((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[3]+"分钟");
+                    sumOfTime.setText((detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[3]);
                 }else {
                     sumOfTime.setTextSize(20);
                     sumOfTime.setText("\n"+(detailData.get(DATETIME_FORMATTER.format(selectedItem.mTimestamp)))[3]+"\n");
@@ -154,11 +156,11 @@ public class HistoryActivity extends AppCompatActivity {
                         mSeries[i][2]=v.findViewById(R.id.planConcentrateTime);
                         mSeries[i][3]=v.findViewById(R.id.level);
                         mSeries[i][4]=v.findViewById(R.id.isSuccess);
-                        mSeries[i][0].setText(seriesString[i][0]+"     ");
+                        mSeries[i][0].setText(seriesString[i][0]+"  ");
                         mSeries[i][1].setText(seriesString[i][1]);
                         mSeries[i][2].setText(seriesString[i][2]);
                         mSeries[i][3].setText(seriesString[i][3]);
-                        mSeries[i][4].setText("         "+seriesString[i][4]);
+                        mSeries[i][4].setText("  "+seriesString[i][4]);
                         series.addView(v);
                     }
                 }
