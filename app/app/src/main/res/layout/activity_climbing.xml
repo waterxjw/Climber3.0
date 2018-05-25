@@ -104,7 +104,7 @@
         android:background="@drawable/text_bg_white"
         android:gravity="center"
         android:text="万瓦宵光曙，重檐夕雾收。\n一日之计在于晨，少年，加油啊！"
-        android:textSize="12sp"
+        android:textSize="15sp"
         android:padding="10dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
