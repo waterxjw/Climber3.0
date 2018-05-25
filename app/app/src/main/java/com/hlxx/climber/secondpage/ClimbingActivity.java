@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.*;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -296,7 +297,7 @@ public class ClimbingActivity extends AppCompatActivity {
                 startActivity(new Intent(ClimbingActivity.this, TimeSettingActivity.class));
                 finish();
             } else {
-                Toast.makeText(getBaseContext(), "骚年，何弃疗！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "少年，何弃疗！", Toast.LENGTH_SHORT).show();
                 firstPressedTime = System.currentTimeMillis();
             }
         });
@@ -361,27 +362,34 @@ public class ClimbingActivity extends AppCompatActivity {
             try {
                 int swtichTimes = TimeChange.changeTime(theRestTime.getText().toString());
                 ImageView clouds = findViewById(R.id.clouds);
+                TextView hint = findViewById(R.id.hint);
                 switch (swtichTimes) {
                     case 1:
                         clouds.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.cloud1));
                         clouds.setAlpha(0.5f);
+                        Toast.makeText(getBaseContext(), "天气变阴了", Toast.LENGTH_SHORT).show();
                         break;
                     case 2:
                         clouds.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.cloud2));
                         clouds.setAlpha(0.7f);
+                        Toast.makeText(getBaseContext(), "天气更阴了", Toast.LENGTH_SHORT).show();
                         break;
                     case 3:
                         clouds.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.cloud3));
                         clouds.setAlpha(0.8f);
+                        Toast.makeText(getBaseContext(), "乌云压境\n专心攀爬呀", Toast.LENGTH_SHORT).show();
                         break;
                     default:
-                        clouds.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.cloud2));
+                        clouds.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.cloud3));
                         clouds.setAlpha(1f);
+                        Toast.makeText(getBaseContext(), "天黑的我快看不见路了...快回来吧", Toast.LENGTH_SHORT).show();
+                        hint.setTextColor(Color.rgb(255, 255, 255));
                         break;
                 }
                 clouds=null;
             } catch (TooManyTimesException e) {//强制退出
                 cancle = true;
+                Toast.makeText(getBaseContext(), "天气原因，您本次的专注攀爬失败了，下次再努力哟~", Toast.LENGTH_SHORT).show();
                 timer.cancel();
                 timer = null;
                 recordWrite(false);
@@ -398,7 +406,7 @@ public class ClimbingActivity extends AppCompatActivity {
                     gcRequest1 = null;
                 }
                 mHandler = null;
-                startActivity(new Intent(ClimbingActivity.this, EndingActivity.class));
+                startActivity(new Intent(ClimbingActivity.this, TimeSettingActivity.class));
                 finish();
                 vibrateSetter.makeVibrate(false);//处理震动
             }
