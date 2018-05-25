@@ -23,4 +23,7 @@
 
     <color name="fbutton_default_shadow_color">#ff3493c8</color>
     <color name="empty">#00000000</color>
+
+    <color name="history_data">#fddcf0ff</color>
+    <color name="history_background">#fdfffff8</color>
 </resources>

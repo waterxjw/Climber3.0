@@ -21,6 +21,7 @@
     android:fitsSystemWindows="true"
     android:background="#fff">
 
+
     <android.support.design.widget.AppBarLayout
         xmlns:toolbar="http://schemas.android.com/apk/res-auto"
         android:id="@+id/appbarLayout"
@@ -28,23 +29,17 @@
         android:layout_height="wrap_content"
         toolbar:elevation="2dp">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            toolbar:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         <com.ruesga.timelinechart.TimelineChartView
             xmlns:tlc="http://schemas.android.com/apk/res-auto"
             android:id="@+id/graph"
             android:layout_width="match_parent"
             android:layout_height="320dp"
-            android:background="?attr/colorPrimary"
-            tlc:tlcGraphBackground="?attr/colorPrimary"
-            tlc:tlcFooterBackground="@color/primary_light"
+            android:background="@color/colorPrimary"
+            tlc:tlcGraphBackground="@color/history_background"
+
+            tlc:tlcFooterBackground="@color/history_data"
+
             tlc:tlcShowFooter="true"
             tlc:tlcGraphMode="tlcBarsStack"/>
 
