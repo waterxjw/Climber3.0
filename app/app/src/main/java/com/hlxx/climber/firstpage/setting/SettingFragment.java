@@ -30,7 +30,6 @@ public class SettingFragment extends PreferenceFragmentCompat {
 
     class RemindonPreferenceChangerListener implements Preference.OnPreferenceChangeListener {
         public boolean onPreferenceChange(Preference preference, Object shockState) {
-            VibrateSetter.setVibrate(Boolean.parseBoolean(shockState.toString()));
             SharedPreferenceUtils.putBoolean(getActivity(),"remind",(boolean)shockState);
             return true;
         }
@@ -38,7 +37,6 @@ public class SettingFragment extends PreferenceFragmentCompat {
 
     class AlwaysLightonPreferenceChangerListener implements Preference.OnPreferenceChangeListener {
         public boolean onPreferenceChange(Preference preference, Object newValue) {
-            ClimbingActivity.setWillScreenOn(Boolean.parseBoolean(newValue.toString()) );
             SharedPreferenceUtils.putBoolean(getActivity(),"alwayslight",(boolean)newValue);
             return true;
         }
