@@ -21,20 +21,21 @@
             app:layout_constraintStart_toStartOf = "parent"
             app:layout_constraintTop_toTopOf = "parent"
             tools:ignore = "ContentDescription" />
+
     <Button
-            android:id = "@+id/button_giveUp"
-            android:layout_width = "146dp"
-            android:layout_height = "38dp"
-            android:layout_marginTop = "8dp"
-            android:layout_marginStart = "8dp"
-            android:background = "@drawable/text_background"
-            android:text = "@string/button_giveUp"
-            android:textColor = "@color/color_button_text"
-            android:textSize = "20sp"
-            app:layout_constraintBottom_toBottomOf = "parent"
-            app:layout_constraintStart_toStartOf = "@+id/text_background"
-            app:layout_constraintTop_toBottomOf = "@+id/text_background"
-            app:layout_constraintVertical_bias = "1.0" />
+        android:id="@+id/button_giveUp"
+        android:layout_width="148dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/text_bg_white"
+        android:text="@string/button_giveUp"
+        android:textColor="@color/color_button_text"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/text_background"
+        app:layout_constraintTop_toBottomOf="@+id/text_background"
+        app:layout_constraintVertical_bias="1.0"
+        android:stateListAnimator="@null"/>
     <pl.droidsonroids.gif.GifImageView
             android:id = "@+id/climber"
             android:layout_width = "75dp"
@@ -105,7 +106,7 @@
             android:background = "@drawable/text_bg_white"
             android:gravity = "center"
             android:text = "万瓦宵光曙，重檐夕雾收。\n一日之计在于晨，少年，加油啊！"
-            android:textSize = "12sp"
+            android:textSize = "14sp"
             android:padding = "10dp"
             android:textStyle = "bold"
             app:layout_constraintEnd_toEndOf = "parent"
