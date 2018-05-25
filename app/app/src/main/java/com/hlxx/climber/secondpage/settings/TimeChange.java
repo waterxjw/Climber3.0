@@ -11,10 +11,10 @@ public class TimeChange {
         TimeGet.setTimeSecond(originalTime);
     }
 
-    public static void changeTime(String sOriginalTime) throws TooManyTimesException {
+    public static int changeTime(String sOriginalTime) throws TooManyTimesException {
         int[] iOriginalTime = stringToInts(sOriginalTime);
         changeTime(iOriginalTime);
-
+        return IsForeground.getTimes();
     }
 
     private static int[] switches(int[] time) throws TooManyTimesException {
@@ -28,6 +28,9 @@ public class TimeChange {
                 break;
             case 3:
                 seconds = (int) (seconds * 1.50);
+                break;
+            case 4:
+                seconds = (int) (seconds * 1.75);
                 break;
             default:
                 throw new TooManyTimesException();

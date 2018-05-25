@@ -37,7 +37,7 @@ public class CommentItemAdapter  extends ArrayAdapter<Comments>{
         row.setTag(currentItem);
         final CheckBox checkBox = (CheckBox) row.findViewById(R.id.checkBox);
         checkBox.setText(currentItem.getText());
-        checkBox.setChecked(false);
+        checkBox.setChecked(currentItem.isThumb());
         checkBox.setEnabled(true);
 
         checkBox.setOnClickListener(new View.OnClickListener() {
@@ -45,10 +45,15 @@ public class CommentItemAdapter  extends ArrayAdapter<Comments>{
             @Override
             public void onClick(View arg0) {
                 if (checkBox.isChecked()) {
-                    checkBox.setEnabled(false);
                     if (mContext instanceof StoneActivity) {
                         StoneActivity activity = (StoneActivity) mContext;
                         activity.checkItem(currentItem);
+                    }
+                }
+                else{
+                    if (mContext instanceof StoneActivity) {
+                        StoneActivity activity = (StoneActivity) mContext;
+                        activity.inCheckItem(currentItem);
                     }
                 }
             }
